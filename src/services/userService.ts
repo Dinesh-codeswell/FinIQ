@@ -1,6 +1,40 @@
 import { supabase } from './supabase';
 import { UserProfile } from '@/types/game';
 
+const mapToSnakeCase = (profile: Partial<UserProfile>) => {
+    const mapped: any = {};
+    const keyMap: Record<string, string> = {
+        lastPlayDate: 'last_play_date',
+        totalDuels: 'total_duels',
+        longestStreak: 'longest_streak',
+        onboardingCompleted: 'onboarding_completed',
+        sessionLength: 'session_length',
+        selectedFrame: 'selected_frame',
+        isPro: 'is_pro'
+    };
+
+    Object.keys(profile).forEach(key => {
+        const snakeKey = keyMap[key] || key;
+        mapped[snakeKey] = (profile as any)[key];
+    });
+
+    return mapped;
+};
+
+const mapToCamelCase = (data: any): UserProfile | null => {
+    if (!data) return null;
+    return {
+        ...data,
+        lastPlayDate: data.last_play_date,
+        totalDuels: data.total_duels,
+        longestStreak: data.longest_streak,
+        onboardingCompleted: data.onboarding_completed,
+        sessionLength: data.session_length,
+        selectedFrame: data.selected_frame,
+        isPro: data.is_pro
+    } as UserProfile;
+};
+
 export const userService = {
     async getProfile(userId: string) {
         const { data, error } = await supabase
@@ -9,18 +43,19 @@ export const userService = {
             .eq('id', userId)
             .single();
 
-        return { data: data as UserProfile | null, error };
+        return { data: mapToCamelCase(data), error };
     },
 
     async updateProfile(userId: string, updates: Partial<UserProfile>) {
+        const snakeUpdates = mapToSnakeCase(updates);
         const { data, error } = await supabase
             .from('profiles')
-            .update(updates)
+            .update(snakeUpdates)
             .eq('id', userId)
             .select()
             .single();
 
-        return { data: data as UserProfile | null, error };
+        return { data: mapToCamelCase(data), error };
     },
 
     async getLeaderboard(limit: number = 20) {

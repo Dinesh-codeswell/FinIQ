@@ -48,7 +48,8 @@ export default function UsernameScreen() {
     const handleFinish = () => {
         updateProfile({
             username: username || 'Player',
-            avatar: selectedAvatar as any
+            avatar: selectedAvatar as any,
+            onboardingCompleted: true
         });
         router.replace('/(tabs)' as any);
     };

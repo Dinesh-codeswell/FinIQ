@@ -6,61 +6,35 @@ import {
     TouchableOpacity,
     TextInput,
     ScrollView,
-    Animated,
     Dimensions,
     KeyboardAvoidingView,
     Platform,
 } from 'react-native';
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    interpolateColor,
+    interpolate
+} from 'react-native-reanimated';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
-import { ChevronRight, Zap, TrendingUp, BarChart2, Target, Swords, ArrowRight } from 'lucide-react-native';
+import { TrendingUp, Target, Swords, ArrowRight, ChevronRight } from 'lucide-react-native';
 import Colors from '@/constants/colors';
 import { useGame } from '@/context/GameContext';
 import { AVATAR_EMOJIS, AVATARS } from '@/constants/divisions';
 
+import { OnboardingProgress } from '@/components/onboarding/OnboardingProgress';
+import { OnboardingCTA } from '@/components/onboarding/OnboardingCTA';
+import { Slide1Arena } from '@/components/onboarding/Slide1Arena';
+import { Slide2Weapon } from '@/components/onboarding/Slide2Weapon';
+import { Slide3Glory } from '@/components/onboarding/Slide3Glory';
+import { ONBOARDING_CONFIG } from '@/src/constants/onboardingConfig';
+import { Accelerometer } from 'expo-sensors';
+
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 type Step = 'carousel' | 'quiz1' | 'quiz2' | 'quiz3' | 'username';
-
-const CAROUSEL_SLIDES = [
-    {
-        emoji: '⚔️',
-        title: 'Duel friends on finance.',
-        subtitle: 'Win real knowledge.',
-        icon: <Zap {...({ size: 28, color: Colors.accent } as any)} />,
-    },
-    {
-        emoji: '📈',
-        title: 'Master money math.',
-        subtitle: 'Grow your rating.',
-        icon: <TrendingUp {...({ size: 28, color: Colors.accent } as any)} />,
-    },
-    {
-        emoji: '🌍',
-        title: 'Daily market challenges.',
-        subtitle: 'Stay ahead.',
-        icon: <BarChart2 {...({ size: 28, color: Colors.accent } as any)} />,
-    },
-];
-
-const features = [
-    {
-        icon: <Target {...({ size: 32, color: Colors.accent } as any)} />,
-        title: "Daily Challenges",
-        description: "Test your financial knowledge with new scenarios every day."
-    },
-    {
-        icon: <Swords {...({ size: 32, color: Colors.scenarioBlue } as any)} />,
-        title: "Live Duels",
-        description: "Compete against friends and players worldwide in real-time."
-    },
-    {
-        icon: <TrendingUp {...({ size: 32, color: Colors.xpGold } as any)} />,
-        title: "Track Growth",
-        description: "Climb the ranks and earn badges as you master concepts."
-    }
-];
 
 const TOPICS = ['Investing', 'Personal Finance', 'Crypto', 'Banking', 'Economics'];
 
@@ -76,27 +50,75 @@ export default function OnboardingScreen() {
     const [username, setUsername] = useState<string>('');
     const [avatar, setAvatar] = useState<string>('fox');
 
-    const fadeAnim = useRef(new Animated.Value(1)).current;
-    const slideAnim = useRef(new Animated.Value(0)).current;
+    const fadeAnim = useSharedValue(1);
+    const slideAnim = useSharedValue(0);
+
+    // Parallax logic
+    const scrollX = useSharedValue(0);
+    const scrollRef = useRef<ScrollView>(null);
+
+    const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+    useEffect(() => {
+        let subscription: any;
+        if (step === 'carousel') {
+            Accelerometer.setUpdateInterval(50);
+            subscription = Accelerometer.addListener(({ x, y }) => {
+                setTilt(prev => ({
+                    x: prev.x * 0.8 + x * 0.2,
+                    y: prev.y * 0.8 + y * 0.2,
+                }));
+            });
+        }
+        return () => subscription?.remove();
+    }, [step]);
+
+    const containerStyle = useAnimatedStyle(() => {
+        const backgroundColor = interpolateColor(
+            scrollX.value,
+            [0, SCREEN_WIDTH, SCREEN_WIDTH * 2],
+            [
+                ONBOARDING_CONFIG.colors.slide1.bg,
+                ONBOARDING_CONFIG.colors.slide2.bg,
+                ONBOARDING_CONFIG.colors.slide3.bg
+            ]
+        );
+        return {
+            backgroundColor: step === 'carousel' ? backgroundColor : Colors.background,
+            flex: 1
+        };
+    });
+
+    const contentAnimatedStyle = useAnimatedStyle(() => ({
+        opacity: fadeAnim.value,
+        transform: [{ translateY: slideAnim.value }],
+        flex: 1,
+    }));
 
     const animateTransition = (callback: () => void) => {
-        Animated.timing(fadeAnim, { toValue: 0, duration: 150, useNativeDriver: true }).start(() => {
-            callback();
-            slideAnim.setValue(30);
-            fadeAnim.setValue(0);
-            Animated.parallel([
-                Animated.timing(fadeAnim, { toValue: 1, duration: 250, useNativeDriver: true }),
-                Animated.timing(slideAnim, { toValue: 0, duration: 250, useNativeDriver: true }),
-            ]).start();
+        fadeAnim.value = Animated.withTiming(0, { duration: 150 }, () => {
+            Animated.runOnJS(callback)();
+            slideAnim.value = 30;
+            fadeAnim.value = 0;
+            fadeAnim.value = Animated.withTiming(1, { duration: 250 });
+            slideAnim.value = Animated.withTiming(0, { duration: 250 });
         });
     };
 
     const nextCarousel = () => {
-        if (Platform.OS !== 'web') Haptics.selectionAsync();
         if (carouselIndex < 2) {
-            animateTransition(() => setCarouselIndex(carouselIndex + 1));
+            scrollRef.current?.scrollTo({ x: (carouselIndex + 1) * SCREEN_WIDTH, animated: true });
         } else {
             animateTransition(() => setStep('quiz1'));
+        }
+    };
+
+    const handleScroll = (event: any) => {
+        const offsetX = event.nativeEvent.contentOffset.x;
+        scrollX.value = offsetX;
+        const index = Math.round(offsetX / SCREEN_WIDTH);
+        if (index !== carouselIndex) {
+            setCarouselIndex(index);
         }
     };
 
@@ -118,49 +140,61 @@ export default function OnboardingScreen() {
         if (!username.trim()) return;
         if (Platform.OS !== 'web') Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         completeOnboarding(username.trim(), avatar, difficulty, interests, sessionLength);
-        router.replace('/');
+        router.replace('/(tabs)' as any);
     };
 
     const suggestedHandle = `@${avatar === 'bull' ? 'Bull' : avatar === 'bear' ? 'Bear' : avatar === 'owl' ? 'Owl' : avatar === 'wolf' ? 'Wolf' : 'Fox'}Rider_${Math.floor(Math.random() * 99)}`;
 
     return (
-        <View style={styles.container}>
+        <Animated.View style={containerStyle}>
             <SafeAreaView style={styles.safeArea}>
                 <KeyboardAvoidingView
                     style={styles.flex}
                     behavior={Platform.OS === 'ios' ? 'padding' : undefined}
                 >
-                    <Animated.View style={[styles.content, { opacity: fadeAnim, transform: [{ translateY: slideAnim }] }]}>
+                    <Animated.View style={contentAnimatedStyle}>
                         {step === 'carousel' && (
                             <View style={styles.carouselContainer}>
-                                <View style={styles.arrowContainer}>
-                                    <ArrowRight {...({ size: 24, color: '#000' } as any)} />
-                                </View>
-                                <View style={styles.carouselTop}>
-                                    <Text style={styles.logo}>FINIQ</Text>
-                                    <Text style={styles.tagline}>Your Money Mind, Sharpened Daily.</Text>
-                                </View>
+                                <OnboardingProgress currentIndex={carouselIndex} />
 
-                                <View style={styles.slideContent}>
-                                    <Text style={styles.slideEmoji}>{CAROUSEL_SLIDES[carouselIndex].emoji}</Text>
-                                    {CAROUSEL_SLIDES[carouselIndex].icon}
-                                    <Text style={styles.slideTitle}>{CAROUSEL_SLIDES[carouselIndex].title}</Text>
-                                    <Text style={styles.slideSubtitle}>{CAROUSEL_SLIDES[carouselIndex].subtitle}</Text>
-                                </View>
+                                <TouchableOpacity
+                                    onPress={() => setStep('quiz1')}
+                                    style={styles.skipBtn}
+                                >
+                                    <Text style={styles.skipText}>Skip</Text>
+                                </TouchableOpacity>
 
-                                <View style={styles.carouselBottom}>
-                                    <View style={styles.dots}>
-                                        {[0, 1, 2].map(i => (
-                                            <View key={i} style={[styles.dot, i === carouselIndex && styles.dotActive]} />
-                                        ))}
-                                    </View>
-                                    <TouchableOpacity style={styles.primaryBtn} onPress={nextCarousel}>
-                                        <Text style={styles.primaryBtnText}>
-                                            {carouselIndex < 2 ? 'NEXT' : 'GET STARTED'}
-                                        </Text>
-                                        <ChevronRight size={18} color={Colors.background} />
-                                    </TouchableOpacity>
-                                </View>
+                                <Animated.ScrollView
+                                    ref={scrollRef as any}
+                                    horizontal
+                                    pagingEnabled
+                                    showsHorizontalScrollIndicator={false}
+                                    onScroll={handleScroll}
+                                    scrollEventThrottle={16}
+                                    style={styles.pager}
+                                >
+                                    <Slide1Arena
+                                        index={0}
+                                        scrollX={scrollX}
+                                        isVisible={carouselIndex === 0}
+                                    />
+                                    <Slide2Weapon
+                                        index={1}
+                                        scrollX={scrollX}
+                                        isVisible={carouselIndex === 1}
+                                    />
+                                    <Slide3Glory
+                                        index={2}
+                                        scrollX={scrollX}
+                                        isVisible={carouselIndex === 2}
+                                    />
+                                </Animated.ScrollView>
+
+                                <OnboardingCTA
+                                    currentIndex={carouselIndex}
+                                    onNext={nextCarousel}
+                                    onSignIn={() => router.push('/signin')}
+                                />
                             </View>
                         )}
 
@@ -296,15 +330,11 @@ export default function OnboardingScreen() {
                     </Animated.View>
                 </KeyboardAvoidingView>
             </SafeAreaView>
-        </View>
+        </Animated.View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: Colors.background,
-    },
     safeArea: {
         flex: 1,
     },
@@ -313,66 +343,24 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        paddingHorizontal: 24,
     },
     carouselContainer: {
         flex: 1,
-        justifyContent: 'space-between',
     },
-    carouselTop: {
-        alignItems: 'center',
-        paddingTop: 40,
+    skipBtn: {
+        position: 'absolute',
+        top: 20,
+        right: 24,
+        zIndex: 110,
+        padding: 8,
     },
-    logo: {
-        color: Colors.textPrimary,
-        fontSize: 42,
-        fontWeight: '900' as const,
-        letterSpacing: 6,
-    },
-    tagline: {
-        color: Colors.textSecondary,
+    skipText: {
+        color: 'rgba(255,255,255,0.45)',
         fontSize: 13,
-        marginTop: 6,
-        letterSpacing: 0.5,
+        fontWeight: '600',
     },
-    slideContent: {
-        alignItems: 'center',
-        gap: 12,
-    },
-    slideEmoji: {
-        fontSize: 56,
-        marginBottom: 8,
-    },
-    slideTitle: {
-        color: Colors.textPrimary,
-        fontSize: 24,
-        fontWeight: '800' as const,
-        textAlign: 'center',
-        marginTop: 8,
-    },
-    slideSubtitle: {
-        color: Colors.textSecondary,
-        fontSize: 16,
-        textAlign: 'center',
-    },
-    carouselBottom: {
-        alignItems: 'center',
-        paddingBottom: 40,
-        gap: 24,
-    },
-    dots: {
-        flexDirection: 'row',
-        gap: 8,
-    },
-    dot: {
-        width: 8,
-        height: 8,
-        borderRadius: 4,
-        backgroundColor: Colors.border,
-    },
-    dotActive: {
-        width: 24,
-        backgroundColor: Colors.accent,
+    pager: {
+        flex: 1,
     },
     primaryBtn: {
         backgroundColor: Colors.accent,
@@ -397,6 +385,7 @@ const styles = StyleSheet.create({
     quizContainer: {
         flex: 1,
         paddingTop: 40,
+        paddingHorizontal: 24,
     },
     quizStep: {
         color: Colors.accent,
@@ -483,6 +472,7 @@ const styles = StyleSheet.create({
     usernameContainer: {
         paddingTop: 40,
         paddingBottom: 40,
+        paddingHorizontal: 24,
     },
     avatarPicker: {
         flexDirection: 'row',
@@ -539,12 +529,5 @@ const styles = StyleSheet.create({
     },
     finishBtn: {
         marginTop: 8,
-    },
-    arrowContainer: {
-        position: 'absolute',
-        top: 60,
-        right: 0,
-        opacity: 0.1,
-        transform: [{ rotate: '-15deg' }],
     },
 });
