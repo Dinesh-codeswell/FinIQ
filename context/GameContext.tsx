@@ -4,6 +4,9 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import createContextHook from '@nkzw/create-context-hook';
 import { UserProfile, DuelResult } from '@/types/game';
 import { getDivision, calculateElo, DAILY_QUESTS } from '@/constants/divisions';
+import { supabase } from '@/src/services/supabase';
+import { userService } from '@/src/services/userService';
+import { duelService } from '@/src/services/duelService';
 
 const STORAGE_KEY = 'finiq_profile';
 
@@ -49,6 +52,13 @@ export const [GameProvider, useGame] = createContextHook(() => {
     const profileQuery = useQuery({
         queryKey: ['profile'],
         queryFn: async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+
+            if (session?.user) {
+                const { data, error } = await userService.getProfile(session.user.id);
+                if (data) return { ...defaultProfile, ...data };
+            }
+
             const stored = await AsyncStorage.getItem(STORAGE_KEY);
             if (stored) {
                 const parsed = JSON.parse(stored) as UserProfile;
@@ -60,7 +70,13 @@ export const [GameProvider, useGame] = createContextHook(() => {
 
     const saveMutation = useMutation({
         mutationFn: async (updated: UserProfile) => {
-            await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+            const { data: { session } } = await supabase.auth.getSession();
+
+            if (session?.user) {
+                await userService.updateProfile(session.user.id, updated);
+            } else {
+                await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+            }
             return updated;
         },
         onSuccess: (data) => {
@@ -184,7 +200,17 @@ export const [GameProvider, useGame] = createContextHook(() => {
                 duelsWonToday: newWinsToday,
                 duelsDateTracker: today,
             };
-            saveMutation.mutate(updated);
+
+            // SYNC TO SUPABASE
+            supabase.auth.getSession().then(({ data: { session } }) => {
+                if (session?.user) {
+                    duelService.recordDuel(session.user.id, result, result.ratingChange, result.xpEarned);
+                    userService.updateProfile(session.user.id, updated);
+                } else {
+                    saveMutation.mutate(updated);
+                }
+            });
+
             return updated;
         });
     }, [saveMutation]);
@@ -223,7 +249,16 @@ export const [GameProvider, useGame] = createContextHook(() => {
                 streak: newStreak,
                 longestStreak: Math.max(prev.longestStreak, newStreak),
             };
-            saveMutation.mutate(updated);
+
+            // SYNC TO SUPABASE
+            supabase.auth.getSession().then(({ data: { session } }) => {
+                if (session?.user) {
+                    userService.updateProfile(session.user.id, updated);
+                } else {
+                    saveMutation.mutate(updated);
+                }
+            });
+
             return updated;
         });
     }, [saveMutation]);
@@ -253,7 +288,10 @@ export const [GameProvider, useGame] = createContextHook(() => {
     }, [profile]);
 
     const resetProfile = useCallback(async () => {
-        await AsyncStorage.removeItem(STORAGE_KEY);
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) {
+            await AsyncStorage.removeItem(STORAGE_KEY);
+        }
         setProfile(defaultProfile);
         setIsReady(true);
         queryClient.setQueryData(['profile'], defaultProfile);

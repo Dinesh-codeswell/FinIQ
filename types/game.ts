@@ -21,13 +21,16 @@ export type DuelMode = 'sprint' | 'scenario' | 'memory' | 'classical';
 
 export interface Question {
     id: string;
-    type: QuestionType;
-    topic: Topic;
-    difficulty: Difficulty;
+    type: QuestionType | string;
+    topic: Topic | string;
+    difficulty: number;
     question: string;
-    options: string[];
-    correctAnswer: number;
+    options?: string[];
+    answer: string | number;
     explanation?: string;
+    minRating?: number;
+    timeLimit?: number;
+    isStarter?: boolean;
 }
 
 export interface UserProfile {

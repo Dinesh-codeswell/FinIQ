@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
     View,
     Text,
@@ -6,29 +6,47 @@ import {
     ScrollView,
     TouchableOpacity,
     FlatList,
+    ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Trophy, Share2, ChevronDown } from 'lucide-react-native';
 import Colors from '@/constants/colors';
 import { useGame } from '@/context/GameContext';
 import { DIVISIONS, getDivision } from '@/constants/divisions';
-import { MOCK_LEADERBOARD } from '@/mocks/data';
+import { userService } from '@/src/services/userService';
 import UserAvatar from '@/src/components/UserAvatar';
 import UsernameDisplay from '@/src/components/UsernameDisplay';
+import { useQuery } from '@tanstack/react-query';
 
 export default function CompeteScreen() {
     const { profile, division } = useGame();
     const [activeTab, setActiveTab] = useState<'open' | 'division'>('open');
 
-    const filteredPlayers = activeTab === 'open'
-        ? MOCK_LEADERBOARD
-        : MOCK_LEADERBOARD.filter((p: any) => {
+    const { data: leaderboardData, isLoading } = useQuery({
+        queryKey: ['leaderboard'],
+        queryFn: async () => {
+            const { data, error } = await userService.getLeaderboard(50);
+            if (error) throw error;
+            return data || [];
+        }
+    });
+
+    const leaderboard = leaderboardData || [];
+
+    const filteredPlayers = useMemo(() => {
+        if (activeTab === 'open') return leaderboard;
+        return leaderboard.filter((p: any) => {
             const d = getDivision(p.rating);
             return d.name === division.name;
         });
+    }, [leaderboard, activeTab, division.name]);
 
-    const userRank = MOCK_LEADERBOARD.findIndex(p => p.rating < profile.rating) + 1;
-    const displayRank = userRank === 0 ? MOCK_LEADERBOARD.length + 1 : userRank;
+    const userRank = useMemo(() => {
+        const index = leaderboard.findIndex(p => p.rating <= profile.rating);
+        return index === -1 ? leaderboard.length + 1 : index + 1;
+    }, [leaderboard, profile.rating]);
+
+    const displayRank = userRank;
 
     const renderPlayer = ({ item, index }: { item: any; index: number }) => {
         const playerDiv = getDivision(item.rating);
@@ -47,7 +65,7 @@ export default function CompeteScreen() {
                 <UserAvatar size={36} animalEmoji={item.avatar} frameId="none" isPro={false} showProBadge={false} />
                 <View style={styles.playerInfo}>
                     <UsernameDisplay username={item.username} isPro={false} size="sm" />
-                    <Text style={[styles.playerDiv, { color: playerDiv.color }]}>{item.division}</Text>
+                    <Text style={[styles.playerDiv, { color: playerDiv.color }]}>{playerDiv.title}</Text>
                 </View>
                 <Text style={styles.playerRating}>{item.rating}</Text>
             </View>
@@ -119,26 +137,32 @@ export default function CompeteScreen() {
                     ))}
                 </View>
 
-                <FlatList
-                    data={filteredPlayers}
-                    renderItem={renderPlayer}
-                    keyExtractor={(item: any) => item.id}
-                    contentContainerStyle={styles.listContent}
-                    showsVerticalScrollIndicator={false}
-                    ListFooterComponent={
-                        <View style={[styles.playerRow, styles.yourRow]}>
-                            <View style={styles.rankCol}>
-                                <Text style={[styles.rankNum, { color: Colors.accent }]}>#{displayRank}</Text>
+                {isLoading ? (
+                    <View style={styles.loadingContainer}>
+                        <ActivityIndicator color={Colors.accent} size="large" />
+                    </View>
+                ) : (
+                    <FlatList
+                        data={filteredPlayers}
+                        renderItem={renderPlayer}
+                        keyExtractor={(item: any) => item.id}
+                        contentContainerStyle={styles.listContent}
+                        showsVerticalScrollIndicator={false}
+                        ListFooterComponent={
+                            <View style={[styles.playerRow, styles.yourRow]}>
+                                <View style={styles.rankCol}>
+                                    <Text style={[styles.rankNum, { color: Colors.accent }]}>#{displayRank}</Text>
+                                </View>
+                                <UserAvatar size={36} animalEmoji={profile.avatar} frameId={profile.selectedAvatarFrame as any} isPro={profile.isPro} showProBadge={false} />
+                                <View style={styles.playerInfo}>
+                                    <UsernameDisplay username={profile.username} isPro={profile.isPro} size="sm" color={Colors.accent} />
+                                    <Text style={[styles.playerDiv, { color: division.color }]}>{division.title}</Text>
+                                </View>
+                                <Text style={[styles.playerRating, { color: Colors.accent }]}>{profile.rating}</Text>
                             </View>
-                            <UserAvatar size={36} animalEmoji={profile.avatar} frameId={profile.selectedAvatarFrame as any} isPro={profile.isPro} showProBadge={false} />
-                            <View style={styles.playerInfo}>
-                                <UsernameDisplay username={profile.username} isPro={profile.isPro} size="sm" color={Colors.accent} />
-                                <Text style={[styles.playerDiv, { color: division.color }]}>{division.title}</Text>
-                            </View>
-                            <Text style={[styles.playerRating, { color: Colors.accent }]}>{profile.rating}</Text>
-                        </View>
-                    }
-                />
+                        }
+                    />
+                )}
             </SafeAreaView>
         </View>
     );
@@ -341,5 +365,10 @@ const styles = StyleSheet.create({
         color: Colors.textPrimary,
         fontSize: 16,
         fontWeight: '800' as const,
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });

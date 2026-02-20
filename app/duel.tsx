@@ -5,6 +5,7 @@ import {
     Animated,
     Dimensions,
     Platform,
+    ActivityIndicator,
 } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -43,11 +44,8 @@ export default function DuelScreen() {
     const opponentRating = parseInt(params.opponentRating || '1000', 10);
     const mode = params.mode || 'classical';
 
-    const [questions] = useState<Question[]>(() => getQuestionsForDuel({
-        difficulty: profile.difficulty || 1,
-        count: 20,
-        mode: mode as any
-    }));
+    const [questions, setQuestions] = useState<Question[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [playerScore, setPlayerScore] = useState<number>(0);
     const [botScore, setBotScore] = useState<number>(0);
@@ -57,6 +55,24 @@ export default function DuelScreen() {
     const [gameOver, setGameOver] = useState<boolean>(false);
     const [isBotThinking, setIsBotThinking] = useState<boolean>(true);
     const [resultsHistory, setResultsHistory] = useState<(boolean | null)[]>(new Array(20).fill(null));
+
+    useEffect(() => {
+        const loadQuestions = async () => {
+            try {
+                const qs = await getQuestionsForDuel({
+                    difficulty: profile.difficulty || 1,
+                    count: 20,
+                    mode: mode as any
+                });
+                setQuestions(qs);
+            } catch (error) {
+                console.error('Failed to load questions:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        loadQuestions();
+    }, []);
 
     // Animations
     const questionSlide = useRef(new Animated.Value(0)).current;
@@ -243,6 +259,14 @@ export default function DuelScreen() {
         }, 300);
     }, [playerScore, botScore, profile.rating, opponentRating, opponentName, opponentAvatar]);
 
+    if (isLoading) {
+        return (
+            <View style={[styles.container, styles.center]}>
+                <ActivityIndicator color={Colors.accent} size="large" />
+            </View>
+        );
+    }
+
     const currentQ = questions[currentIndex];
     if (!currentQ) return <View style={styles.container} />;
 
@@ -358,5 +382,9 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 16,
         paddingTop: 10,
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });

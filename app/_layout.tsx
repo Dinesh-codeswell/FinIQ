@@ -13,6 +13,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { GameProvider } from "@/context/GameContext";
 import Colors from "@/constants/colors";
 
@@ -29,6 +30,11 @@ function RootLayoutNav() {
         animation: "fade",
       }}
     >
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="welcome" options={{ headerShown: false }} />
+      <Stack.Screen name="signup" options={{ headerShown: false }} />
+      <Stack.Screen name="username" options={{ headerShown: false }} />
+      <Stack.Screen name="signin" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="onboarding" options={{ headerShown: false, gestureEnabled: false }} />
       <Stack.Screen name="matchmaking" options={{ headerShown: false, presentation: "fullScreenModal" }} />
@@ -54,6 +60,13 @@ export default function RootLayout() {
     if (fontsLoaded || fontError) {
       SplashScreen.hideAsync();
     }
+
+    // Configure Google Sign-In
+    GoogleSignin.configure({
+      webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+      iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
+      offlineAccess: true,
+    });
   }, [fontsLoaded, fontError]);
 
   if (!fontsLoaded && !fontError) {

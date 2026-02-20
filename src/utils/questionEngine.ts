@@ -1,5 +1,5 @@
 import { Question, DailyChallenge, QuestionType } from '@/src/data/questions/schema';
-import { allQuestions } from '@/src/data/questions';
+import { duelService } from '@/src/services/duelService';
 
 // Helper to shuffle array
 const shuffle = <T>(array: T[]): T[] => {
@@ -7,7 +7,7 @@ const shuffle = <T>(array: T[]): T[] => {
 };
 
 // Generate distractors for money math questions
-const generateMathOptions = (answer: number): string[] => {
+export const generateMathOptions = (answer: number): string[] => {
     const opts = new Set<number>();
     opts.add(answer);
 
@@ -23,15 +23,11 @@ const generateMathOptions = (answer: number): string[] => {
 };
 
 const getStarterRatio = (playerRating: number, duelsPlayed: number): number => {
-    // New players (first 10 duels): 70% Starter questions
     if (duelsPlayed < 10) return 0.70;
-    // Next 10 duels: 50% Starter questions  
     if (duelsPlayed < 20) return 0.50;
-    // Next 10 duels: 30% Starter questions
     if (duelsPlayed < 30) return 0.30;
-    // After 30 duels or rating > 1050: phase out Starter completely
     if (playerRating > 1050) return 0;
-    return 0.20; // Default floor for Bronze players
+    return 0.20;
 };
 
 const interleaveQuestions = (starters: Question[], regulars: Question[]): Question[] => {
@@ -41,7 +37,6 @@ const interleaveQuestions = (starters: Question[], regulars: Question[]): Questi
     if (starters.length === 0) return regulars;
     if (regulars.length === 0) return starters;
 
-    // Spread starter positions evenly across the duel
     const starterPositions = new Set<number>();
     const step = total / (starters.length + 1);
     for (let i = 1; i <= starters.length; i++) {
@@ -66,21 +61,16 @@ interface DuelOptions {
     playerRating?: number;
     duelsPlayed?: number;
     count?: number;
-    mode?: string; // 'sprint', 'scenario', 'classical'
+    mode?: string;
 }
 
-// Track used questions in a session to avoid repetition
-const sessionUsed = new Set<string>();
-
-export const getQuestionsForDuel = (options: DuelOptions): Question[] => {
+export const getQuestionsForDuel = async (options: DuelOptions): Promise<Question[]> => {
     const { difficulty, playerRating = 0, duelsPlayed = 0, count = 10, mode = 'classical' } = options;
 
-    // 1. Calculate Starter Ratio
     const starterRatio = getStarterRatio(playerRating, duelsPlayed);
     const starterCount = Math.round(count * starterRatio);
     const regularCount = count - starterCount;
 
-    // 2. Filter Pool
     let validTypes: QuestionType[] = [];
     if (mode === 'sprint') {
         validTypes = ['money_math', 'true_false'];
@@ -90,70 +80,55 @@ export const getQuestionsForDuel = (options: DuelOptions): Question[] => {
         validTypes = ['money_math', 'scenario_mcq', 'true_false'];
     }
 
-    // 3. Select Starter Questions
-    const starterPool = allQuestions.filter(q =>
-        q.difficulty === 0 &&
-        validTypes.includes(q.type) &&
-        !sessionUsed.has(q.id)
-    );
-
-    const starterQs = shuffle(starterPool).slice(0, starterCount);
-
-    // 4. Select Regular Questions
-    const validDifficulties = [difficulty];
-    if (difficulty > 1) validDifficulties.push(difficulty - 1);
-    if (difficulty < 3) validDifficulties.push(difficulty + 1);
-
-    const regularPool = allQuestions.filter(q =>
-        q.difficulty > 0 &&
-        validTypes.includes(q.type) &&
-        validDifficulties.includes(q.difficulty) &&
-        !sessionUsed.has(q.id) &&
-        q.type !== 'daily_challenge'
-    );
-
-    const regularQs = shuffle(regularPool).slice(0, regularCount);
-
-    // If pool is exhausted, reset session (simplified strategy)
-    if (starterQs.length < starterCount || regularQs.length < regularCount) {
-        sessionUsed.clear();
-        // Recalling selection would be recursive, let's just return what we have for now or fallback
+    // Fetch Starters
+    let starterQs: Question[] = [];
+    if (starterCount > 0) {
+        const { data } = await duelService.getQuestions({
+            count: starterCount,
+            difficulty: 0,
+            types: validTypes
+        });
+        if (data) starterQs = data as unknown as Question[];
     }
 
-    // 5. Interleave
-    const interleaved = interleaveQuestions(starterQs as Question[], regularQs as Question[]);
+    // Fetch Regulars
+    let regularQs: Question[] = [];
+    if (regularCount > 0) {
+        const { data } = await duelService.getQuestions({
+            count: regularCount,
+            difficulty: difficulty,
+            types: validTypes
+        });
+        if (data) regularQs = data as unknown as Question[];
+    }
 
-    // 6. Post-process (Generate Options for Math)
+    const interleaved = interleaveQuestions(starterQs, regularQs);
+
     return interleaved.map(q => {
-        sessionUsed.add(q.id);
         if (q.type === 'money_math' && typeof q.answer === 'number') {
             return {
                 ...q,
                 options: generateMathOptions(q.answer),
-                answer: q.answer.toLocaleString('en-IN') // Convert answer to string to match options
+                answer: q.answer.toLocaleString('en-IN')
             };
         }
         return q;
-    }) as Question[];
+    }) as any as Question[];
 };
 
-export const getDailyChallenge = (): DailyChallenge => {
-    const today = new Date();
-    // Deterministic hash of the date to pick a question
-    const seed = today.getFullYear() * 1000 + (today.getMonth() + 1) * 100 + today.getDate();
-    const challenges = allQuestions.filter(q => q.type === 'daily_challenge') as DailyChallenge[];
+export const getDailyChallenge = async (): Promise<DailyChallenge | null> => {
+    const { data } = await duelService.getQuestions({
+        count: 1,
+        difficulty: 1,
+        types: ['daily_challenge']
+    });
 
-    if (challenges.length === 0) return null as any;
-
-    const index = seed % challenges.length;
-    return challenges[index];
+    return data && data.length > 0 ? (data[0] as unknown as DailyChallenge) : null;
 };
 
 export const checkAnswer = (question: Question, selectedOption: string | number): boolean => {
     if (question.type === 'money_math') {
-        // Compare as strings since we formatted options
         return selectedOption.toString() === question.answer.toString();
     }
-    // For True/False and MCQ
     return selectedOption === question.answer;
 };

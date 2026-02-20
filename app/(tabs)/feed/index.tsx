@@ -11,19 +11,36 @@ import { useRouter } from 'expo-router';
 import { Newspaper, TrendingUp, Lightbulb, BarChart2, Award, ChevronRight, Lock } from 'lucide-react-native';
 import Colors from '@/constants/colors';
 import { useGame } from '@/context/GameContext';
-import { FINIQ_FACTS, MOCK_LEADERBOARD } from '@/mocks/data';
+import { FINIQ_FACTS } from '@/mocks/data';
 import { getDailyChallenge } from '@/src/utils/questionEngine';
 import { AVATAR_EMOJIS, getDivision } from '@/constants/divisions';
+import { useQuery } from '@tanstack/react-query';
+import { userService } from '@/src/services/userService';
+import { DailyChallenge } from '@/src/data/questions/schema';
 
 export default function FeedScreen() {
     const router = useRouter();
     const { profile } = useGame();
-    const dailyChallenge = getDailyChallenge();
+
+    const { data: dailyChallenge } = useQuery({
+        queryKey: ['dailyChallenge'],
+        queryFn: () => getDailyChallenge(),
+    });
+
+    const { data: recentPromotions } = useQuery({
+        queryKey: ['community-feed'],
+        queryFn: async () => {
+            const { data } = await userService.getLeaderboard(5);
+            return data || [];
+        }
+    });
+
     const todayStr = new Date().toISOString().split('T')[0];
     const dailyDone = profile.dailyChallengeCompleted === todayStr;
 
-    const randomFacts = [...FINIQ_FACTS].sort(() => Math.random() - 0.5).slice(0, 3);
-    const recentPromotions = MOCK_LEADERBOARD.slice(0, 3);
+    const randomFacts = React.useMemo(() =>
+        [...FINIQ_FACTS].sort(() => Math.random() - 0.5).slice(0, 3),
+        []);
 
     return (
         <View style={styles.container}>
@@ -88,18 +105,18 @@ export default function FeedScreen() {
                     ))}
 
                     <Text style={[styles.sectionLabel, { marginTop: 16 }]}>COMMUNITY</Text>
-                    {recentPromotions.map((player, i) => {
+                    {(recentPromotions || []).map((player: any) => {
                         const d = getDivision(player.rating);
                         return (
                             <View key={player.id} style={styles.communityCard}>
                                 <View style={[styles.communityAvatar, { borderColor: d.color }]}>
-                                    <Text style={styles.communityEmoji}>{AVATAR_EMOJIS[player.avatar] || '🦊'}</Text>
+                                    <Text style={styles.communityEmoji}>{AVATAR_EMOJIS[player.avatar as keyof typeof AVATAR_EMOJIS] || '🦊'}</Text>
                                 </View>
                                 <View style={styles.communityInfo}>
                                     <Text style={styles.communityText}>
                                         <Text style={styles.communityName}>@{player.username}</Text>
                                         {' '}just climbed to{' '}
-                                        <Text style={[styles.communityDiv, { color: d.color }]}>{player.division}</Text>!
+                                        <Text style={[styles.communityDiv, { color: d.color }]}>{d.title}</Text>!
                                     </Text>
                                 </View>
                                 <Award {...({ size: 16, color: d.color } as any)} />
