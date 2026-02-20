@@ -58,5 +58,8 @@
     "imagemin-webp": "^7.0.0",
     "typescript": "~5.9.2"
   },
+  "overrides": {
+    "expo-location": "~19.0.8"
+  },
   "private": true
 }

@@ -27,6 +27,11 @@
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
+    "autolinking": {
+      "exclude": [
+        "expo-location"
+      ]
+    },
     "plugins": [
       [
         "expo-router",
