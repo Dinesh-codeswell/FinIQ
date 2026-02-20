@@ -12,6 +12,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
+import Constants, { ExecutionEnvironment } from "expo-constants";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { GameProvider } from "@/context/GameContext";
 import Colors from "@/constants/colors";
@@ -61,15 +62,21 @@ export default function RootLayout() {
     }
 
     // Configure Google Sign-In with safety check for Expo Go
-    try {
-      const { GoogleSignin } = require("@react-native-google-signin/google-signin");
-      GoogleSignin.configure({
-        webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
-        iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
-        offlineAccess: true,
-      });
-    } catch (e) {
-      console.warn("Google Sign-In native module not found. This is expected in Expo Go.");
+    const isExpoGo = Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
+
+    if (!isExpoGo) {
+      try {
+        const { GoogleSignin } = require("@react-native-google-signin/google-signin");
+        GoogleSignin.configure({
+          webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+          iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
+          offlineAccess: true,
+        });
+      } catch (e) {
+        console.warn("Google Sign-In native module failed to load:", e);
+      }
+    } else {
+      console.log("Running in Expo Go: Skipping Google Sign-In initialization.");
     }
   }, [fontsLoaded, fontError]);
 

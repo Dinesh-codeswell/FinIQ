@@ -1,3 +1,4 @@
+import Constants, { ExecutionEnvironment } from 'expo-constants';
 import { supabase } from './supabase';
 
 export const authService = {
@@ -38,6 +39,12 @@ export const authService = {
 
     async signInWithGoogle() {
         try {
+            const isExpoGo = Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
+
+            if (isExpoGo) {
+                return { data: null, error: new Error('Google Sign-In is not available in Expo Go. Please use a Development Build for this feature.') };
+            }
+
             const { GoogleSignin } = require('@react-native-google-signin/google-signin');
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
@@ -53,7 +60,7 @@ export const authService = {
             }
         } catch (error: any) {
             if (error.message?.includes('RNGoogleSignin')) {
-                return { data: null, error: new Error('Google Sign-In is not available in Expo Go. Please use a Development Build.') };
+                return { data: null, error: new Error('Google Sign-In native module not found. Please use a Development Build.') };
             }
             return { data: null, error };
         }

@@ -1,0 +1,19 @@
+Unused dependencies
+* @stardazed/streams-text-encoding
+* @ungap/structured-clone
+* expo-blur
+* expo-dev-client
+* expo-image
+* expo-image-picker
+* expo-location
+* expo-symbols
+* expo-system-ui
+* expo-web-browser
+
+Unused devDependencies
+* @expo/ngrok
+* @expo/ngrok-bin-win32-x64
+* typescript
+
+Missing dependencies
+* @react-navigation/native: .\app\(tabs)\profile\index.tsx
