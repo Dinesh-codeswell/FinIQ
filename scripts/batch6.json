@@ -1,0 +1,17 @@
+[
+    {
+        "id": "MMETH_RA_070",
+        "type": "mental_math",
+        "topic": "mental_math",
+        "subCategory": "rapid_arithmetic",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "Total of 10, 10, 10, 10, 10, 10, 10, 10, 10, 10?",
+        "answer": "100",
+        "answerType": "number",
+        "explanation": "10 * 10 = 100.",
+        "feedbackCorrect": "Correct!",
+        "feedbackWrong": "100.",
+        "timeLimit": 5
+    }
+]

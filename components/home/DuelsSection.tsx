@@ -41,6 +41,25 @@ export default function DuelsSection() {
                     </View>
                 </TouchableOpacity>
 
+                <TouchableOpacity
+                    style={[styles.card, { backgroundColor: '#13111A', borderColor: '#BB8FCE40' }]}
+                    activeOpacity={0.8}
+                    onPress={() => router.push('/mental-math-setup' as any)}
+                >
+                    <View style={[styles.accentEdge, { backgroundColor: '#BB8FCE' }]} />
+                    <View style={[styles.iconContainer, { backgroundColor: '#1A1625' }]}>
+                        <Ionicons name="calculator" size={26} color="#BB8FCE" />
+                    </View>
+                    <View style={styles.modeContent}>
+                        <Text style={styles.modeName}>Brain Speed</Text>
+                        <Text style={styles.modeDesc}>250+ rapid-fire math and logic puzzles.</Text>
+                    </View>
+                    <View style={styles.cardFooter}>
+                        <Ionicons name="flash-outline" size={14} color="#BB8FCE" />
+                        <Text style={[styles.timeText, { color: '#BB8FCE' }]}>Multi-mode</Text>
+                    </View>
+                </TouchableOpacity>
+
                 {/* Scenario Card (Locked/Soon) */}
                 <View style={[styles.card, styles.lockedCard]}>
                     <View style={styles.soonBadge}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Animated, TouchableOpacity, Dimensions } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import { Platform } from 'react-native';
@@ -16,6 +16,7 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 export default function MatchmakingScreen() {
     const router = useRouter();
+    const params = useLocalSearchParams<{ topic?: string; mode?: string }>();
     const { profile, division } = useGame();
     const [opponent, setOpponent] = useState<ReturnType<typeof getRandomBot> | null>(null);
     const [countdown, setCountdown] = useState<number | null>(null);
@@ -114,6 +115,8 @@ export default function MatchmakingScreen() {
                     opponentName: opponent?.username || 'Bot',
                     opponentAvatar: opponent?.avatar || 'fox',
                     opponentRating: String(opponent?.rating || 1000),
+                    topic: params.topic || 'investing',
+                    mode: params.mode || 'sprint'
                 },
             });
             return;

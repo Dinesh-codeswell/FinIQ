@@ -11,13 +11,35 @@ export type QuestionResult = {
     options?: string[];
 };
 
-export type QuestionType = 'money-math' | 'scenario-mcq' | 'true-false' | 'daily-challenge';
+export type QuestionType = 'money_math' | 'scenario_mcq' | 'true_false' | 'term_match' | 'daily_challenge' | 'mental_math';
 
-export type Topic = 'investing' | 'personal-finance' | 'banking' | 'macroeconomics' | 'crypto' | 'mental-math';
+export type MentalMathSubCategory =
+    | 'number_series'
+    | 'missing_number'
+    | 'rapid_arithmetic'
+    | 'logic_deduction'
+    | 'pattern_recognition'
+    | 'ratio_proportion'
+    | 'clock_calendar'
+    | 'odd_one_out'
+    | 'number_properties'
+    | 'chain_operations';
+
+export type Topic =
+    | 'investing'
+    | 'personal_finance'
+    | 'banking'
+    | 'macroeconomics'
+    | 'crypto'
+    | 'mental_math'
+    | 'equity_markets'
+    | 'derivatives'
+    | 'taxation'
+    | 'insurance';
 
 export type Difficulty = 1 | 2 | 3;
 
-export type DuelMode = 'sprint' | 'scenario' | 'memory' | 'classical';
+export type DuelMode = 'sprint' | 'scenario' | 'memory' | 'classical' | 'duel' | 'mental_math';
 
 export interface Question {
     id: string;
@@ -27,10 +49,17 @@ export interface Question {
     question: string;
     options?: string[];
     answer: string | number;
-    explanation?: string;
+    explanation: string;
+    feedbackCorrect: string;
+    feedbackWrong: string;
     minRating?: number;
-    timeLimit?: number;
+    timeLimit: number;
     isStarter?: boolean;
+    tags?: string[];
+    // Mental Math specific fields
+    subCategory?: MentalMathSubCategory;
+    answerType?: 'number' | 'letter' | 'word';
+    hint?: string;
 }
 
 export interface UserProfile {

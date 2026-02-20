@@ -8,6 +8,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Bond prices rise", "Loan EMIs increase", "Stock markets rally", "Rupee weakens against dollar"],
         answer: "Loan EMIs increase",
         explanation: "When RBI raises the repo rate, banks borrow at higher costs and pass this on as higher loan interest rates.",
+        feedbackCorrect: "✓ Right! When RBI raises the repo rate, banks borrow at higher costs and pass this on as higher loan interest rates.",
+        feedbackWrong: "✗ Actually, it's Loan EMIs increase. When RBI raises the repo rate, banks borrow at higher costs and pass this on as higher loan interest rates.",
         timeLimit: 15
     },
     {
@@ -16,6 +18,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Fall sharply", "Rise", "Stay the same", "Become more volatile"],
         answer: "Rise",
         explanation: "Bond prices and interest rates move inversely — when rates fall, existing bonds with higher coupons become more valuable.",
+        feedbackCorrect: "✓ Right! Bond prices and interest rates move inversely — when rates fall, existing bonds with higher coupons become more valuable.",
+        feedbackWrong: "✗ Actually, it's Rise. Bond prices and interest rates move inversely — when rates fall, existing bonds with higher coupons become more valuable.",
         timeLimit: 15
     },
     {
@@ -24,6 +28,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Raising tax rates", "Central bank buying bonds to inject money", "Reducing government spending", "Increasing reserve requirements"],
         answer: "Central bank buying bonds to inject money",
         explanation: "QE is a monetary policy where central banks purchase securities to increase money supply.",
+        feedbackCorrect: "✓ Right! QE is a monetary policy where central banks purchase securities to increase money supply.",
+        feedbackWrong: "✗ Actually, it's Central bank buying bonds to inject money. QE is a monetary policy where central banks purchase securities to increase money supply.",
         timeLimit: 15
     },
     {
@@ -32,6 +38,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Cut rates to boost growth", "Hike rates to control inflation", "Print more money", "Devalue the rupee"],
         answer: "Hike rates to control inflation",
         explanation: "Central banks typically raise interest rates to cool down the economy and reduce inflation.",
+        feedbackCorrect: "✓ Right! Central banks typically raise interest rates to cool down the economy and reduce inflation.",
+        feedbackWrong: "✗ Actually, it's Hike rates to control inflation. Central banks typically raise interest rates to cool down the economy and reduce inflation.",
         timeLimit: 15
     },
     {
@@ -40,6 +48,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["RBI lends to banks", "Banks lend to each other", "Banks park excess funds with RBI", "Government borrows from RBI"],
         answer: "Banks park excess funds with RBI",
         explanation: "Reverse repo is the rate at which the central bank borrows money from commercial banks.",
+        feedbackCorrect: "✓ Right! Reverse repo is the rate at which the central bank borrows money from commercial banks.",
+        feedbackWrong: "✗ Actually, it's Banks park excess funds with RBI. Reverse repo is the rate at which the central bank borrows money from commercial banks.",
         timeLimit: 15
     },
     {
@@ -48,6 +58,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Strong economic growth ahead", "Possible economic recession", "Rising inflation", "Stock market rally"],
         answer: "Possible economic recession",
         explanation: "An inverted yield curve (short-term rates higher than long-term) is a reliable recession predictor.",
+        feedbackCorrect: "✓ Right! An inverted yield curve (short-term rates higher than long-term) is a reliable recession predictor.",
+        feedbackWrong: "✗ Actually, it's Possible economic recession. An inverted yield curve (short-term rates higher than long-term) is a reliable recession predictor.",
         timeLimit: 15
     },
     {
@@ -56,6 +68,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Change in total exports", "Change in government spending", "Change in total value of goods/services produced", "Change in population income"],
         answer: "Change in total value of goods/services produced",
         explanation: "GDP measures the monetary value of all finished goods and services made within a country.",
+        feedbackCorrect: "✓ Right! GDP measures the monetary value of all finished goods and services made within a country.",
+        feedbackWrong: "✗ Actually, it's Change in total value of goods/services produced. GDP measures the monetary value of all finished goods and services made within a country.",
         timeLimit: 15
     },
     {
@@ -64,6 +78,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Trade deficit with other countries", "Government spending exceeds government revenue", "Banks have less capital than required", "Rupee is overvalued"],
         answer: "Government spending exceeds government revenue",
         explanation: "It represents the shortfall in a government's income compared to its spending.",
+        feedbackCorrect: "✓ Right! It represents the shortfall in a government.",
+        feedbackWrong: "✗ Actually, it's Government spending exceeds government revenue. It represents the shortfall in a government.",
         timeLimit: 15
     },
     {
@@ -72,6 +88,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Government budget shortfall", "Difference between exports and imports of goods, services, and transfers", "Corporate earnings deficit", "Bank liquidity shortfall"],
         answer: "Difference between exports and imports of goods, services, and transfers",
         explanation: "CAD records the value of exports and imports of both goods and services.",
+        feedbackCorrect: "✓ Right! CAD records the value of exports and imports of both goods and services.",
+        feedbackWrong: "✗ Actually, it's Difference between exports and imports of goods. CAD records the value of exports and imports of both goods and services.",
         timeLimit: 15
     },
     {
@@ -80,6 +98,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Rapid economic growth with low inflation", "High inflation combined with slow growth and high unemployment", "Falling prices with rising growth", "Currency appreciation"],
         answer: "High inflation combined with slow growth and high unemployment",
         explanation: "Stagflation is a tough economic situation with stagnant growth and rising prices.",
+        feedbackCorrect: "✓ Right! Stagflation is a tough economic situation with stagnant growth and rising prices.",
+        feedbackWrong: "✗ Actually, it's High inflation combined with slow growth and high unemployment. Stagflation is a tough economic situation with stagnant growth and rising prices.",
         timeLimit: 15
     },
     {
@@ -88,6 +108,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Pay less for imports", "Pay more for imports", "Be unaffected", "Benefit from cheaper raw materials"],
         answer: "Pay more for imports",
         explanation: "A stronger dollar means more rupees are needed to buy the same amount of dollars for imports.",
+        feedbackCorrect: "✓ Right! A stronger dollar means more rupees are needed to buy the same amount of dollars for imports.",
+        feedbackWrong: "✗ Actually, it's Pay more for imports. A stronger dollar means more rupees are needed to buy the same amount of dollars for imports.",
         timeLimit: 15
     },
     {
@@ -96,6 +118,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Compound interest on savings", "An initial spending increase leads to larger total economic output increase", "Taxes multiply government revenue", "Inflation multiplies over time"],
         answer: "An initial spending increase leads to larger total economic output increase",
         explanation: "It describes how an injection of new spending increases total income by more than the original amount.",
+        feedbackCorrect: "✓ Right! It describes how an injection of new spending increases total income by more than the original amount.",
+        feedbackWrong: "✗ Actually, it's An initial spending increase leads to larger total economic output increase. It describes how an injection of new spending increases total income by more than the original amount.",
         timeLimit: 15
     },
     {
@@ -104,6 +128,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Pay government salaries", "Maintain currency stability and pay for imports", "Invest in stock markets", "Give loans to banks"],
         answer: "Maintain currency stability and pay for imports",
         explanation: "Central banks use reserves to defend the currency and ensure import cover.",
+        feedbackCorrect: "✓ Right! Central banks use reserves to defend the currency and ensure import cover.",
+        feedbackWrong: "✗ Actually, it's Maintain currency stability and pay for imports. Central banks use reserves to defend the currency and ensure import cover.",
         timeLimit: 15
     },
     {
@@ -112,6 +138,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Imports exceed exports", "Exports exceed imports", "Government surplus", "No trade happens"],
         answer: "Exports exceed imports",
         explanation: "Selling more to other countries than buying from them creates a surplus.",
+        feedbackCorrect: "✓ Right! Selling more to other countries than buying from them creates a surplus.",
+        feedbackWrong: "✗ Actually, it's Exports exceed imports. Selling more to other countries than buying from them creates a surplus.",
         timeLimit: 15
     },
     {
@@ -120,6 +148,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Opening new bank branches", "RBI buying/selling government securities", "Stock market opening bell", "Opening trade borders"],
         answer: "RBI buying/selling government securities",
         explanation: "OMOs are used to adjust rupee liquidity in the market.",
+        feedbackCorrect: "✓ Right! OMOs are used to adjust rupee liquidity in the market.",
+        feedbackWrong: "✗ Actually, it's RBI buying/selling government securities. OMOs are used to adjust rupee liquidity in the market.",
         timeLimit: 15
     },
     {
@@ -128,6 +158,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Slowing rate of inflation", "General decline in prices", "Falling GDP", "Falling currency value"],
         answer: "General decline in prices",
         explanation: "Deflation is negative inflation, where prices actually fall.",
+        feedbackCorrect: "✓ Right! Deflation is negative inflation, where prices actually fall.",
+        feedbackWrong: "✗ Actually, it's General decline in prices. Deflation is negative inflation, where prices actually fall.",
         timeLimit: 15
     },
     {
@@ -136,6 +168,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["The Central Government", "The Central Bank (RBI)", "Commercial Banks", "The Stock Exchange"],
         answer: "The Central Bank (RBI)",
         explanation: "RBI formulates monetary policy to control money supply and interest rates.",
+        feedbackCorrect: "✓ Right! RBI formulates monetary policy to control money supply and interest rates.",
+        feedbackWrong: "✗ Actually, it's The Central Bank (RBI). RBI formulates monetary policy to control money supply and interest rates.",
         timeLimit: 15
     },
     {
@@ -144,6 +178,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Interest rate decisions", "Government taxation and spending", "Bank lending rules", "Corporate governance"],
         answer: "Government taxation and spending",
         explanation: "Fiscal policy is how the government adjusts its spending levels and tax rates.",
+        feedbackCorrect: "✓ Right! Fiscal policy is how the government adjusts its spending levels and tax rates.",
+        feedbackWrong: "✗ Actually, it's Government taxation and spending. Fiscal policy is how the government adjusts its spending levels and tax rates.",
         timeLimit: 15
     },
     {
@@ -152,6 +188,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Narrow Money", "Broad Money", "Reserve Money", "Digital Money"],
         answer: "Broad Money",
         explanation: "M3 includes currency, deposits, and time deposits, representing total money supply.",
+        feedbackCorrect: "✓ Right! M3 includes currency, deposits, and time deposits, representing total money supply.",
+        feedbackWrong: "✗ Actually, it's Broad Money. M3 includes currency, deposits, and time deposits, representing total money supply.",
         timeLimit: 15
     },
     {
@@ -160,6 +198,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Excessive money printing relative to output", "High interest rates", "Strong currency", "Low consumer demand"],
         answer: "Excessive money printing relative to output",
         explanation: "When money supply grows much faster than real economic output, currency loses value rapidly.",
+        feedbackCorrect: "✓ Right! When money supply grows much faster than real economic output, currency loses value rapidly.",
+        feedbackWrong: "✗ Actually, it's Excessive money printing relative to output. When money supply grows much faster than real economic output, currency loses value rapidly.",
         timeLimit: 15
     },
     {
@@ -168,6 +208,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["1 month of falling GDP", "Two consecutive quarters of negative GDP growth", "Any rise in unemployment", "Stock market crash"],
         answer: "Two consecutive quarters of negative GDP growth",
         explanation: "This is the standard technical definition of a recession.",
+        feedbackCorrect: "✓ Right! This is the standard technical definition of a recession.",
+        feedbackWrong: "✗ Actually, it's Two consecutive quarters of negative GDP growth. This is the standard technical definition of a recession.",
         timeLimit: 15
     },
     {
@@ -176,6 +218,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Currencies based on goods they can buy", "Stock market returns", "Bank interest rates", "Tax rates"],
         answer: "Currencies based on goods they can buy",
         explanation: "PPP accounts for cost of living differences between countries.",
+        feedbackCorrect: "✓ Right! PPP accounts for cost of living differences between countries.",
+        feedbackWrong: "✗ Actually, it's Currencies based on goods they can buy. PPP accounts for cost of living differences between countries.",
         timeLimit: 15
     },
     {
@@ -184,6 +228,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["IT companies", "Banks", "Manufacturing firms", "Retail shops"],
         answer: "Banks",
         explanation: "CAR ensures banks have enough capital to withstand operational losses.",
+        feedbackCorrect: "✓ Right! CAR ensures banks have enough capital to withstand operational losses.",
+        feedbackWrong: "✗ Actually, it's Banks. CAR ensures banks have enough capital to withstand operational losses.",
         timeLimit: 15
     },
     {
@@ -192,6 +238,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Rate for long-term lending by RBI to banks", "Rate for savings accounts", "Rate for home loans", "Rate for FDs"],
         answer: "Rate for long-term lending by RBI to banks",
         explanation: "Bank rate influences long-term lending rates in the economy.",
+        feedbackCorrect: "✓ Right! Bank rate influences long-term lending rates in the economy.",
+        feedbackWrong: "✗ Actually, it's Rate for long-term lending by RBI to banks. Bank rate influences long-term lending rates in the economy.",
         timeLimit: 15
     },
     {
@@ -200,6 +248,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Interest rates are high and savings are low", "Interest rates are near zero but demand fails to pick up", "Inflation is high", "Banks run out of cash"],
         answer: "Interest rates are near zero but demand fails to pick up",
         explanation: "In a liquidity trap, monetary policy becomes ineffective as people hoard cash.",
+        feedbackCorrect: "✓ Right! In a liquidity trap, monetary policy becomes ineffective as people hoard cash.",
+        feedbackWrong: "✗ Actually, it's Interest rates are near zero but demand fails to pick up. In a liquidity trap, monetary policy becomes ineffective as people hoard cash.",
         timeLimit: 15
     },
 
@@ -210,6 +260,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Company is overvalued", "Company may be undervalued or facing problems", "Industry is undervalued", "P/E has no meaning in isolation"],
         answer: "Company may be undervalued or facing problems",
         explanation: "Low P/E can mean value, or it can mean the market expects poor future growth.",
+        feedbackCorrect: "✓ Right! Low P/E can mean value, or it can mean the market expects poor future growth.",
+        feedbackWrong: "✗ Actually, it's Company may be undervalued or facing problems. Low P/E can mean value, or it can mean the market expects poor future growth.",
         timeLimit: 15
     },
     {
@@ -218,6 +270,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Borrowing shares to sell", "Buying shares expecting price to rise", "Selling shares quickly", "Holding shares for exactly 1 year"],
         answer: "Buying shares expecting price to rise",
         explanation: "Long position means you own the asset and profit if it goes up.",
+        feedbackCorrect: "✓ Right! Long position means you own the asset and profit if it goes up.",
+        feedbackWrong: "✗ Actually, it's Buying shares expecting price to rise. Long position means you own the asset and profit if it goes up.",
         timeLimit: 15
     },
     {
@@ -226,6 +280,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Earnings Before Interest, Tax, Depreciation and Amortization", "Earnings Based on Income Tax and Dividends Added", "Effective Business Income Tax and Debt Assessment", "None of the above"],
         answer: "Earnings Before Interest, Tax, Depreciation and Amortization",
         explanation: "It is a measure of a company's overall financial performance.",
+        feedbackCorrect: "✓ Right! It is a measure of a company.",
+        feedbackWrong: "✗ Actually, it's Earnings Before Interest. It is a measure of a company.",
         timeLimit: 15
     },
     {
@@ -234,6 +290,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["It's 50% less volatile than the market", "It moves 1.5% when market moves 1%", "It always returns 1.5x the market", "It has 1.5% dividend yield"],
         answer: "It moves 1.5% when market moves 1%",
         explanation: "Beta measures volatility relative to the benchmark index (beta of 1).",
+        feedbackCorrect: "✓ Right! Beta measures volatility relative to the benchmark index (beta of 1).",
+        feedbackWrong: "✗ Actually, it's It moves 1.5% when market moves 1%. Beta measures volatility relative to the benchmark index (beta of 1).",
         timeLimit: 15
     },
     {
@@ -242,6 +300,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Forced to sell their shares", "Offered new shares at a discount before public", "Given free bonus shares", "Asked to vote on company merger"],
         answer: "Offered new shares at a discount before public",
         explanation: "Rights issues allow companies to raise capital from existing shareholders.",
+        feedbackCorrect: "✓ Right! Rights issues allow companies to raise capital from existing shareholders.",
+        feedbackWrong: "✗ Actually, it's Offered new shares at a discount before public. Rights issues allow companies to raise capital from existing shareholders.",
         timeLimit: 15
     },
     {
@@ -250,6 +310,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Selling shares within 1 day", "Borrowing shares, selling them, hoping to buy back cheaper", "Selling a small quantity of shares", "Selling at a price below market"],
         answer: "Borrowing shares, selling them, hoping to buy back cheaper",
         explanation: "Short sellers profit from falling prices.",
+        feedbackCorrect: "✓ Right! Short sellers profit from falling prices.",
+        feedbackWrong: "✗ Actually, it's Borrowing shares. Short sellers profit from falling prices.",
         timeLimit: 15
     },
     {
@@ -258,6 +320,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Increase trading volumes", "Temporarily halt trading during extreme price movements", "Allow institutional investors priority access", "Calculate index values faster"],
         answer: "Temporarily halt trading during extreme price movements",
         explanation: "They curb panic selling and allow the market to digest information.",
+        feedbackCorrect: "✓ Right! They curb panic selling and allow the market to digest information.",
+        feedbackWrong: "✗ Actually, it's Temporarily halt trading during extreme price movements. They curb panic selling and allow the market to digest information.",
         timeLimit: 15
     },
     {
@@ -266,6 +330,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["You own 50 shares at ₹1000", "You own 200 shares at ₹250", "You own 100 shares at ₹250", "You own 200 shares at ₹500"],
         answer: "You own 200 shares at ₹250",
         explanation: "Splits increase share count and reduce price proportionally. Value remains same.",
+        feedbackCorrect: "✓ Right! Splits increase share count and reduce price proportionally.",
+        feedbackWrong: "✗ Actually, it's You own 200 shares at ₹250. Splits increase share count and reduce price proportionally.",
         timeLimit: 15
     },
     {
@@ -274,6 +340,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Total revenue / shares outstanding", "Net profit / total shares outstanding", "Dividends / share price", "Operating profit / market cap"],
         answer: "Net profit / total shares outstanding",
         explanation: "EPS indicates how much money a company makes for each share of its stock.",
+        feedbackCorrect: "✓ Right! EPS indicates how much money a company makes for each share of its stock.",
+        feedbackWrong: "✗ Actually, it's Net profit / total shares outstanding. EPS indicates how much money a company makes for each share of its stock.",
         timeLimit: 15
     },
     {
@@ -282,6 +350,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Company is highly profitable", "Company relies more on debt financing than equity", "Company has strong cash flows", "Company is paying high dividends"],
         answer: "Company relies more on debt financing than equity",
         explanation: "High leverage can be risky if earnings are volatile.",
+        feedbackCorrect: "✓ Right! High leverage can be risky if earnings are volatile.",
+        feedbackWrong: "✗ Actually, it's Company relies more on debt financing than equity. High leverage can be risky if earnings are volatile.",
         timeLimit: 15
     },
     {
@@ -290,6 +360,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Total assets of the company", "Share price × Total shares outstanding", "Total sales revenue", "Profit before tax"],
         answer: "Share price × Total shares outstanding",
         explanation: "It represents the total market value of a company's outstanding shares.",
+        feedbackCorrect: "✓ Right! It represents the total market value of a company.",
+        feedbackWrong: "✗ Actually, it's Share price × Total shares outstanding. It represents the total market value of a company.",
         timeLimit: 15
     },
     {
@@ -298,6 +370,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Top 50 global companies", "Top 50 companies on NSE by market cap", "Top 50 banks in India", "Top 50 IT companies"],
         answer: "Top 50 companies on NSE by market cap",
         explanation: "It is the benchmark index of the National Stock Exchange of India.",
+        feedbackCorrect: "✓ Right! It is the benchmark index of the National Stock Exchange of India.",
+        feedbackWrong: "✗ Actually, it's Top 50 companies on NSE by market cap. It is the benchmark index of the National Stock Exchange of India.",
         timeLimit: 15
     },
     {
@@ -306,6 +380,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["A company pays dividends", "A private company sells shares to public for first time", "A company buys back shares", "Two companies merge"],
         answer: "A private company sells shares to public for first time",
         explanation: "IPO marks the transition from private to public company.",
+        feedbackCorrect: "✓ Right! IPO marks the transition from private to public company.",
+        feedbackWrong: "✗ Actually, it's A private company sells shares to public for first time. IPO marks the transition from private to public company.",
         timeLimit: 15
     },
     {
@@ -314,6 +390,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Company revenue", "Company capital", "Net profits", "Employee salaries"],
         answer: "Net profits",
         explanation: "Dividends are a distribution of a portion of a company's earnings.",
+        feedbackCorrect: "✓ Right! Dividends are a distribution of a portion of a company.",
+        feedbackWrong: "✗ Actually, it's Net profits. Dividends are a distribution of a portion of a company.",
         timeLimit: 15
     },
     {
@@ -322,6 +400,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Market price", "Liquidation value per share", "Future growth potential", "Annual dividend"],
         answer: "Liquidation value per share",
         explanation: "It is assets minus liabilities divided by shares.",
+        feedbackCorrect: "✓ Right! It is assets minus liabilities divided by shares.",
+        feedbackWrong: "✗ Actually, it's Liquidation value per share. It is assets minus liabilities divided by shares.",
         timeLimit: 15
     },
     {
@@ -330,6 +410,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Profit to Book Value", "Price to Book Value", "Price to Beta", "Profit to Beta"],
         answer: "Price to Book Value",
         explanation: "It compares market valuation to the company's net asset value.",
+        feedbackCorrect: "✓ Right! It compares market valuation to the company.",
+        feedbackWrong: "✗ Actually, it's Price to Book Value. It compares market valuation to the company.",
         timeLimit: 15
     },
     {
@@ -338,6 +420,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Return on stock price", "Profitability relative to shareholder equity", "Return on total assets", "Return on revenue"],
         answer: "Profitability relative to shareholder equity",
         explanation: "High ROE indicates efficient use of shareholder capital.",
+        feedbackCorrect: "✓ Right! High ROE indicates efficient use of shareholder capital.",
+        feedbackWrong: "✗ Actually, it's Profitability relative to shareholder equity. High ROE indicates efficient use of shareholder capital.",
         timeLimit: 15
     },
     {
@@ -346,6 +430,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Only equity", "Only debt", "Equity plus Long Term Debt", "Current liabilities"],
         answer: "Equity plus Long Term Debt",
         explanation: "ROCE measures return on all capital employed in the business.",
+        feedbackCorrect: "✓ Right! ROCE measures return on all capital employed in the business.",
+        feedbackWrong: "✗ Actually, it's Equity plus Long Term Debt. ROCE measures return on all capital employed in the business.",
         timeLimit: 15
     },
     {
@@ -354,6 +440,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Daily", "Quarterly", "Annually", "Weekly"],
         answer: "Quarterly",
         explanation: "Shareholding patterns are disclosed every quarter.",
+        feedbackCorrect: "✓ Right! Shareholding patterns are disclosed every quarter.",
+        feedbackWrong: "✗ Actually, it's Quarterly. Shareholding patterns are disclosed every quarter.",
         timeLimit: 15
     },
     {
@@ -362,6 +450,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Shares held by public", "Shares held by promoters/locked-in", "Shares held by FIIs", "Shares held by mutual funds"],
         answer: "Shares held by promoters/locked-in",
         explanation: "Free float counts only shares available for trading in the open market.",
+        feedbackCorrect: "✓ Right! Free float counts only shares available for trading in the open market.",
+        feedbackWrong: "✗ Actually, it's Shares held by promoters/locked-in. Free float counts only shares available for trading in the open market.",
         timeLimit: 15
     },
     {
@@ -370,6 +460,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Penny stocks", "Large, well-established, profitable companies", "New startups", "Mining companies"],
         answer: "Large, well-established, profitable companies",
         explanation: "They are considered reliable investments with a history of performance.",
+        feedbackCorrect: "✓ Right! They are considered reliable investments with a history of performance.",
+        feedbackWrong: "✗ Actually, it's Large. They are considered reliable investments with a history of performance.",
         timeLimit: 15
     },
     {
@@ -378,6 +470,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["More shares in market", "Higher EPS", "Lower promoter holding", "Lower stock price"],
         answer: "Higher EPS",
         explanation: "Reducing share count increases Earnings Per Share if earnings settle.",
+        feedbackCorrect: "✓ Right! Reducing share count increases Earnings Per Share if earnings settle.",
+        feedbackWrong: "✗ Actually, it's Higher EPS. Reducing share count increases Earnings Per Share if earnings settle.",
         timeLimit: 15
     },
     {
@@ -386,6 +480,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Market price directly", "Dividend calculations and splits", "P/E Ratio", "Beta"],
         answer: "Dividend calculations and splits",
         explanation: "Dividends are often declared as a % of Face Value.",
+        feedbackCorrect: "✓ Right! Dividends are often declared as a % of Face Value.",
+        feedbackWrong: "✗ Actually, it's Dividend calculations and splits. Dividends are often declared as a % of Face Value.",
         timeLimit: 15
     },
     {
@@ -394,6 +490,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Shares to public", "Shares to specific group at set price", "Shares to employees", "Bonus shares"],
         answer: "Shares to specific group at set price",
         explanation: "It's a way to raise equity from strategic investors or promoters.",
+        feedbackCorrect: "✓ Right! It.",
+        feedbackWrong: "✗ Actually, it's Shares to specific group at set price. It.",
         timeLimit: 15
     },
     {
@@ -402,6 +500,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["US citizens to buy Indian stocks", "Indians to buy US stocks", "Banks to lend in dollars", "Duty free imports"],
         answer: "US citizens to buy Indian stocks",
         explanation: "ADRs are negotiable certificates issued by a U.S. bank representing shares in a foreign stock.",
+        feedbackCorrect: "✓ Right! ADRs are negotiable certificates issued by a U.",
+        feedbackWrong: "✗ Actually, it's US citizens to buy Indian stocks. ADRs are negotiable certificates issued by a U.",
         timeLimit: 15
     },
 
@@ -412,6 +512,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Systematic risk", "Unsystematic/company-specific risk", "Inflation risk", "Liquidity risk"],
         answer: "Unsystematic/company-specific risk",
         explanation: "Diversification cancels out individual asset risks but not the risk of the entire market falling.",
+        feedbackCorrect: "✓ Right! Diversification cancels out individual asset risks but not the risk of the entire market falling.",
+        feedbackWrong: "✗ Actually, it's Unsystematic/company-specific risk. Diversification cancels out individual asset risks but not the risk of the entire market falling.",
         timeLimit: 15
     },
     {
@@ -420,6 +522,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["1-2 months", "3-6 months", "12-18 months", "24+ months"],
         answer: "3-6 months",
         explanation: "This provides a buffer for job loss or medical emergencies.",
+        feedbackCorrect: "✓ Right! This provides a buffer for job loss or medical emergencies.",
+        feedbackWrong: "✗ Actually, it's 3-6 months. This provides a buffer for job loss or medical emergencies.",
         timeLimit: 15
     },
     {
@@ -428,6 +532,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Timing the market perfectly", "Rupee cost averaging and disciplined investing", "Avoiding all investment risk", "Guaranteed returns"],
         answer: "Rupee cost averaging and disciplined investing",
         explanation: "Buying more units when prices are low lowers average cost over time.",
+        feedbackCorrect: "✓ Right! Buying more units when prices are low lowers average cost over time.",
+        feedbackWrong: "✗ Actually, it's Rupee cost averaging and disciplined investing. Buying more units when prices are low lowers average cost over time.",
         timeLimit: 15
     },
     {
@@ -436,6 +542,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Build wealth over time", "Provide a savings corpus", "Provide pure life cover at low cost", "Generate tax-free income"],
         answer: "Provide pure life cover at low cost",
         explanation: "It offers high cover for low premiums but has no maturity benefit if you survive.",
+        feedbackCorrect: "✓ Right! It offers high cover for low premiums but has no maturity benefit if you survive.",
+        feedbackWrong: "✗ Actually, it's Provide pure life cover at low cost. It offers high cover for low premiums but has no maturity benefit if you survive.",
         timeLimit: 15
     },
     {
@@ -444,6 +552,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Your income level", "Your repayment history", "Number of bank accounts", "Your age"],
         answer: "Your repayment history",
         explanation: "Timely payments are the biggest factor in credit scoring.",
+        feedbackCorrect: "✓ Right! Timely payments are the biggest factor in credit scoring.",
+        feedbackWrong: "✗ Actually, it's Your repayment history. Timely payments are the biggest factor in credit scoring.",
         timeLimit: 15
     },
     {
@@ -452,6 +562,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["0-100", "300-900", "500-1000", "1-10"],
         answer: "300-900",
         explanation: "900 is the highest possible score, indicating high creditworthiness.",
+        feedbackCorrect: "✓ Right! 900 is the highest possible score, indicating high creditworthiness.",
+        feedbackWrong: "✗ Actually, it's 300-900. 900 is the highest possible score, indicating high creditworthiness.",
         timeLimit: 15
     },
     {
@@ -460,6 +572,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Tax-free interest", "15-year lock-in period", "Market-linked returns", "Government backing"],
         answer: "Market-linked returns",
         explanation: "PPF interest rates are set by the government, not the stock market.",
+        feedbackCorrect: "✓ Right! PPF interest rates are set by the government, not the stock market.",
+        feedbackWrong: "✗ Actually, it's Market-linked returns. PPF interest rates are set by the government, not the stock market.",
         timeLimit: 15
     },
     {
@@ -468,6 +582,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Lower tax rates", "Someone to act on your behalf for financial matters", "Access to government schemes", "Priority in loan approval"],
         answer: "Someone to act on your behalf for financial matters",
         explanation: "Useful for managing assets if you become incapacitated or live abroad.",
+        feedbackCorrect: "✓ Right! Useful for managing assets if you become incapacitated or live abroad.",
+        feedbackWrong: "✗ Actually, it's Someone to act on your behalf for financial matters. Useful for managing assets if you become incapacitated or live abroad.",
         timeLimit: 15
     },
     {
@@ -476,6 +592,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Time to buy policy", "Time before specific diseases are covered", "Time to pay premium", "Time to get claim money"],
         answer: "Time before specific diseases are covered",
         explanation: "Pre-existing diseases often have a 2-4 year waiting period.",
+        feedbackCorrect: "✓ Right! Pre-existing diseases often have a 2-4 year waiting period.",
+        feedbackWrong: "✗ Actually, it's Time before specific diseases are covered. Pre-existing diseases often have a 2-4 year waiting period.",
         timeLimit: 15
     },
     {
@@ -484,6 +602,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Fully liquid anytime", "Restricted until retirement age", "Allowed only for education", "Taxable fully"],
         answer: "Restricted until retirement age",
         explanation: "NPS is a retirement product with strict lock-in rules.",
+        feedbackCorrect: "✓ Right! NPS is a retirement product with strict lock-in rules.",
+        feedbackWrong: "✗ Actually, it's Restricted until retirement age. NPS is a retirement product with strict lock-in rules.",
         timeLimit: 15
     },
     {
@@ -492,6 +612,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["1 year", "3 years", "5 years", "15 years"],
         answer: "3 years",
         explanation: "ELSS has the shortest lock-in among 80C tax-saving options.",
+        feedbackCorrect: "✓ Right! ELSS has the shortest lock-in among 80C tax-saving options.",
+        feedbackWrong: "✗ Actually, it's 3 years. ELSS has the shortest lock-in among 80C tax-saving options.",
         timeLimit: 15
     },
     {
@@ -500,6 +622,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Self-occupied house", "Rented accommodation", "Vacant plot", "Commercial shop"],
         answer: "Rented accommodation",
         explanation: "HRA tax benefit requires you to actually pay rent.",
+        feedbackCorrect: "✓ Right! HRA tax benefit requires you to actually pay rent.",
+        feedbackWrong: "✗ Actually, it's Rented accommodation. HRA tax benefit requires you to actually pay rent.",
         timeLimit: 15
     },
     {
@@ -508,6 +632,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["₹1 Lakh", "₹1.5 Lakh", "₹2 Lakh", "₹50,000"],
         answer: "₹1.5 Lakh",
         explanation: "This covers PPF, LIC, ELSS, EPF, etc.",
+        feedbackCorrect: "✓ Right! This covers PPF, LIC, ELSS, EPF, etc.",
+        feedbackWrong: "✗ Actually, it's ₹1.5 Lakh. This covers PPF, LIC, ELSS, EPF, etc.",
         timeLimit: 15
     },
     {
@@ -516,6 +642,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Save taxes", "Ensure smooth asset transfer after death", "Avoid loans", "Get insurance"],
         answer: "Ensure smooth asset transfer after death",
         explanation: "It defines legal heirs and avoids family disputes.",
+        feedbackCorrect: "✓ Right! It defines legal heirs and avoids family disputes.",
+        feedbackWrong: "✗ Actually, it's Ensure smooth asset transfer after death. It defines legal heirs and avoids family disputes.",
         timeLimit: 15
     },
     {
@@ -524,6 +652,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Ownership transfer", "Trustee to receive funds after death", "Joint account holder", "Guarantor"],
         answer: "Trustee to receive funds after death",
         explanation: "Nominee is a custodian, not necessarily the legal heir.",
+        feedbackCorrect: "✓ Right! Nominee is a custodian, not necessarily the legal heir.",
+        feedbackWrong: "✗ Actually, it's Trustee to receive funds after death. Nominee is a custodian, not necessarily the legal heir.",
         timeLimit: 15
     },
     {
@@ -532,6 +662,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Paying minimum due only", "Using rewards", "Paying full bill", "Having limit increase"],
         answer: "Paying minimum due only",
         explanation: "Paying only minimum due attracts huge interest (30-40% p.a.) on balance.",
+        feedbackCorrect: "✓ Right! Paying only minimum due attracts huge interest (30-40% p.",
+        feedbackWrong: "✗ Actually, it's Paying minimum due only. Paying only minimum due attracts huge interest (30-40% p.",
         timeLimit: 15
     },
     {
@@ -540,6 +672,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Unsecured", "Secured", "Highest interest rate", "Taking weeks to process"],
         answer: "Secured",
         explanation: "Gold is the collateral, making it a secured loan with lower rates.",
+        feedbackCorrect: "✓ Right! Gold is the collateral, making it a secured loan with lower rates.",
+        feedbackWrong: "✗ Actually, it's Secured. Gold is the collateral, making it a secured loan with lower rates.",
         timeLimit: 15
     },
     {
@@ -548,6 +682,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Buying assets", "Mixing stocks, bonds, gold, cash", "Selling everything", "Allocating funds to banks"],
         answer: "Mixing stocks, bonds, gold, cash",
         explanation: "Balancing portfolio across asset classes to manage risk.",
+        feedbackCorrect: "✓ Right! Balancing portfolio across asset classes to manage risk.",
+        feedbackWrong: "✗ Actually, it's Mixing stocks. Balancing portfolio across asset classes to manage risk.",
         timeLimit: 15
     },
     {
@@ -556,6 +692,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Life Insurance", "Health/Motor Insurance", "Fixed Deposits", "Mutual Funds"],
         answer: "Health/Motor Insurance",
         explanation: "It's a discount on premium for not making claims in previous years.",
+        feedbackCorrect: "✓ Right! It.",
+        feedbackWrong: "✗ Actually, it's Health/Motor Insurance. It.",
         timeLimit: 15
     },
     {
@@ -564,6 +702,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Systematic Withdrawal Plan", "Savings Wealth Plan", "Stock Wealth Plan", "Safe Withdrawal Plan"],
         answer: "Systematic Withdrawal Plan",
         explanation: "Allows periodic withdrawals from mutual fund investments.",
+        feedbackCorrect: "✓ Right! Allows periodic withdrawals from mutual fund investments.",
+        feedbackWrong: "✗ Actually, it's Systematic Withdrawal Plan. Allows periodic withdrawals from mutual fund investments.",
         timeLimit: 15
     },
 
@@ -574,6 +714,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Themselves", "RBI", "Government", "Shareholders"],
         answer: "RBI",
         explanation: "Banks must park a portion of deposits with RBI as cash.",
+        feedbackCorrect: "✓ Right! Banks must park a portion of deposits with RBI as cash.",
+        feedbackWrong: "✗ Actually, it's RBI. Banks must park a portion of deposits with RBI as cash.",
         timeLimit: 15
     },
     {
@@ -582,6 +724,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Cash only", "Gold, Cash or Govt Securities", "Stock market", "Foreign currency"],
         answer: "Gold, Cash or Govt Securities",
         explanation: "Liquid assets banks must maintain with themselves.",
+        feedbackCorrect: "✓ Right! Liquid assets banks must maintain with themselves.",
+        feedbackWrong: "✗ Actually, it's Gold. Liquid assets banks must maintain with themselves.",
         timeLimit: 15
     },
     {
@@ -590,6 +734,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Deposit rates", "Floating rate loans", "Fixed rate loans", "Savings interest"],
         answer: "Floating rate loans",
         explanation: "Marginal Cost of Funds based Lending Rate.",
+        feedbackCorrect: "✓ Right! Marginal Cost of Funds based Lending Rate.",
+        feedbackWrong: "✗ Actually, it's Floating rate loans. Marginal Cost of Funds based Lending Rate.",
         timeLimit: 15
     },
     {
@@ -598,6 +744,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Interest rates rise", "Interest rates fall", "Inflation is high", "Economy is booming"],
         answer: "Interest rates fall",
         explanation: "Your EMI or tenure reduces as market rates fall.",
+        feedbackCorrect: "✓ Right! Your EMI or tenure reduces as market rates fall.",
+        feedbackWrong: "✗ Actually, it's Interest rates fall. Your EMI or tenure reduces as market rates fall.",
         timeLimit: 15
     },
     {
@@ -606,6 +754,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Home Loan", "Car Loan", "Personal Loan", "Gold Loan"],
         answer: "Personal Loan",
         explanation: "No collateral helps secure the loan.",
+        feedbackCorrect: "✓ Right! No collateral helps secure the loan.",
+        feedbackWrong: "✗ Actually, it's Personal Loan. No collateral helps secure the loan.",
         timeLimit: 15
     },
     {
@@ -614,6 +764,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Non Performing Asset", "New Pension Account", "Net Profit After tax", "National Payment Authority"],
         answer: "Non Performing Asset",
         explanation: "Loans that have stopped generating interest income for banks.",
+        feedbackCorrect: "✓ Right! Loans that have stopped generating interest income for banks.",
+        feedbackWrong: "✗ Actually, it's Non Performing Asset. Loans that have stopped generating interest income for banks.",
         timeLimit: 15
     },
     {
@@ -622,6 +774,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Local transfers", "International money transfers", "ATM withdrawals", "Cheque clearing"],
         answer: "International money transfers",
         explanation: "Society for Worldwide Interbank Financial Telecommunication.",
+        feedbackCorrect: "✓ Right! Society for Worldwide Interbank Financial Telecommunication.",
+        feedbackWrong: "✗ Actually, it's International money transfers. Society for Worldwide Interbank Financial Telecommunication.",
         timeLimit: 15
     },
     {
@@ -630,6 +784,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Instant only", "Settled in batches", "Only for lakhs", "Offline only"],
         answer: "Settled in batches",
         explanation: "National Electronic Funds Transfer operates in half-hourly batches.",
+        feedbackCorrect: "✓ Right! National Electronic Funds Transfer operates in half-hourly batches.",
+        feedbackWrong: "✗ Actually, it's Settled in batches. National Electronic Funds Transfer operates in half-hourly batches.",
         timeLimit: 15
     },
     {
@@ -638,6 +794,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["₹1", "₹2 Lakhs", "₹5 Lakhs", "₹10,000"],
         answer: "₹2 Lakhs",
         explanation: "Real Time Gross Settlement is for high value transactions.",
+        feedbackCorrect: "✓ Right! Real Time Gross Settlement is for high value transactions.",
+        feedbackWrong: "✗ Actually, it's ₹2 Lakhs. Real Time Gross Settlement is for high value transactions.",
         timeLimit: 15
     },
     {
@@ -646,6 +804,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["RBI directly", "NPCI", "SBI", "Google"],
         answer: "NPCI",
         explanation: "National Payments Corporation of India.",
+        feedbackCorrect: "✓ Right! National Payments Corporation of India.",
+        feedbackWrong: "✗ Actually, it's NPCI. National Payments Corporation of India.",
         timeLimit: 15
     },
 
@@ -656,6 +816,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Central database", "Distributed digital ledger", "Cloud storage", "Encryption software"],
         answer: "Distributed digital ledger",
         explanation: "A decentralized record of transactions across many computers.",
+        feedbackCorrect: "✓ Right! A decentralized record of transactions across many computers.",
+        feedbackWrong: "✗ Actually, it's Distributed digital ledger. A decentralized record of transactions across many computers.",
         timeLimit: 15
     },
     {
@@ -664,6 +826,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Speed only", "Smart contracts vs Digital gold", "Color", "Creator"],
         answer: "Smart contracts vs Digital gold",
         explanation: "Ethereum is programmable (smart contracts), Bitcoin is primarily store of value.",
+        feedbackCorrect: "✓ Right! Ethereum is programmable (smart contracts), Bitcoin is primarily store of value.",
+        feedbackWrong: "✗ Actually, it's Smart contracts vs Digital gold. Ethereum is programmable (smart contracts), Bitcoin is primarily store of value.",
         timeLimit: 15
     },
     {
@@ -672,6 +836,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Staking coins", "Solving complex math puzzles", "Voting", "Random selection"],
         answer: "Solving complex math puzzles",
         explanation: "Miners use energy to solve puzzles to secure the network.",
+        feedbackCorrect: "✓ Right! Miners use energy to solve puzzles to secure the network.",
+        feedbackWrong: "✗ Actually, it's Solving complex math puzzles. Miners use energy to solve puzzles to secure the network.",
         timeLimit: 15
     },
     {
@@ -680,6 +846,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Definite Finance", "Decentralized Finance", "Digital Files", "Debt Financing"],
         answer: "Decentralized Finance",
         explanation: "Financial services without central intermediaries.",
+        feedbackCorrect: "✓ Right! Financial services without central intermediaries.",
+        feedbackWrong: "✗ Actually, it's Decentralized Finance. Financial services without central intermediaries.",
         timeLimit: 15
     },
     {
@@ -688,6 +856,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Bitcoin", "Real world asset like Dollar", "Ethereum", "Gold only"],
         answer: "Real world asset like Dollar",
         explanation: "Designed to minimize volatility.",
+        feedbackCorrect: "✓ Right! Designed to minimize volatility.",
+        feedbackWrong: "✗ Actually, it's Real world asset like Dollar. Designed to minimize volatility.",
         timeLimit: 15
     },
     {
@@ -696,6 +866,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["10%", "20%", "30%", "0%"],
         answer: "30%",
         explanation: "Flat 30% tax on gains from VDA (Virtual Digital Assets).",
+        feedbackCorrect: "✓ Right! Flat 30% tax on gains from VDA (Virtual Digital Assets).",
+        feedbackWrong: "✗ Actually, it's 30%. Flat 30% tax on gains from VDA (Virtual Digital Assets).",
         timeLimit: 15
     },
     {
@@ -704,6 +876,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Fungible currency", "Unique digital ownership", "A share in company", "A type of Bitcoin"],
         answer: "Unique digital ownership",
         explanation: "Non-Fungible Tokens represent unique items.",
+        feedbackCorrect: "✓ Right! Non-Fungible Tokens represent unique items.",
+        feedbackWrong: "✗ Actually, it's Unique digital ownership. Non-Fungible Tokens represent unique items.",
         timeLimit: 15
     },
     {
@@ -712,6 +886,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Freezing accounts", "Offline storage", "Mobile app", "Exchange wallet"],
         answer: "Offline storage",
         explanation: "Not connected to internet, safer from hacks.",
+        feedbackCorrect: "✓ Right! Not connected to internet, safer from hacks.",
+        feedbackWrong: "✗ Actually, it's Offline storage. Not connected to internet, safer from hacks.",
         timeLimit: 15
     },
     {
@@ -720,6 +896,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["1 year", "2 years", "4 years", "10 years"],
         answer: "4 years",
         explanation: "Reduces block reward by half.",
+        feedbackCorrect: "✓ Right! Reduces block reward by half.",
+        feedbackWrong: "✗ Actually, it's 4 years. Reduces block reward by half.",
         timeLimit: 15
     },
     {
@@ -728,6 +906,8 @@ export const scenarioMCQQuestions: Question[] = [
         options: ["Bitcoin only", "Value of all crypto coins combined", "Ethereum only", "Mining cost"],
         answer: "Value of all crypto coins combined",
         explanation: "The sum of market caps of all traded cryptocurrencies.",
+        feedbackCorrect: "✓ Right! The sum of market caps of all traded cryptocurrencies.",
+        feedbackWrong: "✗ Actually, it's Value of all crypto coins combined. The sum of market caps of all traded cryptocurrencies.",
         timeLimit: 15
     }
 ];

@@ -17,6 +17,7 @@ import { Question } from '@/src/data/questions/schema';
 import { updateTopicAccuracy } from '@/src/store/topicAccuracyStore';
 import { QuestionResult, DuelResult } from '@/types/game';
 import { useFinStore } from '@/src/store/finStore';
+import { MENTAL_MATH_MODES } from '@/src/constants/mentalMathModes';
 
 // Redesigned Components
 import BattleHeader from '@/components/duel/BattleHeader';
@@ -31,10 +32,11 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 export default function DuelScreen() {
     const router = useRouter();
     const params = useLocalSearchParams<{
-        opponentName: string;
-        opponentAvatar: string;
-        opponentRating: string;
-        mode: string;
+        opponentName?: string;
+        opponentAvatar?: string;
+        opponentRating?: string;
+        topic?: string;
+        mode?: string;
     }>();
     const { profile, recordDuelResult } = useGame();
     const { recordDuelResult: recordFinResult } = useFinStore();
@@ -42,14 +44,19 @@ export default function DuelScreen() {
     const opponentName = params.opponentName || 'Bot';
     const opponentAvatar = params.opponentAvatar || 'wolf';
     const opponentRating = parseInt(params.opponentRating || '1000', 10);
+    const topic = params.topic || 'investing';
     const mode = params.mode || 'classical';
+
+    const mmMode = topic === 'mental_math' ? MENTAL_MATH_MODES.find(m => m.id === mode) : null;
+    const duelDuration = mmMode ? mmMode.duration : 60;
+    const questionCount = mmMode ? mmMode.questionCount : 20;
 
     const [questions, setQuestions] = useState<Question[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [playerScore, setPlayerScore] = useState<number>(0);
     const [botScore, setBotScore] = useState<number>(0);
-    const [timeLeft, setTimeLeft] = useState<number>(DUEL_DURATION);
+    const [timeLeft, setTimeLeft] = useState<number>(duelDuration);
     const [answered, setAnswered] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [gameOver, setGameOver] = useState<boolean>(false);
@@ -61,8 +68,9 @@ export default function DuelScreen() {
             try {
                 const qs = await getQuestionsForDuel({
                     difficulty: profile.difficulty || 1,
-                    count: 20,
-                    mode: mode as any
+                    count: questionCount,
+                    mode: mode as any,
+                    topic: topic
                 });
                 setQuestions(qs);
             } catch (error) {
@@ -225,7 +233,8 @@ export default function DuelScreen() {
 
         const won = playerScore > botScore;
         const ratingChange = won ? 25 : -15;
-        const xpEarned = playerScore * 10;
+        const xpMultiplier = mmMode ? mmMode.xpMultiplier : 1;
+        const xpEarned = Math.round(playerScore * 10 * xpMultiplier);
 
         const result: DuelResult = {
             duelId: Math.random().toString(36).substring(2, 11),
@@ -290,7 +299,7 @@ export default function DuelScreen() {
                     playerScore={playerScore}
                     botScore={botScore}
                     timeLeft={timeLeft}
-                    totalDuration={DUEL_DURATION}
+                    totalDuration={duelDuration}
                     currentIndex={currentIndex}
                     totalQuestions={questions.length}
                     playerAvatar={profile.avatar}

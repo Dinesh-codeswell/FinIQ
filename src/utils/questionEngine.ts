@@ -1,5 +1,7 @@
 import { Question, DailyChallenge, QuestionType } from '@/src/data/questions/schema';
 import { duelService } from '@/src/services/duelService';
+import mentalMathData from '@/mental_math_data.json';
+import { MentalMathQuestion } from '@/types/game';
 
 // Helper to shuffle array
 const shuffle = <T>(array: T[]): T[] => {
@@ -62,6 +64,7 @@ interface DuelOptions {
     duelsPlayed?: number;
     count?: number;
     mode?: string;
+    topic?: string;
 }
 
 export const getQuestionsForDuel = async (options: DuelOptions): Promise<Question[]> => {
@@ -70,6 +73,16 @@ export const getQuestionsForDuel = async (options: DuelOptions): Promise<Questio
     const starterRatio = getStarterRatio(playerRating, duelsPlayed);
     const starterCount = Math.round(count * starterRatio);
     const regularCount = count - starterCount;
+
+    if (options.topic === 'mental_math') {
+        // Fetch from local JSON for Mental Math
+        const mmQs = mentalMathData as MentalMathQuestion[];
+        let filtered = mmQs.filter(q => q.difficulty <= difficulty + 1);
+
+        // Shuffle and take count
+        const shuffled = filtered.sort(() => Math.random() - 0.5).slice(0, count);
+        return shuffled as any as Question[];
+    }
 
     let validTypes: QuestionType[] = [];
     if (mode === 'sprint') {
@@ -105,12 +118,31 @@ export const getQuestionsForDuel = async (options: DuelOptions): Promise<Questio
     const interleaved = interleaveQuestions(starterQs, regularQs);
 
     return interleaved.map(q => {
-        if (q.type === 'money_math' && typeof q.answer === 'number') {
+        if ((q.type === 'money_math' || (q.type as string) === 'mental_math') && typeof q.answer === 'number' && (!q.options || q.options.length === 0)) {
             return {
                 ...q,
                 options: generateMathOptions(q.answer),
                 answer: q.answer.toLocaleString('en-IN')
             };
+        }
+
+        // Handle mental math string type answers (like letter patterns or words)
+        if ((q.type as string) === 'mental_math' && typeof q.answer === 'string' && (!q.options || q.options.length === 0)) {
+            // For simple mental math, we might need a different generator for string distractors.
+            // For now, if no options are provide, we'll try to provide default ones or just let the UI handle it.
+            // Actually, my data has some letter/word answers. I'll add a simple generator for those.
+            if (q.answer.length === 1 && /[A-Z]/.test(q.answer)) {
+                // Letter pattern
+                const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const idx = alphabet.indexOf(q.answer);
+                const distractors = new Set<string>();
+                distractors.add(q.answer);
+                while (distractors.size < 4) {
+                    const randomIdx = Math.floor(Math.random() * 26);
+                    distractors.add(alphabet[randomIdx]);
+                }
+                return { ...q, options: shuffle(Array.from(distractors)) };
+            }
         }
         return q;
     }) as any as Question[];
@@ -127,7 +159,7 @@ export const getDailyChallenge = async (): Promise<DailyChallenge | null> => {
 };
 
 export const checkAnswer = (question: Question, selectedOption: string | number): boolean => {
-    if (question.type === 'money_math') {
+    if (question.type === 'money_math' || (question.type as string) === 'mental_math') {
         return selectedOption.toString() === question.answer.toString();
     }
     return selectedOption === question.answer;

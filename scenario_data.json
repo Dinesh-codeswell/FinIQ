@@ -1,0 +1,2858 @@
+[
+    {
+        "id": "SC_MACRO_026",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Creeping Inflation'?",
+        "options": [
+            "Low, steady inflation",
+            "Extremely high inflation",
+            "Deflation",
+            "Negative growth"
+        ],
+        "answer": "Low, steady inflation",
+        "explanation": "Low, single-digit inflation that is generally considered good for growth.",
+        "feedbackCorrect": "✓ Well done!",
+        "feedbackWrong": "✗ Incorrect."
+    },
+    {
+        "id": "SC_MACRO_027",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "The 'Base Year' in CPI is used for:",
+        "options": [
+            "Comparison of price changes",
+            "Calculating tax",
+            "Fixing interest rates",
+            "Determining GDP"
+        ],
+        "answer": "Comparison of price changes",
+        "explanation": "It serves as the reference point for measuring inflation over time.",
+        "feedbackCorrect": "✓ Well done!",
+        "feedbackWrong": "✗ Incorrect."
+    },
+    {
+        "id": "SC_MACRO_028",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Balanced Budget' means:",
+        "options": [
+            "Revenue = Expenditure",
+            "No taxes",
+            "High debt",
+            "Surplus only"
+        ],
+        "answer": "Revenue = Expenditure",
+        "explanation": "When government earnings perfectly match its spending.",
+        "feedbackCorrect": "✓ Well done!",
+        "feedbackWrong": "✗ Incorrect."
+    },
+    {
+        "id": "SC_MACRO_029",
+        "topic": "macroeconomics",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "The 'Laffer Curve' explains the relationship between:",
+        "options": [
+            "Tax rates and tax revenue",
+            "Inflation and growth",
+            "Debt and GDP",
+            "Money supply and prices"
+        ],
+        "answer": "Tax rates and tax revenue",
+        "explanation": "It suggests there is an optimal tax rate that maximizes revenue.",
+        "feedbackCorrect": "✓ Well done!",
+        "feedbackWrong": "✗ Incorrect."
+    },
+    {
+        "id": "SC_MACRO_030",
+        "topic": "macroeconomics",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "When a country's currency devalues, exports typically become:",
+        "options": [
+            "Cheaper for foreign buyers",
+            "More expensive",
+            "Unaffected",
+            "Banned"
+        ],
+        "answer": "Cheaper for foreign buyers",
+        "explanation": "Devaluation makes domestic goods more competitive globally.",
+        "feedbackCorrect": "✓ Well done!",
+        "feedbackWrong": "✗ Incorrect."
+    },
+    {
+        "id": "SC_MACRO_031",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "Giffen Goods are those for which demand:",
+        "options": [
+            "Increases as price rises",
+            "Decreases as price rises",
+            "Stays same",
+            "Is zero"
+        ],
+        "answer": "Increases as price rises",
+        "explanation": "An exception to the law of demand where higher prices lead to higher consumption.",
+        "feedbackCorrect": "✓ Well done!",
+        "feedbackWrong": "✗ Incorrect."
+    },
+    {
+        "id": "SC_EQ_026",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is a 'Value Trap'?",
+        "options": [
+            "Cheap stock that stays cheap due to poor fundamentals",
+            "Expensive stock that falls",
+            "Stock with no dividends",
+            "IPO that fails"
+        ],
+        "answer": "Cheap stock that stays cheap due to poor fundamentals",
+        "explanation": "A stock that appears undervalued based on metrics but has structural flaws.",
+        "feedbackCorrect": "✓ Well done!",
+        "feedbackWrong": "✗ Incorrect."
+    },
+    {
+        "id": "SC_EQ_027",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "'Window Dressing' by mutual funds happens at:",
+        "options": [
+            "End of reporting period",
+            "Every Monday",
+            "During IPOs",
+            "When market crashes"
+        ],
+        "answer": "End of reporting period",
+        "explanation": "Buying high-performing stocks to improve the look of the portfolio before disclosure.",
+        "feedbackCorrect": "✓ Well done!",
+        "feedbackWrong": "✗ Incorrect."
+    },
+    {
+        "id": "SC_PF_021",
+        "topic": "personal_finance",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "'Rupee Cost Averaging' is a benefit of:",
+        "options": [
+            "SIP",
+            "Lumpsum",
+            "FD",
+            "Insurance"
+        ],
+        "answer": "SIP",
+        "explanation": "Investing a fixed amount regularly ensures you buy more units when prices are low.",
+        "feedbackCorrect": "✓ Well done!",
+        "feedbackWrong": "✗ Incorrect."
+    },
+    {
+        "id": "SC_BNK_011",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Teaser Rate' in a loan?",
+        "options": [
+            "Low initial rate that rises later",
+            "Fixed rate for life",
+            "Variable rate only",
+            "Interest-free loan"
+        ],
+        "answer": "Low initial rate that rises later",
+        "explanation": "Common in home loans to attract borrowers initially.",
+        "feedbackCorrect": "✓ Well done!",
+        "feedbackWrong": "✗ Incorrect."
+    },
+    {
+        "id": "SC_TAX_001",
+        "topic": "taxation",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "Standard Deduction on salary income in India (current) is:",
+        "options": [
+            "₹50,000",
+            "₹40,000",
+            "₹75,000",
+            "₹1,00,000"
+        ],
+        "answer": "₹75,000",
+        "explanation": "The current standard deduction for salaried individuals is ₹75,000.",
+        "feedbackCorrect": "✓ Well done!",
+        "feedbackWrong": "✗ Incorrect."
+    },
+    {
+        "id": "SC_INS_001",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Surrender Value' in Life Insurance?",
+        "options": [
+            "Amount paid on terminating policy early",
+            "Death benefit",
+            "Sum assured",
+            "Annual premium"
+        ],
+        "answer": "Amount paid on terminating policy early",
+        "explanation": "The amount the insurer pays if the policyholder cancels before maturity.",
+        "feedbackCorrect": "✓ Well done!",
+        "feedbackWrong": "✗ Incorrect."
+    },
+    {
+        "id": "SC_MACRO_032",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "The 'Big Mac Index' is a lighthearted measurement of:",
+        "options": [
+            "PPP (Purchasing Power Parity)",
+            "Global hunger",
+            "Export efficiency",
+            "Fast food consumption"
+        ],
+        "answer": "PPP (Purchasing Power Parity)",
+        "explanation": "It compares the price of a burger in different countries to judge currency values.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_033",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Frictionally Unemployed'?",
+        "options": [
+            "Between jobs by choice",
+            "Job replaced by robots",
+            "No jobs in the market",
+            "Unable to work"
+        ],
+        "answer": "Between jobs by choice",
+        "explanation": "Temporary unemployment while transitioning from one job to another.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_034",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "When tax revenue > government spending, it's a:",
+        "options": [
+            "Budget Surplus",
+            "Budget Deficit",
+            "Balanced Budget",
+            "Zero Base Budget"
+        ],
+        "answer": "Budget Surplus",
+        "explanation": "The government is earning more than it spends.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_035",
+        "topic": "macroeconomics",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "Hyperinflation in Zimbabwe reached millions of percent. Main cause?",
+        "options": [
+            "Uncontrolled money printing",
+            "High oil prices",
+            "Export ban",
+            "Population boom"
+        ],
+        "answer": "Uncontrolled money printing",
+        "explanation": "Extreme expansion of money supply without economic output.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_036",
+        "topic": "macroeconomics",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is the 'Velocity of Money'?",
+        "options": [
+            "Speed of printing",
+            "Rate at which money circulates in economy",
+            "Time to clear a cheque",
+            "Stock market speed"
+        ],
+        "answer": "Rate at which money circulates in economy",
+        "explanation": "The frequency with which one unit of currency is used for purchase of goods.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_037",
+        "topic": "macroeconomics",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "Which body calculates GDP in India?",
+        "options": [
+            "NSO (National Statistical Office)",
+            "RBI",
+            "Finance Ministry",
+            "SEBI"
+        ],
+        "answer": "NSO (National Statistical Office)",
+        "explanation": "NSO, under MOSPI, is responsible for national income accounting.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_038",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'V-shaped' recovery means:",
+        "options": [
+            "Quick fall followed by quick rise",
+            "Slow fall followed by slow rise",
+            "No recovery",
+            "Stagnant growth"
+        ],
+        "answer": "Quick fall followed by quick rise",
+        "explanation": "A sharp recession followed by an equally sharp rebound.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_039",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Hot Money'?",
+        "options": [
+            "Counterfeit notes",
+            "Funds that move quickly to gain from short-term interest rates",
+            "Illegal cash",
+            "Direct Foreign Investment"
+        ],
+        "answer": "Funds that move quickly to gain from short-term interest rates",
+        "explanation": "Capital that flows in and out of a country seeking the highest returns.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_040",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "In a 'Seller's Market':",
+        "options": [
+            "Supply > Demand",
+            "Demand > Supply",
+            "Price stays low",
+            "No buyers"
+        ],
+        "answer": "Demand > Supply",
+        "explanation": "Sellers have bargaining power due to scarcity.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_028",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is a 'Multi-bagger'?",
+        "options": [
+            "Stock that doubles or triples in value",
+            "Stock that is very cheap",
+            "Stock of an airport company",
+            "Stock that loses value"
+        ],
+        "answer": "Stock that doubles or triples in value",
+        "explanation": "An investment that yields returns several times its cost.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_029",
+        "topic": "equity_markets",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "Buying shares on 'Margin' means:",
+        "options": [
+            "Using borrowed money from broker",
+            "Buying only small caps",
+            "Buying after market hours",
+            "Paying in installments"
+        ],
+        "answer": "Using borrowed money from broker",
+        "explanation": "Leveraging your capital to buy more shares than you can afford outright.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_030",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Insider Trading'?",
+        "options": [
+            "Trading based on confidential, non-public info",
+            "Trading within your own city",
+            "Trading by company employees legally",
+            "Trading only on weekends"
+        ],
+        "answer": "Trading based on confidential, non-public info",
+        "explanation": "Buying/selling shares using privileged information, which is illegal.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_031",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Penny Stock' typically has:",
+        "options": [
+            "High price, low volume",
+            "Low price, low market cap, high risk",
+            "High dividend yield",
+            "Strong government backing"
+        ],
+        "answer": "Low price, low market cap, high risk",
+        "explanation": "Small companies with very low share prices, often highly speculative.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_032",
+        "topic": "equity_markets",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Contrarian Investing'?",
+        "options": [
+            "Buying against market trends",
+            "Buying what everyone is buying",
+            "Selling all stocks",
+            "Investing only in gold"
+        ],
+        "answer": "Buying against market trends",
+        "explanation": "Purchasing assets that are currently unpopular with other investors.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_033",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'DRHP' is filed during:",
+        "options": [
+            "IPO process",
+            "Company closure",
+            "Dividend declaration",
+            "Stock split"
+        ],
+        "answer": "IPO process",
+        "explanation": "Draft Red Herring Prospectus contains details of the company going public.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_034",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Price Discovery'?",
+        "options": [
+            "Finding the best broker",
+            "Setting asset price through supply/demand in market",
+            "Guessing future prices",
+            "Central bank setting prices"
+        ],
+        "answer": "Setting asset price through supply/demand in market",
+        "explanation": "The process of determining the spot price of an asset via marketplace interactions.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_035",
+        "topic": "equity_markets",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "A 'Bull Market' indicates:",
+        "options": [
+            "Falling prices",
+            "Rising prices and optimism",
+            "No change",
+            "Extreme fear"
+        ],
+        "answer": "Rising prices and optimism",
+        "explanation": "Characterized by high investor confidence and rising asset prices.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_036",
+        "topic": "equity_markets",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Algorithmic Trading'?",
+        "options": [
+            "Trading by phone",
+            "Using computer programs to execute trades at high speed",
+            "Manual research",
+            "Buying only tech stocks"
+        ],
+        "answer": "Using computer programs to execute trades at high speed",
+        "explanation": "Automated trading based on pre-set mathematical rules.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_037",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Portfolio' is a:",
+        "options": [
+            "Single stock",
+            "Collection of diverse investments",
+            "Bank account",
+            "Type of loan"
+        ],
+        "answer": "Collection of diverse investments",
+        "explanation": "The group of all assets (stocks, bonds, cash) held by an investor.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_038",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Market Liquidity'?",
+        "options": [
+            "Company cash",
+            "Ease of buying/selling without affecting price",
+            "Market crash",
+            "Interest rates"
+        ],
+        "answer": "Ease of buying/selling without affecting price",
+        "explanation": "High liquidity means you can exit a position quickly at current market cost.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_039",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Growth Stock' usually:",
+        "options": [
+            "Pays high dividends",
+            "Reinvests profits into expansion",
+            "Has low PE ratio",
+            "Is very stable"
+        ],
+        "answer": "Reinvests profits into expansion",
+        "explanation": "Expected to grow at a rate significantly above the average for the market.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_040",
+        "topic": "equity_markets",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Dark Pool' trading?",
+        "options": [
+            "Illegal gambling",
+            "Private exchanges for large institutional trades",
+            "Hidden bank accounts",
+            "Trading after midnight"
+        ],
+        "answer": "Private exchanges for large institutional trades",
+        "explanation": "Institutional trades executed away from public stock exchanges.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_041",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Arbitrage'?",
+        "options": [
+            "Buying and selling same asset in different markets to profit from price gap",
+            "Paying off debt",
+            "Long term investing",
+            "Guessing market tops"
+        ],
+        "answer": "Buying and selling same asset in different markets to profit from price gap",
+        "explanation": "Simultaneous purchase and sale of an asset to profit from price difference.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_042",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "The 'VIX' index measures:",
+        "options": [
+            "Expected volatility",
+            "Stock performance",
+            "Dividend yield",
+            "Interest rates"
+        ],
+        "answer": "Expected volatility",
+        "explanation": "Commonly called the 'Fear Gauge' of the market.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_022",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "The '50/30/20 Rule' suggests 50% for:",
+        "options": [
+            "Needs",
+            "Wants",
+            "Savings",
+            "Tax"
+        ],
+        "answer": "Needs",
+        "explanation": "50% for essentials, 30% for lifestyle, 20% for savings/debt.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_023",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Dollar Cost Averaging'?",
+        "options": [
+            "Buying only in dollars",
+            "Regularly investing a fixed amount regardless of price",
+            "Buying when price is low",
+            "Selling when price is high"
+        ],
+        "answer": "Regularly investing a fixed amount regardless of price",
+        "explanation": "Reduces impact of volatility on the overall purchase.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_024",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Net Worth'?",
+        "options": [
+            "Total Income",
+            "Total Assets minus Total Liabilities",
+            "Total Savings",
+            "Monthly Salary"
+        ],
+        "answer": "Total Assets minus Total Liabilities",
+        "explanation": "Measures your financial health at a specific point in time.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_025",
+        "topic": "personal_finance",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "A 'Liquid Asset' is one that:",
+        "options": [
+            "Is worth a lot",
+            "Can be quickly converted to cash with minimal loss",
+            "Is kept in a bank",
+            "Is highly risky"
+        ],
+        "answer": "Can be quickly converted to cash with minimal loss",
+        "explanation": "Cash, savings, and highly traded stocks are liquid.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_026",
+        "topic": "personal_finance",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Tax Loss Harvesting'?",
+        "options": [
+            "Avoiding tax illegally",
+            "Selling losing stocks to offset capital gains",
+            "Not paying tax",
+            "Deferring income"
+        ],
+        "answer": "Selling losing stocks to offset capital gains",
+        "explanation": "Using investment losses to reduce taxable income from gains.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_027",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is an 'Expense Ratio' in mutual funds?",
+        "options": [
+            "Annual cost to manage the fund as % of assets",
+            "Profit share of the manager",
+            "Exit load",
+            "Transaction tax"
+        ],
+        "answer": "Annual cost to manage the fund as % of assets",
+        "explanation": "Higher expense ratios can significantly eat into long-term returns.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_028",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Nominee' in a bank account is a:",
+        "options": [
+            "New owner",
+            "Custodian/Trustee for legal heirs",
+            "Power of attorney holder",
+            "Fixed deposit holder"
+        ],
+        "answer": "Custodian/Trustee for legal heirs",
+        "explanation": "The nominee receives the money but must distribute it to legal heirs.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_029",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Compound Interest'?",
+        "options": [
+            "Interest on principal only",
+            "Interest on principal and accumulated interest",
+            "Interest on debt",
+            "Government interest"
+        ],
+        "answer": "Interest on principal and accumulated interest",
+        "explanation": "Considered the 'eighth wonder' of the world for building wealth.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_030",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Credit Utilization Ratio' should ideally be below:",
+        "options": [
+            "100%",
+            "50%",
+            "30%",
+            "10%"
+        ],
+        "answer": "30%",
+        "explanation": "High utilization can negatively impact your credit score.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_012",
+        "topic": "banking",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "What is an 'Overdraft'?",
+        "options": [
+            "Withdrawing more than your balance",
+            "Depositing too much",
+            "Lowering your limit",
+            "Closing an account"
+        ],
+        "answer": "Withdrawing more than your balance",
+        "explanation": "A credit facility that allows you to withdraw funds even with zero balance.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_013",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "The 'Prime Lending Rate' (PLR) is for:",
+        "options": [
+            "Riskiest customers",
+            "Most creditworthy customers",
+            "Government only",
+            "Banks' own employees"
+        ],
+        "answer": "Most creditworthy customers",
+        "explanation": "The benchmark interest rate banks use for their best clients.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_014",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Escrow'?",
+        "options": [
+            "A third-party account holding funds during a transaction",
+            "A type of tax",
+            "A bank branch",
+            "A loan for cars"
+        ],
+        "answer": "A third-party account holding funds during a transaction",
+        "explanation": "Funds are released only when specific conditions are met.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_015",
+        "topic": "banking",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "A 'Dormant Account' is one with:",
+        "options": [
+            "High interest",
+            "No activity for a long period",
+            "Many transactions",
+            "Negative balance"
+        ],
+        "answer": "No activity for a long period",
+        "explanation": "Banks flag accounts as dormant after 12-24 months of no user-led activity.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_016",
+        "topic": "banking",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Fractional Reserve Banking'?",
+        "options": [
+            "Banks keeping only a fraction of deposits as reserves",
+            "Banks lending only to small businesses",
+            "Banks having only one branch",
+            "Banks charging zero interest"
+        ],
+        "answer": "Banks keeping only a fraction of deposits as reserves",
+        "explanation": "The system where modern banks lend out most of what they receive.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_017",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Moratorium' on a loan means:",
+        "options": [
+            "Interest rate hike",
+            "Temporary suspension of repayments",
+            "Immediate full repayment",
+            "Loan cancellation"
+        ],
+        "answer": "Temporary suspension of repayments",
+        "explanation": "Often granted during crises to help borrowers manage liquidity.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_018",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'E-Rupee' (CBDC)?",
+        "options": [
+            "A cryptocurrency",
+            "Digital version of physical currency issued by RBI",
+            "UPI payment",
+            "Bitcoin in India"
+        ],
+        "answer": "Digital version of physical currency issued by RBI",
+        "explanation": "Central Bank Digital Currency is legal tender in digital form.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_019",
+        "topic": "banking",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "The 'MICR' code on a cheque helps in:",
+        "options": [
+            "Identifying the drawer",
+            "Automatic processing and clearing",
+            "Saving tax",
+            "Calculating interest"
+        ],
+        "answer": "Automatic processing and clearing",
+        "explanation": "Magnetic Ink Character Recognition helps in high-speed sorting.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_020",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Priority Sector Lending' (PSL)?",
+        "options": [
+            "Lending only to big corporates",
+            "Mandatory lending to sectors like agriculture/MSME",
+            "Loans to bank managers",
+            "High-interest loans"
+        ],
+        "answer": "Mandatory lending to sectors like agriculture/MSME",
+        "explanation": "RBI mandates a % of lending go to vital underdeveloped sectors.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_011",
+        "topic": "crypto",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Faucets' in crypto is:",
+        "options": [
+            "A place to get small amounts of free crypto",
+            "A mining rig",
+            "A hack",
+            "A type of wallet"
+        ],
+        "answer": "A place to get small amounts of free crypto",
+        "explanation": "Often used for testing or to introduce new users to a coin.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_012",
+        "topic": "crypto",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is a '51% Attack'?",
+        "options": [
+            "Market drop of 51%",
+            "When a group controls majority mining power to manipulate ledger",
+            "51% tax hike",
+            "Hack of 51 wallets"
+        ],
+        "answer": "When a group controls majority mining power to manipulate ledger",
+        "explanation": "A threat to decentralized networks if mining power is centralized.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_013",
+        "topic": "crypto",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Gas Fee'?",
+        "options": [
+            "Petrol price",
+            "Transaction fee on Ethereum network",
+            "Mining reward",
+            "Cost of electricity"
+        ],
+        "answer": "Transaction fee on Ethereum network",
+        "explanation": "Paid to validate transactions on the blockchain.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_014",
+        "topic": "crypto",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is a 'Genesis Block'?",
+        "options": [
+            "Last block mined",
+            "The very first block of a blockchain",
+            "A fake block",
+            "A block with errors"
+        ],
+        "answer": "The very first block of a blockchain",
+        "explanation": "Block 0, the foundation of the entire chain history.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_015",
+        "topic": "crypto",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'DAO' stands for:",
+        "options": [
+            "Digital Asset Office",
+            "Decentralized Autonomous Organization",
+            "Debt Assessment Order",
+            "Daily Asset Output"
+        ],
+        "answer": "Decentralized Autonomous Organization",
+        "explanation": "Member-owned communities without centralized leadership.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_016",
+        "topic": "crypto",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Staking'?",
+        "options": [
+            "Mining with power",
+            "Locking crypto to support network and earn rewards",
+            "Selling all coins",
+            "Gambling with crypto"
+        ],
+        "answer": "Locking crypto to support network and earn rewards",
+        "explanation": "Common in Proof of Stake (PoS) blockchains.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_017",
+        "topic": "crypto",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "What is a 'HODL'?",
+        "options": [
+            "Quick trading",
+            "Holding crypto long term regardless of volatility",
+            "Selling at a loss",
+            "Hack Of Digital Ledger"
+        ],
+        "answer": "Holding crypto long term regardless of volatility",
+        "explanation": "A popular meme/strategy in the crypto community.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_018",
+        "topic": "crypto",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Satoshi'?",
+        "options": [
+            "A Japanese bank",
+            "The smallest unit of Bitcoin",
+            "A type of miner",
+            "A crypto exchange"
+        ],
+        "answer": "The smallest unit of Bitcoin",
+        "explanation": "1 Bitcoin = 100,000,000 Satoshis.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_019",
+        "topic": "crypto",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Rug Pull' is a type of:",
+        "options": [
+            "Design",
+            "Exit scam where developers abandon project and steal funds",
+            "Wallet security",
+            "Mining method"
+        ],
+        "answer": "Exit scam where developers abandon project and steal funds",
+        "explanation": "Common in new, unregulated DeFi projects.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_020",
+        "topic": "crypto",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'FOMO'?",
+        "options": [
+            "Fear Of Missing Out",
+            "Financial Order Model",
+            "Federal Office Money",
+            "Fast Options Market"
+        ],
+        "answer": "Fear Of Missing Out",
+        "explanation": "Driving emotional decisions to buy when prices are high.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_002",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'TDS'?",
+        "options": [
+            "Tax Deducted at Source",
+            "Total Debt Status",
+            "Tax Deposit Scheme",
+            "Transfer Debit Service"
+        ],
+        "answer": "Tax Deducted at Source",
+        "explanation": "Tax is deducted at the time of income payment by the payer.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_003",
+        "topic": "taxation",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "Income Tax in India is based on:",
+        "options": [
+            "Fixed rates for all",
+            "Progressive slabs",
+            "Decreasing rates",
+            "One-time flat tax"
+        ],
+        "answer": "Progressive slabs",
+        "explanation": "Higher income earners pay a higher percentage of their income as tax.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_004",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Section 80D' for?",
+        "options": [
+            "Investment in stocks",
+            "Medical insurance premium",
+            "Education loan",
+            "Rent payment"
+        ],
+        "answer": "Medical insurance premium",
+        "explanation": "Provides tax deduction for health insurance premiums paid.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_005",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "GST stands for:",
+        "options": [
+            "Goods and Services Tax",
+            "General Sales Tax",
+            "Government Savings Tax",
+            "Gold and Silver Transfer"
+        ],
+        "answer": "Goods and Services Tax",
+        "explanation": "An indirect tax used in India on the supply of goods and services.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_006",
+        "topic": "taxation",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Capital Gains Tax'?",
+        "options": [
+            "Tax on lottery",
+            "Tax on profit from sale of assets",
+            "Tax on salary",
+            "Tax on dividends"
+        ],
+        "answer": "Tax on profit from sale of assets",
+        "explanation": "Applicable when you sell an asset like property or stocks for more than purchase price.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_007",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "LTCG on equity above ₹1.25 Lakh is currently taxed at:",
+        "options": [
+            "5%",
+            "10%",
+            "12.5%",
+            "20%"
+        ],
+        "answer": "12.5%",
+        "explanation": "Long Term Capital Gains tax was recently revised.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_008",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "STCG on equity is currently taxed at:",
+        "options": [
+            "10%",
+            "15%",
+            "20%",
+            "Income slab rate"
+        ],
+        "answer": "20%",
+        "explanation": "Short Term Capital Gains (less than 1 year) are taxed at 20%.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_009",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "Income from 'Other Sources' includes:",
+        "options": [
+            "Salary",
+            "Rent",
+            "Savings interest and gifts",
+            "Business profit"
+        ],
+        "answer": "Savings interest and gifts",
+        "explanation": "Catch-all category for income not falling under other heads.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_010",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Form 16'?",
+        "options": [
+            "Certificate for tax deducted by employer",
+            "Tax return form",
+            "Home loan application",
+            "Pan card update"
+        ],
+        "answer": "Certificate for tax deducted by employer",
+        "explanation": "Issued by employers detailing salary paid and TDS deducted.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_002",
+        "topic": "insurance",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "What does 'Life Insurance' protect against?",
+        "options": [
+            "Job loss",
+            "Loss of life and financial security of family",
+            "Market crash",
+            "Identity theft"
+        ],
+        "answer": "Loss of life and financial security of family",
+        "explanation": "Provides a sum to beneficiaries in case of insured's death.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_003",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "The 'Premium' is:",
+        "options": [
+            "Payout on claim",
+            "Amount paid to keep policy active",
+            "Policy duration",
+            "Bonus amount"
+        ],
+        "answer": "Amount paid to keep policy active",
+        "explanation": "Regular payments made by the insured to the insurer.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_004",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Deductible' in health insurance is:",
+        "options": [
+            "Tax discount",
+            "Amount insured pays before company pays",
+            "Total sum insured",
+            "Monthly premium"
+        ],
+        "answer": "Amount insured pays before company pays",
+        "explanation": "Higher deductibles usually lower the premium cost.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_005",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Cashless Claim'?",
+        "options": [
+            "Insurance company pays hospital directly",
+            "Reimbursement after discharge",
+            "Cash payment by doctor",
+            "Policy without premium"
+        ],
+        "answer": "Insurance company pays hospital directly",
+        "explanation": "Provides convenience as the insured doesn't need to arrange bulk cash.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_006",
+        "topic": "insurance",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Annuity'?",
+        "options": [
+            "One-time insurance payment",
+            "Regular income paid after retirement until death",
+            "Type of mutual fund",
+            "Stock dividend"
+        ],
+        "answer": "Regular income paid after retirement until death",
+        "explanation": "Insurance product that provides a stream of payments.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_007",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "Third-Party Motor Insurance is:",
+        "options": [
+            "Optional",
+            "Mandatory by law",
+            "Only for old cars",
+            "For expensive cars only"
+        ],
+        "answer": "Mandatory by law",
+        "explanation": "Covers damages caused to others by your vehicle.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_008",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'IRDAI'?",
+        "options": [
+            "Indian Revenue Authority",
+            "Insurance Regulatory and Development Authority of India",
+            "Investment Review Dept",
+            "None of the above"
+        ],
+        "answer": "Insurance Regulatory and Development Authority of India",
+        "explanation": "The apex body regulator for insurance in India.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_009",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Rider' in insurance is:",
+        "options": [
+            "The person driving",
+            "An add-on benefit to the base policy",
+            "Policy cancellation",
+            "A type of discount"
+        ],
+        "answer": "An add-on benefit to the base policy",
+        "explanation": "Offers extra coverage like critical illness or accidental death.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_010",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Grace Period'?",
+        "options": [
+            "Time to buy policy",
+            "Extra time after due date to pay premium without policy lapse",
+            "Wait for claim",
+            "Free look period"
+        ],
+        "answer": "Extra time after due date to pay premium without policy lapse",
+        "explanation": "Typically 15-30 days depending on the policy.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_041",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "Monopsony means:",
+        "options": [
+            "Only one seller",
+            "Only one buyer",
+            "Fixed prices",
+            "No competition"
+        ],
+        "answer": "Only one buyer",
+        "explanation": "A market situation where there is only one buyer for many sellers.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_042",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Dutch Disease'?",
+        "options": [
+            "A virus",
+            "Economy where one sector booms while others decline",
+            "Low growth in Europe",
+            "Hyperinflation"
+        ],
+        "answer": "Economy where one sector booms while others decline",
+        "explanation": "Often occurs in resource-rich countries where a boom in one sector hurts manufacturing.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_043",
+        "topic": "macroeconomics",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "A 'Liquidity Trap' renders which policy ineffective?",
+        "options": [
+            "Fiscal policy",
+            "Monetary policy",
+            "Trade policy",
+            "Industrial policy"
+        ],
+        "answer": "Monetary policy",
+        "explanation": "Lowering interest rates fails to stimulate demand in a trap.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_044",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Protectionism'?",
+        "options": [
+            "Ensuring bank safety",
+            "Restricting imports to protect domestic industry",
+            "Lowering taxes",
+            "Buying local gold"
+        ],
+        "answer": "Restricting imports to protect domestic industry",
+        "explanation": "Uses tariffs or quotas to limit foreign competition.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_045",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "The 'Invisible Hand' theory was proposed by:",
+        "options": [
+            "Adam Smith",
+            "John Keynes",
+            "Karl Marx",
+            "Warren Buffett"
+        ],
+        "answer": "Adam Smith",
+        "explanation": "The idea that self-interested individuals contribute to public good.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_046",
+        "topic": "macroeconomics",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "What is 'Brain Drain'?",
+        "options": [
+            "Old age",
+            "Emigration of highly skilled workers",
+            "Lack of schools",
+            "Poor memory"
+        ],
+        "answer": "Emigration of highly skilled workers",
+        "explanation": "Loss of human capital from one country to another.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_047",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Cartel' is a group of companies that:",
+        "options": [
+            "Compete fiercely",
+            "Collude to control prices and supply",
+            "Sell only to government",
+            "Merge into one"
+        ],
+        "answer": "Collude to control prices and supply",
+        "explanation": "OPEC is a well-known example.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_048",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Pareto Efficiency'?",
+        "options": [
+            "Everyone is equal",
+            "No one can be better off without making someone else worse off",
+            "High growth",
+            "Low unemployment"
+        ],
+        "answer": "No one can be better off without making someone else worse off",
+        "explanation": "A state of optimal resource allocation.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_049",
+        "topic": "macroeconomics",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Gini Coefficient'?",
+        "options": [
+            "Measures price change",
+            "Measures income inequality",
+            "Measures GDP",
+            "Measures population"
+        ],
+        "answer": "Measures income inequality",
+        "explanation": "0 represents perfect equality, 1 represents perfect inequality.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_050",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "The 'Federal Reserve' is the central bank of:",
+        "options": [
+            "UK",
+            "USA",
+            "EU",
+            "India"
+        ],
+        "answer": "USA",
+        "explanation": "Commonly known as the 'Fed'.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_043",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Wash Trading'?",
+        "options": [
+            "Selling to clean clothes",
+            "Illegal trading to create fake volume",
+            "Trading water stocks",
+            "Cleaning your portfolio"
+        ],
+        "answer": "Illegal trading to create fake volume",
+        "explanation": "Buying and selling same asset simultaneously to deceive others.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_044",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Greenfield' project is:",
+        "options": [
+            "Buying an old factory",
+            "A new venture started from scratch",
+            "Environment project only",
+            "Farming project"
+        ],
+        "answer": "A new venture started from scratch",
+        "explanation": "Involves building everything from the ground up.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_045",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Mezzanine Financing'?",
+        "options": [
+            "Bank loan",
+            "Hybrid of debt and equity",
+            "IPO",
+            "Crowdfunding"
+        ],
+        "answer": "Hybrid of debt and equity",
+        "explanation": "Gives lender right to convert to an equity interest.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_046",
+        "topic": "equity_markets",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "A 'Poison Pill' is a strategy to:",
+        "options": [
+            "Increase dividends",
+            "Prevent a hostile takeover",
+            "Close the company",
+            "Hire new CEO"
+        ],
+        "answer": "Prevent a hostile takeover",
+        "explanation": "Making the target company less attractive to the acquirer.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_047",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'EBIT'?",
+        "options": [
+            "Earnings Before Interest and Tax",
+            "Effective Business Income Tax",
+            "Earnings Based on IT",
+            "None"
+        ],
+        "answer": "Earnings Before Interest and Tax",
+        "explanation": "Also known as operating profit.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_048",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Turnaround' stock is one that is:",
+        "options": [
+            "Going bankrupt",
+            "Recovering from poor performance",
+            "New IPO",
+            "Penny stock"
+        ],
+        "answer": "Recovering from poor performance",
+        "explanation": "Investing in companies expected to recover.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_049",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is a 'Stop Loss'?",
+        "options": [
+            "Losing all money",
+            "Order to sell when stock reaches a certain low price",
+            "Order to buy more",
+            "Cancellation of trade"
+        ],
+        "answer": "Order to sell when stock reaches a certain low price",
+        "explanation": "Used to limit risk and protect capital.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_050",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Volume' in trading?",
+        "options": [
+            "Sound level",
+            "Total shares traded in a period",
+            "Price change",
+            "Number of brokers"
+        ],
+        "answer": "Total shares traded in a period",
+        "explanation": "Indicates market activity and strength of a price move.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_031",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "The 'Rule of 72' helps estimate:",
+        "options": [
+            "Tax amount",
+            "Time to double your money",
+            "Savings needed",
+            "Retirement age"
+        ],
+        "answer": "Time to double your money",
+        "explanation": "72 divided by annual ROI gives years to double.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_032",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is a 'No-Load' fund?",
+        "options": [
+            "Mutual fund without entry or exit charges",
+            "Fund with zero risk",
+            "Fund for beginners",
+            "Government fund"
+        ],
+        "answer": "Mutual fund without entry or exit charges",
+        "explanation": "Saves on transaction costs for investors.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_033",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "An 'Index Fund' tracks:",
+        "options": [
+            "Any stock",
+            "A specific market index like Nifty",
+            "Sector stocks",
+            "Gold prices"
+        ],
+        "answer": "A specific market index like Nifty",
+        "explanation": "A type of passive investing with lower fees.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_034",
+        "topic": "personal_finance",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Sequence of Returns Risk'?",
+        "options": [
+            "Losing money in order",
+            "Risk of poor returns early in retirement",
+            "Risk of high inflation",
+            "Risk of tax changes"
+        ],
+        "answer": "Risk of poor returns early in retirement",
+        "explanation": "Impact of negative returns when you're withdrawing from portfolio.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_035",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Financial Independence'?",
+        "options": [
+            "Having a rich family",
+            "Assets generate enough income to cover expenses",
+            "Earning 1 Lakh/month",
+            "No credit card debt"
+        ],
+        "answer": "Assets generate enough income to cover expenses",
+        "explanation": "Often called reaching 'FIRE' (Financial Independence, Retire Early).",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_021",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'CASA' ratio?",
+        "options": [
+            "Current and Savings Account deposits as % of total",
+            "Debt to equity ratio",
+            "Profit margin",
+            "Tax rate"
+        ],
+        "answer": "Current and Savings Account deposits as % of total",
+        "explanation": "High CASA is good as it provides low-cost funds to banks.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_022",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Repo Rate'?",
+        "options": [
+            "Rate for loans to public",
+            "Rate at which RBI lends to commercial banks",
+            "Rate for FDs",
+            "Rate for forex"
+        ],
+        "answer": "Rate at which RBI lends to commercial banks",
+        "explanation": "Main tool for controlling inflation and economy.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_021",
+        "topic": "crypto",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is a 'Stablecoin'?",
+        "options": [
+            "A coin with low growth",
+            "Crypto pegged to a stable asset like USD",
+            "Bitcoin",
+            "A coin for mining"
+        ],
+        "answer": "Crypto pegged to a stable asset like USD",
+        "explanation": "Avoids the high volatility of other cryptos.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_040",
+        "topic": "personal_finance",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'FIRE' in personal finance?",
+        "options": [
+            "Fast Income Regular Expense",
+            "Financial Independence, Retire Early",
+            "Flexible Interest Rate Equity",
+            "Fixed Income Retirement Earn"
+        ],
+        "answer": "Financial Independence, Retire Early",
+        "explanation": "A movement dedicated to a program of extreme savings and investment.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_056",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Capital Flight'?",
+        "options": [
+            "Air travel for rich",
+            "Large scale exit of assets/capital from a country",
+            "Illegal money",
+            "Bank crash"
+        ],
+        "answer": "Large scale exit of assets/capital from a country",
+        "explanation": "Often occurs due to political instability or economic fear.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_056",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Order Matching'?",
+        "options": [
+            "Matching shirts",
+            "System finding a buyer for every seller at a set price",
+            "Broker fees",
+            "Market crash"
+        ],
+        "answer": "System finding a buyer for every seller at a set price",
+        "explanation": "The core mechanism of a stock exchange.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_041",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Debt Consolidation'?",
+        "options": [
+            "Taking more loans",
+            "Combining multiple debts into one loan with lower interest",
+            "Closing all accounts",
+            "Refusing to pay"
+        ],
+        "answer": "Combining multiple debts into one loan with lower interest",
+        "explanation": "Used to simplify repayments and reduce total interest cost.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_023",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'NBFC'?",
+        "options": [
+            "Non-Banking Financial Company",
+            "National Bank For Commerce",
+            "New Business Fund Corp",
+            "None"
+        ],
+        "answer": "Non-Banking Financial Company",
+        "explanation": "Provides banking services without a full banking license.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_022",
+        "topic": "crypto",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Ethereum Merge'?",
+        "options": [
+            "Company merger",
+            "Transition of Ethereum from PoW to PoS",
+            "New coin launch",
+            "Network shutdown"
+        ],
+        "answer": "Transition of Ethereum from PoW to PoS",
+        "explanation": "Significantly reduced the network's energy consumption.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_021",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Tax Evasion'?",
+        "options": [
+            "Legal tax saving",
+            "Illegal non-payment or underpayment of taxes",
+            "Moving to another country",
+            "Paying tax early"
+        ],
+        "answer": "Illegal non-payment or underpayment of taxes",
+        "explanation": "A criminal offense involving deliberate misrepresentation.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_016",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Material Fact' in insurance?",
+        "options": [
+            "Address only",
+            "Info that affects insurer's decision to provide cover",
+            "Policy number",
+            "Premium amount"
+        ],
+        "answer": "Info that affects insurer's decision to provide cover",
+        "explanation": "Non-disclosure of material facts can void the policy.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_057",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Mercantilism'?",
+        "options": [
+            "Free trade",
+            "Economic theory emphasizing gold accumulation and trade surplus",
+            "Modern banking",
+            "Taxation rules"
+        ],
+        "answer": "Economic theory emphasizing gold accumulation and trade surplus",
+        "explanation": "Popular in 16th-18th century Europe.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_057",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Beta Neutral'?",
+        "options": [
+            "Beta of 1",
+            "Portfolio unaffected by market movements",
+            "Only buying tech stocks",
+            "No risk"
+        ],
+        "answer": "Portfolio unaffected by market movements",
+        "explanation": "Achieved by balancing long and short positions.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_042",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Estate Planning'?",
+        "options": [
+            "Buying land",
+            "Planning for management and disposal of assets after death",
+            "House design",
+            "Tax filing"
+        ],
+        "answer": "Planning for management and disposal of assets after death",
+        "explanation": "Involves wills, trusts, and power of attorney.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_024",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Tier 1 Capital'?",
+        "options": [
+            "Core capital (equity and reserves)",
+            "Debt capital",
+            "Customer deposits",
+            "Bank buildings"
+        ],
+        "answer": "Core capital (equity and reserves)",
+        "explanation": "The primary measure of a bank's financial strength.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_023",
+        "topic": "crypto",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Layer 2'?",
+        "options": [
+            "Second blockchain",
+            "Scaling solution built on top of a base layer (Layer 1)",
+            "A type of coin",
+            "Wallet security"
+        ],
+        "answer": "Scaling solution built on top of a base layer (Layer 1)",
+        "explanation": "Increases transaction speed and lowers fees (e.g., Lightning Network, Polygon).",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_022",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Tax Avoidance'?",
+        "options": [
+            "Illegal",
+            "Legal minimization of tax using law provisions",
+            "Not filing returns",
+            "Faking receipts"
+        ],
+        "answer": "Legal minimization of tax using law provisions",
+        "explanation": "Unlike evasion, avoidance uses legal gaps to save tax.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_017",
+        "topic": "insurance",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "What is 'Life Assurance' different from insurance?",
+        "options": [
+            "Covers events that will definitely happen (like death)",
+            "Covers possible events",
+            "Only for cars",
+            "Short term plan"
+        ],
+        "answer": "Covers events that will definitely happen (like death)",
+        "explanation": "Usually provides a certain payout on death or maturity.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_058",
+        "topic": "macroeconomics",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Crowding Out'?",
+        "options": [
+            "Too many people in market",
+            "Govt borrowing reduces private sector investment capacity",
+            "High taxes",
+            "Small business growth"
+        ],
+        "answer": "Govt borrowing reduces private sector investment capacity",
+        "explanation": "Occurs when increased govt spending leads to higher interest rates.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_058",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Short Squeeze'?",
+        "options": [
+            "Shorting more",
+            "Rapid price rise forcing short sellers to buy back and exit",
+            "Price drop",
+            "Market halt"
+        ],
+        "answer": "Rapid price rise forcing short sellers to buy back and exit",
+        "explanation": "Accelerates a stock's upward move dramatically.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_043",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is a 'Zero-Coupon Bond'?",
+        "options": [
+            "Bond with 0% tax",
+            "Bond sold at discount with no periodic interest",
+            "A fake bond",
+            "Corporate debt only"
+        ],
+        "answer": "Bond sold at discount with no periodic interest",
+        "explanation": "The profit is the difference between purchase price and maturity value.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_025",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Base Rate'?",
+        "options": [
+            "Minimum rate below which a bank cannot lend",
+            "Rate for savings",
+            "RBI's repo rate",
+            "Fixed deposit rate"
+        ],
+        "answer": "Minimum rate below which a bank cannot lend",
+        "explanation": "Replaced by MCLR but still relevant for old loans.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_024",
+        "topic": "crypto",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Oracle' in blockchain?",
+        "options": [
+            "A tech company",
+            "Service that provides real-world data to smart contracts",
+            "A mining rig",
+            "A wallet"
+        ],
+        "answer": "Service that provides real-world data to smart contracts",
+        "explanation": "Chainlink is a famous decentralized oracle network.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_023",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Gift Tax' in India?",
+        "options": [
+            "Tax on all gifts",
+            "Tax on gifts above ₹50,000 from non-relatives",
+            "Only for gold gifts",
+            "None"
+        ],
+        "answer": "Tax on gifts above ₹50,000 from non-relatives",
+        "explanation": "Gifts from relatives are generally exempt.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_018",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Reinstatement' of a policy?",
+        "options": [
+            "Buying new policy",
+            "Restoring a lapsed policy to active status",
+            "Changing nominee",
+            "Lowering cover"
+        ],
+        "answer": "Restoring a lapsed policy to active status",
+        "explanation": "Usually requires payment of overdue premiums and interest.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_059",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Quantitative Easing' (QE)?",
+        "options": [
+            "Selling assets",
+            "Central bank buying securities to pump liquidity",
+            "Increasing interest rates",
+            "Tightening money supply"
+        ],
+        "answer": "Central bank buying securities to pump liquidity",
+        "explanation": "An unconventional monetary policy used to stimulate the economy.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_059",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Market Depth'?",
+        "options": [
+            "Market crash level",
+            "List of buy and sell orders at different prices",
+            "Number of listed companies",
+            "Total market cap"
+        ],
+        "answer": "List of buy and sell orders at different prices",
+        "explanation": "Shows the level of supply and demand for a stock.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_044",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Rebalancing'?",
+        "options": [
+            "Selling everything",
+            "Adjusting portfolio back to target asset allocation",
+            "Buying only debt",
+            "Saving more"
+        ],
+        "answer": "Adjusting portfolio back to target asset allocation",
+        "explanation": "Helps maintain the desired risk profile of an investor.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_026",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Financial Inclusion'?",
+        "options": [
+            "Lending only to rich",
+            "Providing affordable financial services to all",
+            "Closing small branches",
+            "Online banking only"
+        ],
+        "answer": "Providing affordable financial services to all",
+        "explanation": "Jan Dhan Yojana is a major initiative for this in India.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_025",
+        "topic": "crypto",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Airdrop'?",
+        "options": [
+            "Hacking a wallet",
+            "Free distribution of a new cryptocurrency to the public",
+            "Network crash",
+            "Selling coins"
+        ],
+        "answer": "Free distribution of a new cryptocurrency to the public",
+        "explanation": "Often used for marketing and building a community.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_024",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Tax Residency'?",
+        "options": [
+            "Citizenship",
+            "Status determining where an individual pays tax based on stay duration",
+            "Visa status",
+            "Passport details"
+        ],
+        "answer": "Status determining where an individual pays tax based on stay duration",
+        "explanation": "For India, usually 182 days or more in a financial year.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_019",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Personal Accident' cover?",
+        "options": [
+            "Medical bills only",
+            "Payout for death or permanent disability due to accident",
+            "Car damage",
+            "Life insurance only"
+        ],
+        "answer": "Payout for death or permanent disability due to accident",
+        "explanation": "A specialized low-cost cover often offered with motor insurance.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_060",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'GDP per capita'?",
+        "options": [
+            "Total GDP",
+            "GDP divided by total population",
+            "Rural GDP",
+            "Industrial GDP"
+        ],
+        "answer": "GDP divided by total population",
+        "explanation": "Indicates the average economic output per person in a country.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_060",
+        "topic": "equity_markets",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "What is 'NSE'?",
+        "options": [
+            "National Stock Exchange",
+            "New Stock Entity",
+            "New Securities Estate",
+            "National Savings Entry"
+        ],
+        "answer": "National Stock Exchange",
+        "explanation": "India's largest stock exchange based in Mumbai.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_045",
+        "topic": "personal_finance",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "What is 'Fixed Deposit' (FD)?",
+        "options": [
+            "Savings account",
+            "Lumpsum investment for fixed period at fixed rate",
+            "Stock market investment",
+            "Gold loan"
+        ],
+        "answer": "Lumpsum investment for fixed period at fixed rate",
+        "explanation": "A safe, traditional preservation tool in India.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_BNK_027",
+        "topic": "banking",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Escrow Service' in real estate?",
+        "options": [
+            "Property design",
+            "Holding funds in a secure account until transaction completes",
+            "Lowering price",
+            "Broker fees"
+        ],
+        "answer": "Holding funds in a secure account until transaction completes",
+        "explanation": "Protects both buyer and seller in high-value transactions.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_CRP_026",
+        "topic": "crypto",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Flash Loan'?",
+        "options": [
+            "Quick personal loan",
+            "Uncollateralized loan that must be repaid in the same block",
+            "Illegal loan",
+            "Low interest loan"
+        ],
+        "answer": "Uncollateralized loan that must be repaid in the same block",
+        "explanation": "A unique feature of DeFi enabled by smart contracts.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_025",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Indexation' benefit?",
+        "options": [
+            "Tax hike",
+            "Adjusting purchase price for inflation to reduce capital gains",
+            "Stock market tip",
+            "Lowering tax slab"
+        ],
+        "answer": "Adjusting purchase price for inflation to reduce capital gains",
+        "explanation": "Currently removed for debt mutual funds but available for real estate (with conditions).",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_020",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'OPD' cover in health insurance?",
+        "options": [
+            "Hospitalization only",
+            "Out-Patient Dept (doctor consultations, pharmacy)",
+            "Only for operation",
+            "Free look period"
+        ],
+        "answer": "Out-Patient Dept (doctor consultations, pharmacy)",
+        "explanation": "Covers day-to-day medical expenses without hospitalization.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_011",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Advance Tax'?",
+        "options": [
+            "Tax paid in advance of earning",
+            "Tax paid for next year",
+            "Paid in installments by those with high liability",
+            "Tax on loans"
+        ],
+        "answer": "Paid in installments by those with high liability",
+        "explanation": "Mandatory if total tax liability > ₹10,000.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_012",
+        "topic": "taxation",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "What is 'PAN'?",
+        "options": [
+            "Permanent Account Number",
+            "Personal Area Network",
+            "Premium Asset Note",
+            "Public Account Name"
+        ],
+        "answer": "Permanent Account Number",
+        "explanation": "Unique 10-digit alphanumeric ID issued by the Income Tax Dept.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_013",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Section 80E' for?",
+        "options": [
+            "Education loan interest",
+            "House rent",
+            "Donations",
+            "Senior citizens"
+        ],
+        "answer": "Education loan interest",
+        "explanation": "Allows deduction of interest paid on loans for higher education.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_014",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Section 80G' for?",
+        "options": [
+            "Donations to charitable institutions",
+            "Gold investment",
+            "Government bonds",
+            "Gifts to family"
+        ],
+        "answer": "Donations to charitable institutions",
+        "explanation": "Provides deduction for contributions to approved relief funds/charities.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_015",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Tax Haven' is a country with:",
+        "options": [
+            "Very high taxes",
+            "Very low or zero tax for foreign investors",
+            "No banks",
+            "Only gold currency"
+        ],
+        "answer": "Very low or zero tax for foreign investors",
+        "explanation": "Used by individuals/companies to avoid high taxes in their home countries.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_016",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Customs Duty'?",
+        "options": [
+            "Tax on services",
+            "Tax on imports and exports of goods",
+            "Tax on income",
+            "Tax on local sales"
+        ],
+        "answer": "Tax on imports and exports of goods",
+        "explanation": "An indirect tax collected by the government on international trade.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_017",
+        "topic": "taxation",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Double Taxation Avoidance Agreement' (DTAA)?",
+        "options": [
+            "Paying tax twice",
+            "Treaty to avoid paying tax in two countries on same income",
+            "Tax for dual citizens",
+            "None"
+        ],
+        "answer": "Treaty to avoid paying tax in two countries on same income",
+        "explanation": "Ensures taxpayers aren't penalized for earning abroad.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_018",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Surcharge' in tax?",
+        "options": [
+            "Tax on tax",
+            "Processing fee",
+            "Reduction in tax",
+            "Penalty for late filing"
+        ],
+        "answer": "Tax on tax",
+        "explanation": "An additional tax levied on high income earners above a certain threshold.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_019",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "The 'Health and Education Cess' is currently:",
+        "options": [
+            "2%",
+            "3%",
+            "4%",
+            "5%"
+        ],
+        "answer": "4%",
+        "explanation": "Applied on the sum of income tax and surcharge.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_TAX_020",
+        "topic": "taxation",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'MAT' (Minimum Alternate Tax)?",
+        "options": [
+            "Tax for individuals",
+            "Tax for companies that pay little tax due to exemptions",
+            "Maximum tax rate",
+            "Tax on assets"
+        ],
+        "answer": "Tax for companies that pay little tax due to exemptions",
+        "explanation": "Ensures profitable companies pay a minimum tax.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_011",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Co-payment' in health insurance?",
+        "options": [
+            "Insurer pays everything",
+            "Insured pays a fixed % of the total bill",
+            "Paying in installments",
+            "Shared by many companies"
+        ],
+        "answer": "Insured pays a fixed % of the total bill",
+        "explanation": "Common in policies for senior citizens to reduce premium.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_012",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Restoration Benefit'?",
+        "options": [
+            "Fixing the house",
+            "Refilling the sum insured if it gets exhausted",
+            "Buying a new policy",
+            "Lowering premium"
+        ],
+        "answer": "Refilling the sum insured if it gets exhausted",
+        "explanation": "Allows multiple claims in a single year for different illnesses.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_013",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "A 'Unit Linked Insurance Plan' (ULIP) combines:",
+        "options": [
+            "Life cover and Investment",
+            "Health and Car insurance",
+            "PPF and SIP",
+            "Wealth and Debt"
+        ],
+        "answer": "Life cover and Investment",
+        "explanation": "Part of premium goes to life cover, remainder is invested in market.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_014",
+        "topic": "insurance",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'Reinsurance'?",
+        "options": [
+            "Buying policy again",
+            "Insurance for insurance companies",
+            "Changing the nominee",
+            "None"
+        ],
+        "answer": "Insurance for insurance companies",
+        "explanation": "Insurers transfer part of their risk to specialized reinsurance firms.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_INS_015",
+        "topic": "insurance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'TPV' (Third Party Validation) for?",
+        "options": [
+            "Identifying the hospital",
+            "Ensuring premium is paid from the insured's account",
+            "Checking the policy",
+            "Checking car health"
+        ],
+        "answer": "Ensuring premium is paid from the insured's account",
+        "explanation": "A security measure to prevent money laundering.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_051",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Cost-Push Inflation'?",
+        "options": [
+            "Rising demand",
+            "Rising costs of production (like oil/wages)",
+            "Printing money",
+            "Lowering taxes"
+        ],
+        "answer": "Rising costs of production (like oil/wages)",
+        "explanation": "When producers pass on higher input costs to consumers.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_MACRO_052",
+        "topic": "macroeconomics",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Demand-Pull Inflation'?",
+        "options": [
+            "Too much money chasing too few goods",
+            "High taxes",
+            "Falling export",
+            "Rising input costs"
+        ],
+        "answer": "Too much money chasing too few goods",
+        "explanation": "When consumer demand exceeds the economy's capacity to produce.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_051",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is a 'Circuit Limit'?",
+        "options": [
+            "Max price movement allowed in a day",
+            "Minimum trade size",
+            "Broker's limit",
+            "Number of stocks"
+        ],
+        "answer": "Max price movement allowed in a day",
+        "explanation": "Used to prevent sudden extreme crashes or spikes.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_EQ_052",
+        "topic": "equity_markets",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Earnings Guidance'?",
+        "options": [
+            "Past profits",
+            "Company's estimate of future earnings",
+            "Stock tips",
+            "Regulatory rules"
+        ],
+        "answer": "Company's estimate of future earnings",
+        "explanation": "Provided by management to set analyst expectations.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_036",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Sovereign Gold Bond' (SGB)?",
+        "options": [
+            "Physical gold",
+            "Gold certificate issued by RBI",
+            "Gold jewellery",
+            "Mining shares"
+        ],
+        "answer": "Gold certificate issued by RBI",
+        "explanation": "Offers 2.5% annual interest plus gold price appreciation.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_037",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'Mahila Samman Savings Certificate'?",
+        "options": [
+            "A loan for women",
+            "Small savings scheme for women/girls",
+            "Health card",
+            "Educational grant"
+        ],
+        "answer": "Small savings scheme for women/girls",
+        "explanation": "Launched to promote financial inclusion for women with fixed returns.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_038",
+        "topic": "personal_finance",
+        "difficulty": 1,
+        "minRating": 0,
+        "question": "What is 'KMY' (Kisan Mandhan Yojana)?",
+        "options": [
+            "Pension scheme for farmers",
+            "Loan for tractors",
+            "Free seeds",
+            "Market for crops"
+        ],
+        "answer": "Pension scheme for farmers",
+        "explanation": "Voluntary contributory pension for small farmers.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_039",
+        "topic": "personal_finance",
+        "difficulty": 2,
+        "minRating": 1000,
+        "question": "What is 'APY' (Atal Pension Yojana)?",
+        "options": [
+            "Investment in stocks",
+            "Pension scheme for unorganized sector",
+            "Health plan",
+            "Startup fund"
+        ],
+        "answer": "Pension scheme for unorganized sector",
+        "explanation": "Focuses on providing retirement security to workers in informal sectors.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    },
+    {
+        "id": "SC_PF_040",
+        "topic": "personal_finance",
+        "difficulty": 3,
+        "minRating": 1300,
+        "question": "What is 'FIRE' in personal finance?",
+        "options": [
+            "Fast Income Regular Expense",
+            "Financial Independence, Retire Early",
+            "Flexible Interest Rate Equity",
+            "Fixed Income Retirement Earn"
+        ],
+        "answer": "Financial Independence, Retire Early",
+        "explanation": "A movement dedicated to a program of extreme savings and investment.",
+        "feedbackCorrect": "✓ Correct!",
+        "feedbackWrong": "✗ Wrong."
+    }
+]
