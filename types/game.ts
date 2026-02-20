@@ -25,6 +25,25 @@ export type MentalMathSubCategory =
     | 'number_properties'
     | 'chain_operations';
 
+export interface MentalMathQuestion {
+    id: string;
+    type: 'mental_math';
+    topic: string;
+    difficulty: number;
+    question: string;
+    answer: string | number;
+    options?: string[];
+    explanation: string;
+    feedbackCorrect: string;
+    feedbackWrong: string;
+    timeLimit: number;
+    minRating?: number;
+    subCategory?: MentalMathSubCategory;
+    answerType?: 'number' | 'letter' | 'word';
+    hint?: string;
+    tags?: string[];
+}
+
 export type Topic =
     | 'investing'
     | 'personal_finance'
@@ -48,12 +67,13 @@ export interface Question {
     difficulty: number;
     question: string;
     options?: string[];
-    answer: string | number;
+    answer?: string | number;       // String answer (modern schema)
+    correctAnswer?: number;         // Index-based answer (legacy format)
     explanation: string;
-    feedbackCorrect: string;
-    feedbackWrong: string;
+    feedbackCorrect?: string;
+    feedbackWrong?: string;
     minRating?: number;
-    timeLimit: number;
+    timeLimit?: number;
     isStarter?: boolean;
     tags?: string[];
     // Mental Math specific fields

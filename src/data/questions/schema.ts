@@ -30,10 +30,10 @@ export interface Question {
     answer: string | number;       // Correct answer
     options?: string[];            // MCQ only: exactly 4 options, answer must be one of them
     explanation: string;           // Brief explanation shown post-answer (1-2 sentences)
-    feedbackCorrect: string;       // Motivational text for correct answer
-    feedbackWrong: string;         // Educational text for wrong answer
+    feedbackCorrect?: string;      // Motivational text for correct answer
+    feedbackWrong?: string;        // Educational text for wrong answer
     timeLimit: number;             // Seconds allowed: 8 for sprint, 20 for scenario
-    tags: string[];                // e.g. ["rbi", "interest-rates", "bonds"] for filtering
+    tags?: string[];               // e.g. ["rbi", "interest-rates", "bonds"] for filtering
 }
 
 export interface DailyChallenge extends Question {

@@ -123,7 +123,7 @@ export default function DailyChallengeScreen() {
                         </View>
 
                         <View style={styles.optionsArea}>
-                            {challenge.options.map((option, index) => {
+                            {(challenge.options || []).map((option, index) => {
                                 const isSelected = selectedOption === index;
                                 const isCorrectOption = index === challenge.correctAnswer;
                                 const labels = ['A', 'B', 'C', 'D'];

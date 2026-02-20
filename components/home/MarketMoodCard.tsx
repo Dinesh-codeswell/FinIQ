@@ -38,9 +38,15 @@ const LiveIndicator = ({ isCompleted }: { isCompleted: boolean }) => {
 export default function MarketMoodCard() {
     const router = useRouter();
     const { profile } = useGame();
-    const dailyChallenge = getDailyChallenge();
+    const [dailyChallenge, setDailyChallenge] = React.useState<{ question: string } | null>(null);
     const todayStr = new Date().toISOString().split('T')[0];
     const isCompleted = profile.dailyChallengeCompleted === todayStr;
+
+    React.useEffect(() => {
+        getDailyChallenge().then(challenge => {
+            if (challenge) setDailyChallenge({ question: challenge.question });
+        }).catch(() => { });
+    }, []);
 
     return (
         <TouchableOpacity
@@ -82,7 +88,7 @@ export default function MarketMoodCard() {
                 <View style={styles.middleSection}>
                     <Text style={[styles.title, isCompleted && { color: '#9CA3AF' }]}>MARKET MOOD</Text>
                     <Text style={styles.questionText}>
-                        {dailyChallenge.question}
+                        {dailyChallenge?.question ?? 'Loading challenge...'}
                     </Text>
                 </View>
 

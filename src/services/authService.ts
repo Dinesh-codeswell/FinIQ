@@ -1,4 +1,3 @@
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { supabase } from './supabase';
 
 export const authService = {
@@ -39,6 +38,7 @@ export const authService = {
 
     async signInWithGoogle() {
         try {
+            const { GoogleSignin } = require('@react-native-google-signin/google-signin');
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
 
@@ -52,6 +52,9 @@ export const authService = {
                 throw new Error('No ID token present!');
             }
         } catch (error: any) {
+            if (error.message?.includes('RNGoogleSignin')) {
+                return { data: null, error: new Error('Google Sign-In is not available in Expo Go. Please use a Development Build.') };
+            }
             return { data: null, error };
         }
     },

@@ -10,6 +10,11 @@
                 "buildType": "apk"
             }
         },
+        "standalone": {
+            "android": {
+                "buildType": "apk"
+            }
+        },
         "production": {}
     }
 }

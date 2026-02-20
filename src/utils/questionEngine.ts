@@ -160,7 +160,7 @@ export const getDailyChallenge = async (): Promise<DailyChallenge | null> => {
 
 export const checkAnswer = (question: Question, selectedOption: string | number): boolean => {
     if (question.type === 'money_math' || (question.type as string) === 'mental_math') {
-        return selectedOption.toString() === question.answer.toString();
+        return selectedOption.toString() === question.answer?.toString();
     }
     return selectedOption === question.answer;
 };

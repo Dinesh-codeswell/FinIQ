@@ -4,9 +4,12 @@
   "version": "1.0.0",
   "scripts": {
     "start": "bunx rork start -p quf26712qjtkppjs7ma62 --tunnel",
+    "start-lan": "bunx rork start -p quf26712qjtkppjs7ma62 --lan",
     "start-web": "bunx rork start -p quf26712qjtkppjs7ma62 --web --tunnel",
     "start-web-dev": "DEBUG=expo* bunx rork start -p quf26712qjtkppjs7ma62 --web --tunnel",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.4.2",
@@ -22,6 +25,7 @@
     "expo": "~54.0.33",
     "expo-blur": "~15.0.8",
     "expo-constants": "~18.0.13",
+    "expo-dev-client": "~6.0.20",
     "expo-font": "~14.0.11",
     "expo-haptics": "~15.0.8",
     "expo-image": "~3.0.11",

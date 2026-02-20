@@ -13,7 +13,6 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { GameProvider } from "@/context/GameContext";
 import Colors from "@/constants/colors";
 
@@ -61,12 +60,17 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
 
-    // Configure Google Sign-In
-    GoogleSignin.configure({
-      webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
-      iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
-      offlineAccess: true,
-    });
+    // Configure Google Sign-In with safety check for Expo Go
+    try {
+      const { GoogleSignin } = require("@react-native-google-signin/google-signin");
+      GoogleSignin.configure({
+        webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+        iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
+        offlineAccess: true,
+      });
+    } catch (e) {
+      console.warn("Google Sign-In native module not found. This is expected in Expo Go.");
+    }
   }, [fontsLoaded, fontError]);
 
   if (!fontsLoaded && !fontError) {
