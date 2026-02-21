@@ -19,6 +19,62 @@ interface PrefStep2TopicsProps {
     onToggle: (id: string) => void;
 }
 
+const TopicCard = ({ topic, index, isSelected, onToggle }: {
+    topic: any,
+    index: number,
+    isSelected: boolean,
+    onToggle: (id: string) => void
+}) => {
+    const Icon = IconMap[topic.icon!] || Zap;
+
+    const animatedStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: withSpring(isSelected ? 1.04 : 1, { damping: 12 }) }],
+        borderColor: withTiming(isSelected ? `${topic.accent}99` : `${topic.accent}33`, { duration: 200 }),
+    }));
+
+    const iconStyle = useAnimatedStyle(() => ({
+        opacity: withTiming(isSelected ? 1 : 0.6, { duration: 200 }),
+    }));
+
+    return (
+        <Animated.View
+            entering={FadeInUp.delay(350 + index * 60).springify()}
+        >
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => {
+                    onToggle(topic.id);
+                    if (Platform.OS !== 'web') {
+                        Haptics.selectionAsync();
+                    }
+                }}
+            >
+                <Animated.View style={[styles.card, animatedStyle]}>
+                    <LinearGradient
+                        colors={(topic.gradient || ['#1A1D2B', '#0D1018']) as any}
+                        style={styles.gradient}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                    >
+                        <View style={styles.cardHeader}>
+                            <Animated.View style={iconStyle}>
+                                <Icon size={24} color={topic.accent} />
+                            </Animated.View>
+                            <View style={[
+                                styles.selectionIndicator,
+                                { borderColor: isSelected ? topic.accent : 'rgba(255,255,255,0.2)' }
+                            ]}>
+                                {isSelected && <View style={[styles.selectionFill, { backgroundColor: topic.accent }]} />}
+                            </View>
+                        </View>
+                        <Text style={styles.topicLabel}>{topic.label}</Text>
+                    </LinearGradient>
+                </Animated.View>
+            </TouchableOpacity>
+        </Animated.View>
+    );
+};
+
 const IconMap: Record<string, LucideIcon> = {
     'trending-up': TrendingUp,
     'home': Home,
@@ -42,60 +98,15 @@ export const PrefStep2Topics: React.FC<PrefStep2TopicsProps> = ({ selected, onTo
             </View>
 
             <View style={styles.grid}>
-                {TOPIC_OPTIONS.map((topic, index) => {
-                    const isSelected = selected.includes(topic.id);
-                    const Icon = IconMap[topic.icon!] || Zap;
-
-                    const animatedStyle = useAnimatedStyle(() => ({
-                        transform: [{ scale: withSpring(isSelected ? 1.04 : 1, { damping: 12 }) }],
-                        borderColor: withTiming(isSelected ? `${topic.accent}99` : `${topic.accent}33`, { duration: 200 }),
-                    }));
-
-                    const iconStyle = useAnimatedStyle(() => ({
-                        opacity: withTiming(isSelected ? 1 : 0.6, { duration: 200 }),
-                    }));
-
-                    return (
-                        <Animated.View
-                            key={topic.id}
-                            entering={FadeInUp.delay(350 + index * 60).springify()}
-                        >
-                            <TouchableOpacity
-                                activeOpacity={0.9}
-                                onPress={() => {
-                                    onToggle(topic.id);
-                                    if (Platform.OS !== 'web') {
-                                        Haptics.selectionAsync();
-                                    }
-                                }}
-                            >
-                                <Animated.View style={[styles.card, animatedStyle]}>
-                                    <LinearGradient
-                                        colors={(topic.gradient || ['#1A1D2B', '#0D1018']) as any}
-                                        style={styles.gradient}
-                                        start={{ x: 0, y: 0 }}
-                                        end={{ x: 1, y: 1 }}
-                                    >
-                                        <View style={styles.cardHeader}>
-                                            <Animated.View style={iconStyle}>
-                                                <Icon size={24} color={topic.accent} />
-                                            </Animated.View>
-                                            <View style={[
-                                                styles.selectionIndicator,
-                                                { borderColor: isSelected ? topic.accent : 'rgba(255,255,255,0.2)' }
-                                            ]}>
-                                                {isSelected && <View style={[styles.selectionFill, { backgroundColor: topic.accent }]} />}
-                                            </View>
-                                        </View>
-
-                                        <Text style={styles.topicLabel}>{topic.label}</Text>
-
-                                    </LinearGradient>
-                                </Animated.View>
-                            </TouchableOpacity>
-                        </Animated.View>
-                    );
-                })}
+                {TOPIC_OPTIONS.map((topic, index) => (
+                    <TopicCard
+                        key={topic.id}
+                        topic={topic}
+                        index={index}
+                        isSelected={selected.includes(topic.id)}
+                        onToggle={onToggle}
+                    />
+                ))}
             </View>
         </View>
     );

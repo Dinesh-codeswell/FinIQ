@@ -16,6 +16,60 @@ interface PrefStep4MissionProps {
     onToggle: (id: string) => void;
 }
 
+const MissionRow = ({ option, index, isSelected, isDisabled, onToggle }: {
+    option: any,
+    index: number,
+    isSelected: boolean,
+    isDisabled: boolean,
+    onToggle: (id: string) => void
+}) => {
+    const isSpecial = option.id === 'crush';
+
+    const animatedStyle = useAnimatedStyle(() => ({
+        opacity: withTiming(isDisabled ? 0.4 : 1, { duration: 200 }),
+        borderColor: withTiming(
+            isSelected
+                ? '#00D68F'
+                : isSpecial ? 'rgba(0,214,143,0.2)' : 'rgba(255,255,255,0.08)',
+            { duration: 200 }
+        ),
+        backgroundColor: withTiming(
+            isSelected ? 'rgba(0,214,143,0.1)' : 'rgba(255,255,255,0.04)',
+            { duration: 200 }
+        ),
+    }));
+
+    return (
+        <Animated.View
+            entering={FadeInUp.delay(350 + index * 60).springify()}
+        >
+            <TouchableOpacity
+                activeOpacity={0.8}
+                disabled={isDisabled}
+                onPress={() => {
+                    onToggle(option.id);
+                    if (Platform.OS !== 'web') {
+                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    }
+                }}
+            >
+                <Animated.View style={[styles.row, animatedStyle]}>
+                    <View style={[styles.iconCircle, { backgroundColor: isSpecial ? 'rgba(0,214,143,0.15)' : 'rgba(255,255,255,0.05)' }]}>
+                        <Text style={styles.emoji}>{option.emoji}</Text>
+                    </View>
+                    <Text style={styles.label}>{option.label}</Text>
+                    <View style={[
+                        styles.selectionIndicator,
+                        { borderColor: isSelected ? '#00D68F' : 'rgba(255,255,255,0.2)' }
+                    ]}>
+                        {isSelected && <View style={styles.selectionFill} />}
+                    </View>
+                </Animated.View>
+            </TouchableOpacity>
+        </Animated.View>
+    );
+};
+
 export const PrefStep4Mission: React.FC<PrefStep4MissionProps> = ({ selected, onToggle }) => {
     const isAtMax = selected.length >= 2;
 
@@ -30,58 +84,16 @@ export const PrefStep4Mission: React.FC<PrefStep4MissionProps> = ({ selected, on
             </View>
 
             <View style={styles.list}>
-                {MONEY_MISSION_OPTIONS.map((option, index) => {
-                    const isSelected = selected.includes(option.id);
-                    const isDisabled = isAtMax && !isSelected;
-                    const isSpecial = option.id === 'crush';
-
-                    const animatedStyle = useAnimatedStyle(() => ({
-                        opacity: withTiming(isDisabled ? 0.4 : 1, { duration: 200 }),
-                        borderColor: withTiming(
-                            isSelected
-                                ? '#00D68F'
-                                : isSpecial ? 'rgba(0,214,143,0.2)' : 'rgba(255,255,255,0.08)',
-                            { duration: 200 }
-                        ),
-                        backgroundColor: withTiming(
-                            isSelected ? 'rgba(0,214,143,0.1)' : 'rgba(255,255,255,0.04)',
-                            { duration: 200 }
-                        ),
-                    }));
-
-                    return (
-                        <Animated.View
-                            key={option.id}
-                            entering={FadeInUp.delay(350 + index * 60).springify()}
-                        >
-                            <TouchableOpacity
-                                activeOpacity={0.8}
-                                disabled={isDisabled}
-                                onPress={() => {
-                                    onToggle(option.id);
-                                    if (Platform.OS !== 'web') {
-                                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                    }
-                                }}
-                            >
-                                <Animated.View style={[styles.row, animatedStyle]}>
-                                    <View style={[styles.iconCircle, { backgroundColor: isSpecial ? 'rgba(0,214,143,0.15)' : 'rgba(255,255,255,0.05)' }]}>
-                                        <Text style={styles.emoji}>{option.emoji}</Text>
-                                    </View>
-
-                                    <Text style={styles.label}>{option.label}</Text>
-
-                                    <View style={[
-                                        styles.selectionIndicator,
-                                        { borderColor: isSelected ? '#00D68F' : 'rgba(255,255,255,0.2)' }
-                                    ]}>
-                                        {isSelected && <View style={styles.selectionFill} />}
-                                    </View>
-                                </Animated.View>
-                            </TouchableOpacity>
-                        </Animated.View>
-                    );
-                })}
+                {MONEY_MISSION_OPTIONS.map((option, index) => (
+                    <MissionRow
+                        key={option.id}
+                        option={option}
+                        index={index}
+                        isSelected={selected.includes(option.id)}
+                        isDisabled={isAtMax && !selected.includes(option.id)}
+                        onToggle={onToggle}
+                    />
+                ))}
             </View>
         </View>
     );

@@ -63,15 +63,14 @@ export const PrefLoadingTransition: React.FC<PrefLoadingTransitionProps> = ({ on
     const scanLinePosition = useSharedValue(-100);
     const checkScale = useSharedValue(0);
 
-    // Data points for the holographic radar
-    const dataPoints = useMemo(() => [
-        useSharedValue(0.1),
-        useSharedValue(0.1),
-        useSharedValue(0.1),
-        useSharedValue(0.1),
-        useSharedValue(0.1),
-        useSharedValue(0.1),
-    ], []);
+    // Data points for the holographic radar - Declared individually to follow hook rules
+    const p1 = useSharedValue(0.1);
+    const p2 = useSharedValue(0.1);
+    const p3 = useSharedValue(0.1);
+    const p4 = useSharedValue(0.1);
+    const p5 = useSharedValue(0.1);
+    const p6 = useSharedValue(0.1);
+    const dataPoints = [p1, p2, p3, p4, p5, p6];
 
     useEffect(() => {
         const timers: any[] = [];
@@ -137,13 +136,13 @@ export const PrefLoadingTransition: React.FC<PrefLoadingTransitionProps> = ({ on
         opacity: checkScale.value,
     }));
 
-    // Generate the animated props for the data area
+    // Data Area extracted to maintain stable references
     const dataAreaProps = useAnimatedProps(() => {
         const radius = 100;
         const center = 120;
-        const points = dataPoints.map((p, i) => {
+        const points = [p1.value, p2.value, p3.value, p4.value, p5.value, p6.value].map((v, i) => {
             const angle = (i * 60 * Math.PI) / 180;
-            const r = p.value * radius;
+            const r = v * radius;
             return `${center + r * Math.cos(angle)},${center + r * Math.sin(angle)}`;
         });
         return {

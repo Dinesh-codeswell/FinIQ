@@ -25,26 +25,62 @@ interface Props {
 
 const AnimatedRect = Animated.createAnimatedComponent(Rect);
 
+const SynthesizerBar = ({ index, isVisible }: { index: number; isVisible: boolean }) => {
+    const barHeight = useSharedValue(0.2);
+
+    useEffect(() => {
+        if (isVisible) {
+            barHeight.value = withDelay(index * 100, withRepeat(
+                withSequence(
+                    withTiming(0.4 + Math.random() * 0.6, { duration: 800 + Math.random() * 400 }),
+                    withTiming(0.2 + Math.random() * 0.3, { duration: 800 + Math.random() * 400 })
+                ),
+                -1,
+                true
+            ));
+        } else {
+            barHeight.value = 0.2;
+        }
+    }, [isVisible]);
+
+    const animatedProps = useAnimatedProps(() => {
+        const height = barHeight.value * 160;
+        return {
+            height: height,
+            y: 180 - height,
+        };
+    });
+
+    return (
+        <G>
+            {/* Background track */}
+            <Rect
+                x={index * (BAR_WIDTH + BAR_GAP)}
+                y={20}
+                width={BAR_WIDTH}
+                height={160}
+                fill="rgba(255,255,255,0.05)"
+                rx={BAR_WIDTH / 2}
+            />
+            {/* Animated bar */}
+            <AnimatedRect
+                x={index * (BAR_WIDTH + BAR_GAP)}
+                width={BAR_WIDTH}
+                fill="url(#barGrad)"
+                rx={BAR_WIDTH / 2}
+                animatedProps={animatedProps}
+            />
+        </G>
+    );
+};
+
 export const FinSynthesizer = ({ isVisible }: Props) => {
-    const bars = Array.from({ length: BAR_COUNT }).map(() => useSharedValue(0.2));
     const scanLine = useSharedValue(-100);
     const opacity = useSharedValue(0);
 
     useEffect(() => {
         if (isVisible) {
             opacity.value = withTiming(1, { duration: 600 });
-
-            bars.forEach((bar, i) => {
-                bar.value = withDelay(i * 100, withRepeat(
-                    withSequence(
-                        withTiming(0.4 + Math.random() * 0.6, { duration: 800 + Math.random() * 400 }),
-                        withTiming(0.2 + Math.random() * 0.3, { duration: 800 + Math.random() * 400 })
-                    ),
-                    -1,
-                    true
-                ));
-            });
-
             scanLine.value = withRepeat(
                 withTiming(CONTAINER_WIDTH, { duration: 3000, easing: Easing.linear }),
                 -1,
@@ -52,7 +88,6 @@ export const FinSynthesizer = ({ isVisible }: Props) => {
             );
         } else {
             opacity.value = 0;
-            bars.forEach(bar => { bar.value = 0.2; });
             scanLine.value = -100;
         }
     }, [isVisible]);
@@ -72,37 +107,9 @@ export const FinSynthesizer = ({ isVisible }: Props) => {
                     </LinearGradient>
                 </Defs>
 
-                {bars.map((bar, i) => {
-                    const animatedProps = useAnimatedProps(() => {
-                        const height = bar.value * 160;
-                        return {
-                            height: height,
-                            y: 180 - height,
-                        };
-                    });
-
-                    return (
-                        <G key={i}>
-                            {/* Background track */}
-                            <Rect
-                                x={i * (BAR_WIDTH + BAR_GAP)}
-                                y={20}
-                                width={BAR_WIDTH}
-                                height={160}
-                                fill="rgba(255,255,255,0.05)"
-                                rx={BAR_WIDTH / 2}
-                            />
-                            {/* Animated bar */}
-                            <AnimatedRect
-                                x={i * (BAR_WIDTH + BAR_GAP)}
-                                width={BAR_WIDTH}
-                                fill="url(#barGrad)"
-                                rx={BAR_WIDTH / 2}
-                                animatedProps={animatedProps}
-                            />
-                        </G>
-                    );
-                })}
+                {Array.from({ length: BAR_COUNT }).map((_, i) => (
+                    <SynthesizerBar key={i} index={i} isVisible={isVisible} />
+                ))}
             </Svg>
 
             {/* Glossy Overlay */}

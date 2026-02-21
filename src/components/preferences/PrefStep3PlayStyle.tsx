@@ -19,6 +19,59 @@ interface PrefStep3PlayStyleProps {
     onToggle: (id: string) => void;
 }
 
+const StyleTile = ({ styleOption, index, isSelected, onToggle }: {
+    styleOption: any,
+    index: number,
+    isSelected: boolean,
+    onToggle: (id: string) => void
+}) => {
+    const Icon = IconMap[styleOption.icon!] || Zap;
+
+    const animatedStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: withSpring(isSelected ? 1.05 : 1, { damping: 12 }) }],
+        borderColor: withTiming(isSelected ? `${styleOption.accent}80` : `${styleOption.accent}40`, { duration: 200 }),
+        shadowOpacity: withTiming(isSelected ? 0.3 : 0, { duration: 200 }),
+    }));
+
+    const iconStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: withSpring(isSelected ? 1.1 : 1, { damping: 12 }) }],
+    }));
+
+    return (
+        <Animated.View
+            entering={FadeInUp.delay(350 + index * 60).springify()}
+        >
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => {
+                    onToggle(styleOption.id);
+                    if (Platform.OS !== 'web') {
+                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    }
+                }}
+            >
+                <Animated.View style={[styles.tile, animatedStyle]}>
+                    <LinearGradient
+                        colors={(styleOption.gradient || ['rgba(255,255,255,0.08)', 'rgba(255,255,255,0.04)']) as any}
+                        style={styles.gradient}
+                    >
+                        <View style={styles.tileHeader}>
+                            <Animated.View style={iconStyle}>
+                                <Icon size={36} color={styleOption.accent} />
+                            </Animated.View>
+                        </View>
+
+                        <View>
+                            <Text style={[styles.label, { color: styleOption.accent }]}>{styleOption.label}</Text>
+                            <Text style={styles.subLabel}>{styleOption.description}</Text>
+                        </View>
+                    </LinearGradient>
+                </Animated.View>
+            </TouchableOpacity>
+        </Animated.View>
+    );
+};
+
 const IconMap: Record<string, LucideIcon> = {
     'zap': Zap,
     'target': Target,
@@ -30,55 +83,15 @@ export const PrefStep3PlayStyle: React.FC<PrefStep3PlayStyleProps> = ({ selected
     return (
         <View style={styles.container}>
             <View style={styles.grid}>
-                {PLAY_STYLE_OPTIONS.map((style, index) => {
-                    const isSelected = selected.includes(style.id);
-                    const Icon = IconMap[style.icon!] || Zap;
-
-                    const animatedStyle = useAnimatedStyle(() => ({
-                        transform: [{ scale: withSpring(isSelected ? 1.05 : 1, { damping: 12 }) }],
-                        borderColor: withTiming(isSelected ? `${style.accent}80` : `${style.accent}40`, { duration: 200 }),
-                        shadowOpacity: withTiming(isSelected ? 0.3 : 0, { duration: 200 }),
-                    }));
-
-                    const iconStyle = useAnimatedStyle(() => ({
-                        transform: [{ scale: withSpring(isSelected ? 1.1 : 1, { damping: 12 }) }],
-                    }));
-
-                    return (
-                        <Animated.View
-                            key={style.id}
-                            entering={FadeInUp.delay(350 + index * 60).springify()}
-                        >
-                            <TouchableOpacity
-                                activeOpacity={0.9}
-                                onPress={() => {
-                                    onToggle(style.id);
-                                    if (Platform.OS !== 'web') {
-                                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                    }
-                                }}
-                            >
-                                <Animated.View style={[styles.tile, animatedStyle]}>
-                                    <LinearGradient
-                                        colors={(style.gradient || ['rgba(255,255,255,0.08)', 'rgba(255,255,255,0.04)']) as any}
-                                        style={styles.gradient}
-                                    >
-                                        <View style={styles.tileHeader}>
-                                            <Animated.View style={iconStyle}>
-                                                <Icon size={36} color={style.accent} />
-                                            </Animated.View>
-                                        </View>
-
-                                        <View>
-                                            <Text style={[styles.label, { color: style.accent }]}>{style.label}</Text>
-                                            <Text style={styles.subLabel}>{style.description}</Text>
-                                        </View>
-                                    </LinearGradient>
-                                </Animated.View>
-                            </TouchableOpacity>
-                        </Animated.View>
-                    );
-                })}
+                {PLAY_STYLE_OPTIONS.map((style, index) => (
+                    <StyleTile
+                        key={style.id}
+                        styleOption={style}
+                        index={index}
+                        isSelected={selected.includes(style.id)}
+                        onToggle={onToggle}
+                    />
+                ))}
             </View >
 
             <Animated.Text
