@@ -67,11 +67,6 @@ export const PrefStep3PlayStyle: React.FC<PrefStep3PlayStyleProps> = ({ selected
                                             <Animated.View style={iconStyle}>
                                                 <Icon size={36} color={style.accent} />
                                             </Animated.View>
-                                            {isSelected && (
-                                                <View style={[styles.checkCircle, { backgroundColor: style.accent }]}>
-                                                    <Text style={styles.checkIcon}>✓</Text>
-                                                </View>
-                                            )}
                                         </View>
 
                                         <View>
@@ -84,7 +79,7 @@ export const PrefStep3PlayStyle: React.FC<PrefStep3PlayStyleProps> = ({ selected
                         </Animated.View>
                     );
                 })}
-            </View>
+            </View >
 
             <Animated.Text
                 entering={FadeInUp.delay(700).springify()}
@@ -92,7 +87,7 @@ export const PrefStep3PlayStyle: React.FC<PrefStep3PlayStyleProps> = ({ selected
             >
                 Not sure? Pick what sounds coolest — you'll find your style.
             </Animated.Text>
-        </View>
+        </View >
     );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, Dimensions } from 'react-native';
 import Animated, {
     useAnimatedStyle,
@@ -25,6 +25,7 @@ interface Props {
 export const Slide1Arena = ({ isVisible, scrollX, index }: Props) => {
     const data = SLIDE_DATA[0];
 
+
     const parallaxStyle = useAnimatedStyle(() => {
         const inputValues = [(index - 1) * SCREEN_WIDTH, index * SCREEN_WIDTH, (index + 1) * SCREEN_WIDTH];
         const translateX = interpolate(
@@ -39,17 +40,6 @@ export const Slide1Arena = ({ isVisible, scrollX, index }: Props) => {
         <View style={styles.container}>
             <Animated.View style={[styles.illustration, parallaxStyle]}>
                 <DuelScene isVisible={isVisible} />
-
-                {/* Floating Elements */}
-                <View style={[styles.floating, { top: 20, left: 20 }]}>
-                    <Text style={[styles.floatingText, { color: '#00D68F' }]}>+15 XP</Text>
-                </View>
-                <View style={[styles.floating, { top: 30, right: 30 }]}>
-                    <Text style={styles.floatingText}>1,240 ELO</Text>
-                </View>
-                <View style={[styles.floating, { bottom: 50, left: 10 }]}>
-                    <Text style={[styles.floatingText, { color: '#F5A623' }]}>Gold Analyst</Text>
-                </View>
             </Animated.View>
 
             <View style={styles.textZone}>
@@ -70,11 +60,12 @@ const styles = StyleSheet.create({
     illustration: {
         flex: 1,
         justifyContent: 'center',
-        paddingHorizontal: -16,
+        paddingHorizontal: 0,
+        overflow: 'hidden',
     },
     textZone: {
         paddingHorizontal: 24,
-        paddingBottom: 200,
+        paddingBottom: 180,
     },
     title: {
         color: '#FFFFFF',

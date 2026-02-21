@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import { View, Text, StyleSheet, Dimensions, Platform } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Platform, ScrollView } from 'react-native';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
@@ -17,7 +17,6 @@ import { PrefStep2Topics } from './PrefStep2Topics';
 import { PrefStep3PlayStyle } from './PrefStep3PlayStyle';
 import { PrefStep4Mission } from './PrefStep4Mission';
 import { PrefStep5Commitment } from './PrefStep5Commitment';
-import { PrefStep6Reminder } from './PrefStep6Reminder';
 import { PrefLoadingTransition } from './PrefLoadingTransition';
 import { SCREEN_ATMOSPHERES } from '@/src/constants/preferenceOptions';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -38,12 +37,11 @@ export const PreferencesFlow: React.FC<PreferencesFlowProps> = ({ onComplete, us
     // Form State
     const [knowledge, setKnowledge] = useState<string | null>(null);
     const [topics, setTopics] = useState<string[]>([]);
-    const [playStyle, setPlayStyle] = useState<string[]>([]);
-    const [mission, setMission] = useState<string | null>(null);
+    const [playStyle, setPlayStyle] = useState<string | null>(null);
+    const [mission, setMission] = useState<string[]>([]);
     const [commitment, setCommitment] = useState<number>(10);
-    const [reminderTime, setReminderTime] = useState<string>("20:00");
 
-    const totalSteps = 6;
+    const totalSteps = 5;
 
     const handleNext = () => {
         if (step < totalSteps) {
@@ -64,25 +62,24 @@ export const PreferencesFlow: React.FC<PreferencesFlowProps> = ({ onComplete, us
     };
 
     const togglePlayStyle = (id: string) => {
-        setPlayStyle(prev => {
-            if (prev.includes(id)) return prev.filter(s => s !== id);
-            if (prev.length >= 2) return [prev[1], id];
-            return [...prev, id];
-        });
+        setPlayStyle(id);
     };
 
     const toggleMission = (id: string) => {
-        setMission(id);
+        setMission(prev => {
+            if (prev.includes(id)) return prev.filter(m => m !== id);
+            if (prev.length >= 2) return [prev[1], id];
+            return [...prev, id];
+        });
     };
 
     const canContinue = useMemo(() => {
         switch (step) {
             case 1: return knowledge !== null;
             case 2: return topics.length >= 1;
-            case 3: return playStyle.length >= 1;
-            case 4: return mission !== null;
+            case 3: return playStyle !== null;
+            case 4: return mission.length >= 1;
             case 5: return commitment !== null;
-            case 6: return true;
             default: return false;
         }
     }, [step, knowledge, topics, playStyle, mission, commitment]);
@@ -97,10 +94,9 @@ export const PreferencesFlow: React.FC<PreferencesFlowProps> = ({ onComplete, us
         switch (step) {
             case 1: return <PrefStep1Knowledge selected={knowledge} onSelect={setKnowledge} />;
             case 2: return <PrefStep2Topics selected={topics} onToggle={toggleTopic} />;
-            case 3: return <PrefStep3PlayStyle selected={playStyle} onToggle={togglePlayStyle} />;
-            case 4: return <PrefStep4Mission selected={mission ? [mission] : []} onToggle={toggleMission} />;
+            case 3: return <PrefStep3PlayStyle selected={playStyle ? [playStyle] : []} onToggle={togglePlayStyle} />;
+            case 4: return <PrefStep4Mission selected={mission} onToggle={toggleMission} />;
             case 5: return <PrefStep5Commitment selected={commitment} onSelect={setCommitment} />;
-            case 6: return <PrefStep6Reminder time={reminderTime} onSelect={setReminderTime} />;
             default: return null;
         }
     };
@@ -110,8 +106,7 @@ export const PreferencesFlow: React.FC<PreferencesFlowProps> = ({ onComplete, us
         "What's your financial world? Pick all that call to you.",
         "What's your fight style in the arena?",
         "What's the REAL reason you're here?",
-        "How much time can you commit to the arena?",
-        "When should I remind you to duel? I won't let you forget."
+        "How much time can you commit to the arena?"
     ];
 
     if (isLoading) {
@@ -119,7 +114,7 @@ export const PreferencesFlow: React.FC<PreferencesFlowProps> = ({ onComplete, us
             <PrefLoadingTransition
                 topics={topics}
                 onComplete={() => onComplete({
-                    knowledge, topics, playStyle, mission, commitment, reminderTime
+                    knowledge, topics, playStyle, mission, commitment
                 })}
             />
         );
@@ -138,15 +133,21 @@ export const PreferencesFlow: React.FC<PreferencesFlowProps> = ({ onComplete, us
                     )}
                 </View>
 
-                <PrefHeader
-                    question={questions[step - 1]}
-                    step={step}
-                    totalSteps={totalSteps}
-                />
+                <ScrollView
+                    style={styles.content}
+                    contentContainerStyle={styles.scrollContent}
+                    showsVerticalScrollIndicator={false}
+                >
+                    <PrefHeader
+                        question={questions[step - 1]}
+                        step={step}
+                        totalSteps={totalSteps}
+                    />
 
-                <View style={styles.content}>
-                    {renderStep()}
-                </View>
+                    <View style={styles.stepContainer}>
+                        {renderStep()}
+                    </View>
+                </ScrollView>
 
                 <View style={styles.footer}>
                     <Text style={styles.reassurance}>You can change this anytime in settings.</Text>
@@ -180,6 +181,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     content: {
+        flex: 1,
+    },
+    scrollContent: {
+        paddingBottom: 40,
+    },
+    stepContainer: {
         flex: 1,
     },
     footer: {

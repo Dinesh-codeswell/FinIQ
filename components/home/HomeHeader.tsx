@@ -1,15 +1,31 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useGame } from '@/context/GameContext';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { metricsService } from '@/src/services/metricsService';
 import { DIVISIONS } from '@/constants/divisions';
 import UserAvatar from '@/src/components/UserAvatar';
 
 export default function HomeHeader() {
     const router = useRouter();
     const { profile, division } = useGame();
+    const [activePlayers, setActivePlayers] = useState(0);
+
+    useEffect(() => {
+        // Initial fetch
+        metricsService.fetchMetrics().then(m => setActivePlayers(m.activePlayers));
+
+        // Real-time subscription
+        const channel = metricsService.subscribeToMetrics((m) => {
+            setActivePlayers(m.activePlayers);
+        });
+
+        return () => {
+            channel.unsubscribe();
+        };
+    }, []);
 
     const greeting = useMemo(() => {
         const hour = new Date().getHours();
@@ -62,7 +78,7 @@ export default function HomeHeader() {
             <View style={styles.greetingSection}>
                 <Text style={styles.pageGreeting}>{greeting}, {profile.username.split('_')[0]}.</Text>
                 <Text style={styles.rankSubtitle}>
-                    {nextDivInfo}
+                    {nextDivInfo} • 📈 {activePlayers} online
                 </Text>
             </View>
         </View>

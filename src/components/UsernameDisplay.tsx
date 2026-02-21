@@ -26,7 +26,7 @@ export default function UsernameDisplay({
     return (
         <View style={styles.container}>
             <Text style={[styles.username, { fontSize, color }]} numberOfLines={1}>
-                {username.startsWith('@') ? username : `@${username}`}
+                {!username ? 'Anonymous' : (username.startsWith('@') ? username : `@${username}`)}
             </Text>
             {isPro && (
                 <View

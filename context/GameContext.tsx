@@ -74,7 +74,11 @@ export const [GameProvider, useGame] = createContextHook(() => {
             const { data: { session } } = await supabase.auth.getSession();
 
             if (session?.user) {
-                await userService.updateProfile(session.user.id, updated);
+                const { error } = await userService.updateProfile(session.user.id, updated);
+                if (error) {
+                    console.error('Supabase Profile Update Error:', error);
+                    throw error;
+                }
             } else {
                 await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
             }
@@ -83,6 +87,9 @@ export const [GameProvider, useGame] = createContextHook(() => {
         onSuccess: (data) => {
             queryClient.setQueryData(['profile'], data);
         },
+        onError: (error) => {
+            console.error('Save Mutation Failed:', error);
+        }
     });
 
     useEffect(() => {
@@ -108,19 +115,21 @@ export const [GameProvider, useGame] = createContextHook(() => {
                 },
                 (payload) => {
                     const updated = payload.new as any;
-                    // Sync backend fields to CamelCase if needed or just spread
                     setProfile(prev => ({
                         ...prev,
-                        rating: updated.rating,
-                        previous_rating: updated.previous_rating,
+                        username: updated.username ?? prev.username,
+                        avatar: updated.avatar ?? prev.avatar,
+                        rating: updated.rating ?? prev.rating,
+                        previous_rating: updated.previous_rating ?? prev.previous_rating,
                         xp: updated.total_xp ?? prev.xp,
-                        total_xp: updated.total_xp,
-                        tournament_xp: updated.tournament_xp,
-                        win_count: updated.win_count,
-                        loss_count: updated.loss_count,
-                        current_streak: updated.current_streak,
-                        global_rank: updated.global_rank,
-                        rank_change: updated.rank_change,
+                        total_xp: updated.total_xp ?? prev.total_xp,
+                        tournament_xp: updated.tournament_xp ?? prev.tournament_xp,
+                        win_count: updated.win_count ?? prev.win_count,
+                        loss_count: updated.loss_count ?? prev.loss_count,
+                        current_streak: updated.current_streak ?? prev.current_streak,
+                        global_rank: updated.global_rank ?? prev.global_rank,
+                        rank_change: updated.rank_change ?? prev.rank_change,
+                        onboardingCompleted: updated.onboarding_completed ?? prev.onboardingCompleted,
                     }));
                 }
             )
@@ -134,6 +143,14 @@ export const [GameProvider, useGame] = createContextHook(() => {
     const updateProfile = useCallback((updates: Partial<UserProfile>) => {
         setProfile(prev => {
             const updated = { ...prev, ...updates };
+            saveMutation.mutate(updated);
+            return updated;
+        });
+    }, [saveMutation]);
+
+    const addXP = useCallback((amount: number) => {
+        setProfile(prev => {
+            const updated = { ...prev, xp: prev.xp + amount };
             saveMutation.mutate(updated);
             return updated;
         });
@@ -256,14 +273,49 @@ export const [GameProvider, useGame] = createContextHook(() => {
             const result = await response.json();
             if (!response.ok) throw new Error(result.error);
 
-            // 3. Update local state optimistically or wait for real-time
-            // The result structure follows Part 4: { success, player1: { newRating, delta, xpEarned }, ... }
+            // 3. Update local state optimistically
+            const today = getTodayString();
+            const won = playerScore > opponentScore;
+            const xpEarned = result.player1.xpEarned;
+            const ratingChange = result.player1.delta;
+
+            setProfile(prev => {
+                const isSameDay = prev.duelsDateTracker === today;
+                const newDuelsPlayed = isSameDay ? prev.duelsPlayedToday + 1 : 1;
+                const newDuelsWon = isSameDay ? (won ? prev.duelsWonToday + 1 : prev.duelsWonToday) : (won ? 1 : 0);
+
+                const newQuestsCompleted = prev.questsDate === today ? [...prev.questsCompletedToday] : [];
+
+                // Track Quest Progress: "Play any duel"
+                if (newDuelsPlayed >= 1 && !newQuestsCompleted.includes('play_duel')) {
+                    newQuestsCompleted.push('play_duel');
+                }
+                // Track Quest Progress: "Win 2 Sprint Duels"
+                if (newDuelsWon >= 2 && !newQuestsCompleted.includes('win_2_sprints')) {
+                    newQuestsCompleted.push('win_2_sprints');
+                }
+
+                return {
+                    ...prev,
+                    xp: prev.xp + xpEarned,
+                    rating: prev.rating + ratingChange,
+                    totalDuels: prev.totalDuels + 1,
+                    wins: won ? prev.wins + 1 : prev.wins,
+                    duelsPlayedToday: newDuelsPlayed,
+                    duelsWonToday: newDuelsWon,
+                    duelsDateTracker: today,
+                    questsCompletedToday: newQuestsCompleted,
+                    questsDate: today,
+                    lastPlayDate: today,
+                };
+            });
+
             setLastDuelResult({
-                won: playerScore > opponentScore,
+                won,
                 playerScore,
                 opponentScore,
-                ratingChange: result.player1.delta,
-                xpEarned: result.player1.xpEarned
+                ratingChange,
+                xpEarned
             });
 
             // Invalidate queries to refresh leaderboard
@@ -274,7 +326,7 @@ export const [GameProvider, useGame] = createContextHook(() => {
             console.error('Error recording duel:', err);
             return null;
         }
-    }, [profile, queryClient]);
+    }, [profile, queryClient, getTodayString]);
 
     const completeDailyChallenge = useCallback((correct: boolean) => {
         const today = getTodayString();
@@ -365,6 +417,7 @@ export const [GameProvider, useGame] = createContextHook(() => {
         division,
         todayQuests,
         updateProfile,
+        addXP,
         completeOnboarding,
         checkAndUpdateStreak,
         recordDuelResult,

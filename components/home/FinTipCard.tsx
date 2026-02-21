@@ -5,6 +5,7 @@ import FinMascot from '@/src/components/fin/FinMascot';
 import { useFinStore } from '@/src/store/finStore';
 import { getTodaysTip } from '@/src/utils/finTipEngine';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { TourAnchor } from '@/src/components/fin/TourAnchor';
 
 export default function FinTipCard() {
     const { tipLiked, setTipLiked } = useFinStore();
@@ -37,65 +38,67 @@ export default function FinTipCard() {
     };
 
     return (
-        <View style={styles.card}>
-            {/* Top Section */}
-            <View style={styles.topSection}>
-                {/* Mascot Container */}
-                <View style={styles.mascotCircle}>
-                    <FinMascot expression={tip.expression} size="medium" />
-                </View>
+        <TourAnchor id="fin_tip_card">
+            <View style={styles.card}>
+                {/* Top Section */}
+                <View style={styles.topSection}>
+                    {/* Mascot Container */}
+                    <View style={styles.mascotCircle}>
+                        <FinMascot expression={tip.expression} size="medium" />
+                    </View>
 
-                {/* Content Section */}
-                <View style={styles.contentSection}>
-                    <Text style={styles.finWhisper}>Fin says</Text>
-                    <Text style={styles.tipHeadline}>{tip.headline}</Text>
-                    <Text style={styles.tipBody} numberOfLines={3}>
-                        {tip.body}
-                    </Text>
-                </View>
-
-                {/* Heart Icon */}
-                <TouchableOpacity
-                    style={styles.heartWrapper}
-                    onPress={handleLike}
-                    onLongPress={triggerToast}
-                    activeOpacity={0.7}
-                >
-                    <Animated.View style={{ transform: [{ scale: likeScale }] }}>
-                        <Ionicons
-                            name={isLiked ? "heart" : "heart-outline"}
-                            size={18}
-                            color={isLiked ? "#FF4757" : "#3A3A3A"}
-                        />
-                    </Animated.View>
-                </TouchableOpacity>
-            </View>
-
-            {/* Hairline Separator */}
-            <View style={styles.hairline} />
-
-            {/* Bottom Section */}
-            <View style={styles.bottomSection}>
-                <View style={styles.tagPills}>
-                    <View style={styles.pill}>
-                        <Text style={styles.pillText}>
-                            {tip.category.replace('_', ' · ')}
+                    {/* Content Section */}
+                    <View style={styles.contentSection}>
+                        <Text style={styles.finWhisper}>Fin says</Text>
+                        <Text style={styles.tipHeadline}>{tip.headline}</Text>
+                        <Text style={styles.tipBody} numberOfLines={3}>
+                            {tip.body}
                         </Text>
                     </View>
+
+                    {/* Heart Icon */}
+                    <TouchableOpacity
+                        style={styles.heartWrapper}
+                        onPress={handleLike}
+                        onLongPress={triggerToast}
+                        activeOpacity={0.7}
+                    >
+                        <Animated.View style={{ transform: [{ scale: likeScale }] }}>
+                            <Ionicons
+                                name={isLiked ? "heart" : "heart-outline"}
+                                size={18}
+                                color={isLiked ? "#FF4757" : "#3A3A3A"}
+                            />
+                        </Animated.View>
+                    </TouchableOpacity>
                 </View>
 
-                <TouchableOpacity activeOpacity={0.7}>
-                    <Text style={styles.nextTipText}>Next tip →</Text>
-                </TouchableOpacity>
-            </View>
+                {/* Hairline Separator */}
+                <View style={styles.hairline} />
 
-            {/* Toast Notification */}
-            {showToast && (
-                <Animated.View style={[styles.toast, { opacity: toastOpacity }]}>
-                    <Text style={styles.toastText}>Tip saved to Library</Text>
-                </Animated.View>
-            )}
-        </View>
+                {/* Bottom Section */}
+                <View style={styles.bottomSection}>
+                    <View style={styles.tagPills}>
+                        <View style={styles.pill}>
+                            <Text style={styles.pillText}>
+                                {tip.category.replace('_', ' · ')}
+                            </Text>
+                        </View>
+                    </View>
+
+                    <TouchableOpacity activeOpacity={0.7}>
+                        <Text style={styles.nextTipText}>Next tip →</Text>
+                    </TouchableOpacity>
+                </View>
+
+                {/* Toast Notification */}
+                {showToast && (
+                    <Animated.View style={[styles.toast, { opacity: toastOpacity }]}>
+                        <Text style={styles.toastText}>Tip saved to Library</Text>
+                    </Animated.View>
+                )}
+            </View>
+        </TourAnchor>
     );
 }
 

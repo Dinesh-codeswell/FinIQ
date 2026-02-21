@@ -29,6 +29,12 @@ export const LeaderboardStack = ({ isVisible }: Props) => {
             card3Y.value = withDelay(300, withSpring(0));
             card2Y.value = withDelay(400, withSpring(0));
             card1Y.value = withDelay(500, withSpring(0));
+        } else {
+            // Reset for replay
+            cardOpacity.value = 0;
+            card3Y.value = 40;
+            card2Y.value = 40;
+            card1Y.value = 40;
         }
     }, [isVisible]);
 
@@ -88,8 +94,9 @@ export const LeaderboardStack = ({ isVisible }: Props) => {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        paddingTop: 40,
-        height: 180,
+        paddingTop: 20,
+        height: 220,
+        overflow: 'hidden',
     },
     card: {
         width: CARD_WIDTH,

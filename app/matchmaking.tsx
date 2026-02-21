@@ -112,6 +112,7 @@ export default function MatchmakingScreen() {
             router.replace({
                 pathname: '/duel' as any,
                 params: {
+                    opponentId: opponent?.id || `bot_${Date.now()}`,
                     opponentName: opponent?.username || 'Bot',
                     opponentAvatar: opponent?.avatar || 'fox',
                     opponentRating: String(opponent?.rating || 1000),

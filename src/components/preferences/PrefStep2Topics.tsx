@@ -90,11 +90,6 @@ export const PrefStep2Topics: React.FC<PrefStep2TopicsProps> = ({ selected, onTo
 
                                         <Text style={styles.topicLabel}>{topic.label}</Text>
 
-                                        {isSelected && (
-                                            <View style={[styles.checkBadge, { backgroundColor: topic.accent }]}>
-                                                <Text style={styles.checkIcon}>✓</Text>
-                                            </View>
-                                        )}
                                     </LinearGradient>
                                 </Animated.View>
                             </TouchableOpacity>

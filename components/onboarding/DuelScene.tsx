@@ -13,7 +13,6 @@ import Animated, {
 import { ONBOARDING_CONFIG } from '@/src/constants/onboardingConfig';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
-const AnimatedView = Animated.createAnimatedComponent(View);
 
 interface Props {
     isVisible: boolean;
@@ -34,24 +33,33 @@ export const DuelScene = ({ isVisible }: Props) => {
             rightScale.value = withDelay(300, withSpring(1));
             vsScale.value = withDelay(400, withSpring(1, { damping: 10, stiffness: 200 }));
 
-            // Aura pulses
+            // Aura pulses — clamped to 1.15 to stay within container bounds
             auraLeftOpacity.value = withDelay(1000, withRepeat(withSequence(
-                withTiming(0.3, { duration: 1000 }),
-                withTiming(0, { duration: 1000 })
+                withTiming(0.25, { duration: 1200 }),
+                withTiming(0, { duration: 1200 })
             ), -1));
             auraLeftScale.value = withDelay(1000, withRepeat(withSequence(
-                withTiming(1.3, { duration: 1000 }),
-                withTiming(1, { duration: 1000 })
+                withTiming(1.15, { duration: 1200 }),
+                withTiming(1, { duration: 1200 })
             ), -1));
 
             auraRightOpacity.value = withDelay(1200, withRepeat(withSequence(
-                withTiming(0.3, { duration: 1000 }),
-                withTiming(0, { duration: 1000 })
+                withTiming(0.25, { duration: 1200 }),
+                withTiming(0, { duration: 1200 })
             ), -1));
             auraRightScale.value = withDelay(1200, withRepeat(withSequence(
-                withTiming(1.3, { duration: 1000 }),
-                withTiming(1, { duration: 1000 })
+                withTiming(1.15, { duration: 1200 }),
+                withTiming(1, { duration: 1200 })
             ), -1));
+        } else {
+            // Reset all animations so they replay on re-visit
+            leftScale.value = 0;
+            rightScale.value = 0;
+            vsScale.value = 0;
+            auraLeftOpacity.value = 0;
+            auraLeftScale.value = 1;
+            auraRightOpacity.value = 0;
+            auraRightScale.value = 1;
         }
     }, [isVisible]);
 
@@ -78,27 +86,27 @@ export const DuelScene = ({ isVisible }: Props) => {
     return (
         <View style={styles.container}>
             {/* Left Player (You) */}
-            <AnimatedView style={[styles.playerContainer, leftScaleStyle]}>
-                <AnimatedView style={[styles.aura, styles.auraLeft, auraLeftStyle]} />
+            <Animated.View style={[styles.playerContainer, leftScaleStyle]}>
+                <Animated.View style={[styles.aura, styles.auraLeft, auraLeftStyle]} />
                 <View style={[styles.card, styles.cardLeft]}>
                     <Text style={styles.monogram}>FQ</Text>
                 </View>
                 <Text style={styles.playerLabel}>You</Text>
-            </AnimatedView>
+            </Animated.View>
 
             {/* VS Element */}
-            <AnimatedView style={[styles.vsContainer, vsScaleStyle]}>
+            <Animated.View style={[styles.vsContainer, vsScaleStyle]}>
                 <Text style={styles.vsText}>VS</Text>
-            </AnimatedView>
+            </Animated.View>
 
             {/* Right Player (Opponent) */}
-            <AnimatedView style={[styles.playerContainer, rightScaleStyle]}>
-                <AnimatedView style={[styles.aura, styles.auraRight, auraRightStyle]} />
+            <Animated.View style={[styles.playerContainer, rightScaleStyle]}>
+                <Animated.View style={[styles.aura, styles.auraRight, auraRightStyle]} />
                 <View style={[styles.card, styles.cardRight]}>
                     <View style={styles.silhouette} />
                 </View>
                 <Text style={styles.playerLabel}>?</Text>
-            </AnimatedView>
+            </Animated.View>
         </View>
     );
 };
@@ -160,9 +168,9 @@ const styles = StyleSheet.create({
     },
     aura: {
         position: 'absolute',
-        width: 120,
-        height: 120,
-        borderRadius: 60,
+        width: 100,
+        height: 100,
+        borderRadius: 50,
     },
     auraLeft: {
         backgroundColor: ONBOARDING_CONFIG.colors.slide1.accent,

@@ -34,7 +34,6 @@ function ProgressSegmentFill({
             fillProgress.value,
             [index, index + 1],
             [0, 1],
-            Extrapolation.CLAMP,
             Extrapolation.CLAMP
         );
         return {

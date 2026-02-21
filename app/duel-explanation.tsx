@@ -45,6 +45,7 @@ export default function DuelExplanationScreen() {
         result = contextResult;
     }
     const scrollViewRef = useRef<ScrollView>(null);
+    const itemOffsets = useRef<Record<number, number>>({}).current;
     const fadeAnims = useRef<Animated.Value[]>([]).current;
 
     useEffect(() => {
@@ -77,8 +78,8 @@ export default function DuelExplanationScreen() {
     }
 
     const scrollToQuestion = (index: number) => {
-        // Rough estimate for scroll position
-        scrollViewRef.current?.scrollTo({ y: index * 200, animated: true });
+        const offset = itemOffsets[index] || index * 250;
+        scrollViewRef.current?.scrollTo({ y: offset, animated: true });
     };
 
     return (
@@ -120,6 +121,9 @@ export default function DuelExplanationScreen() {
                         return (
                             <Animated.View
                                 key={i}
+                                onLayout={(e) => {
+                                    itemOffsets[i] = e.nativeEvent.layout.y;
+                                }}
                                 style={[
                                     styles.card,
                                     {
@@ -156,7 +160,7 @@ export default function DuelExplanationScreen() {
                                 {/* Options Review */}
                                 {q.options && q.options.length > 0 && (
                                     <View style={styles.optionsList}>
-                                        {q.options.map((opt, optIdx) => {
+                                        {q.options.map((opt: string, optIdx: number) => {
                                             const isUserSelected = q.userAnswer === opt;
                                             const isCorrect = q.correctAnswer === opt;
 

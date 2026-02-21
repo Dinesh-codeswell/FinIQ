@@ -7,6 +7,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useGame } from '@/context/GameContext';
 import { getDailyChallenge } from '@/src/utils/questionEngine';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { metricsService } from '@/src/services/metricsService';
+import { TourAnchor } from '@/src/components/fin/TourAnchor';
 
 const LiveIndicator = ({ isCompleted }: { isCompleted: boolean }) => {
     const pulseAnim = useRef(new Animated.Value(1)).current;
@@ -39,6 +41,7 @@ export default function MarketMoodCard() {
     const router = useRouter();
     const { profile } = useGame();
     const [dailyChallenge, setDailyChallenge] = React.useState<{ question: string } | null>(null);
+    const [challengeCount, setChallengeCount] = React.useState(0);
     const todayStr = new Date().toISOString().split('T')[0];
     const isCompleted = profile.dailyChallengeCompleted === todayStr;
 
@@ -46,76 +49,90 @@ export default function MarketMoodCard() {
         getDailyChallenge().then(challenge => {
             if (challenge) setDailyChallenge({ question: challenge.question });
         }).catch(() => { });
+
+        // Initial fetch
+        metricsService.fetchMetrics().then(m => setChallengeCount(m.challengeParticipants));
+
+        // Real-time subscription
+        const channel = metricsService.subscribeToMetrics((m) => {
+            setChallengeCount(m.challengeParticipants);
+        });
+
+        return () => {
+            channel.unsubscribe();
+        };
     }, []);
 
     return (
-        <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={() => !isCompleted && router.push('/daily-challenge' as any)}
-            disabled={isCompleted}
-            style={isCompleted ? { opacity: 0.6 } : {}}
-        >
-            <LinearGradient
-                colors={isCompleted ? ['#1A1A1A', '#111111'] : ['#0A1F14', '#0D0D0D']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={[styles.card, isCompleted && styles.cardCompleted]}
+        <TourAnchor id="daily_challenge_card">
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => !isCompleted && router.push('/daily-challenge' as any)}
+                disabled={isCompleted}
+                style={isCompleted ? { opacity: 0.6 } : {}}
             >
-                {/* Decoration Candlestick SVG */}
-                <View style={styles.decorationContainer}>
-                    <Svg width="80" height="80" viewBox="0 0 80 80">
-                        {/* Faint Candlesticks */}
-                        <Rect x="10" y="40" width="6" height="20" fill="#FFFFFF" fillOpacity="0.04" />
-                        <Line x1="13" y1="35" x2="13" y2="65" stroke="#FFFFFF" strokeOpacity="0.04" strokeWidth="1" />
+                <LinearGradient
+                    colors={isCompleted ? ['#1A1A1A', '#111111'] : ['#0A1F14', '#0D0D0D']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={[styles.card, isCompleted && styles.cardCompleted]}
+                >
+                    {/* Decoration Candlestick SVG */}
+                    <View style={styles.decorationContainer}>
+                        <Svg width="80" height="80" viewBox="0 0 80 80">
+                            {/* Faint Candlesticks */}
+                            <Rect x="10" y="40" width="6" height="20" fill="#FFFFFF" fillOpacity="0.04" />
+                            <Line x1="13" y1="35" x2="13" y2="65" stroke="#FFFFFF" strokeOpacity="0.04" strokeWidth="1" />
 
-                        <Rect x="25" y="30" width="6" height="25" fill="#FFFFFF" fillOpacity="0.04" />
-                        <Line x1="28" y1="25" x2="28" y2="60" stroke="#FFFFFF" strokeOpacity="0.04" strokeWidth="1" />
+                            <Rect x="25" y="30" width="6" height="25" fill="#FFFFFF" fillOpacity="0.04" />
+                            <Line x1="28" y1="25" x2="28" y2="60" stroke="#FFFFFF" strokeOpacity="0.04" strokeWidth="1" />
 
-                        <Rect x="40" y="20" width="6" height="30" fill="#FFFFFF" fillOpacity="0.04" />
-                        <Line x1="43" y1="15" x2="43" y2="55" stroke="#FFFFFF" strokeOpacity="0.04" strokeWidth="1" />
-                    </Svg>
-                </View>
-
-                {/* Top Row */}
-                <View style={styles.topRow}>
-                    <View style={styles.labelSection}>
-                        <Text style={styles.challengeLabel}>TODAY'S CHALLENGE</Text>
-                    </View>
-                    <LiveIndicator isCompleted={isCompleted} />
-                </View>
-
-                {/* Middle Section */}
-                <View style={styles.middleSection}>
-                    <Text style={[styles.title, isCompleted && { color: '#9CA3AF' }]}>MARKET MOOD</Text>
-                    <Text style={styles.questionText}>
-                        {dailyChallenge?.question ?? 'Loading challenge...'}
-                    </Text>
-                </View>
-
-                {/* Bottom Row */}
-                <View style={styles.bottomRow}>
-                    <View style={styles.playersInfo}>
-                        <Text style={styles.playersText}>📊 492 players answered</Text>
+                            <Rect x="40" y="20" width="6" height="30" fill="#FFFFFF" fillOpacity="0.04" />
+                            <Line x1="43" y1="15" x2="43" y2="55" stroke="#FFFFFF" strokeOpacity="0.04" strokeWidth="1" />
+                        </Svg>
                     </View>
 
-                    {isCompleted ? (
-                        <View style={styles.donePill}>
-                            <Text style={styles.doneText}>✓ Done</Text>
+                    {/* Top Row */}
+                    <View style={styles.topRow}>
+                        <View style={styles.labelSection}>
+                            <Text style={styles.challengeLabel}>TODAY'S CHALLENGE</Text>
                         </View>
-                    ) : (
-                        <View style={styles.playButton}>
-                            <Text style={styles.playButtonText}>PLAY →</Text>
-                        </View>
-                    )}
-                </View>
-            </LinearGradient>
+                        <LiveIndicator isCompleted={isCompleted} />
+                    </View>
 
-            {isCompleted && (
-                <TouchableOpacity style={styles.seeResultsRow}>
-                    <Text style={styles.seeResultsText}>See results →</Text>
-                </TouchableOpacity>
-            )}
-        </TouchableOpacity>
+                    {/* Middle Section */}
+                    <View style={styles.middleSection}>
+                        <Text style={[styles.title, isCompleted && { color: '#9CA3AF' }]}>MARKET MOOD</Text>
+                        <Text style={styles.questionText}>
+                            {dailyChallenge?.question ?? 'Loading challenge...'}
+                        </Text>
+                    </View>
+
+                    {/* Bottom Row */}
+                    <View style={styles.bottomRow}>
+                        <View style={styles.playersInfo}>
+                            <Text style={styles.playersText}>📊 {challengeCount} players answered</Text>
+                        </View>
+
+                        {isCompleted ? (
+                            <View style={styles.donePill}>
+                                <Text style={styles.doneText}>✓ Done</Text>
+                            </View>
+                        ) : (
+                            <View style={styles.playButton}>
+                                <Text style={styles.playButtonText}>PLAY →</Text>
+                            </View>
+                        )}
+                    </View>
+                </LinearGradient>
+
+                {isCompleted && (
+                    <TouchableOpacity style={styles.seeResultsRow}>
+                        <Text style={styles.seeResultsText}>See results →</Text>
+                    </TouchableOpacity>
+                )}
+            </TouchableOpacity>
+        </TourAnchor>
     );
 }
 

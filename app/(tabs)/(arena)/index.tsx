@@ -20,11 +20,19 @@ import FinTourOverlay from '@/src/components/fin/FinTourOverlay';
 import FriendsOnline from '@/components/home/FriendsOnline';
 import MarketMoodCard from '@/components/home/MarketMoodCard';
 import DuelsSection from '@/components/home/DuelsSection';
+import { TourProvider, useTour } from '@/context/TourContext';
 
-export default function ArenaHome() {
+function ArenaContent() {
     const router = useRouter();
     const { profile, checkAndUpdateStreak, isReady } = useGame();
+    const { scrollViewRef, setTourVisible } = useTour();
     const fadeIn = useRef(new Animated.Value(0)).current;
+
+    useEffect(() => {
+        if (isReady && profile.onboardingCompleted) {
+            setTourVisible(true);
+        }
+    }, [isReady, profile.onboardingCompleted]);
 
     useEffect(() => {
         if (isReady && !profile.onboardingCompleted) {
@@ -56,6 +64,7 @@ export default function ArenaHome() {
             <SafeAreaView style={styles.safeArea} edges={['top']}>
                 <Animated.View style={{ opacity: fadeIn, flex: 1 }}>
                     <ScrollView
+                        ref={scrollViewRef as any}
                         style={styles.scrollView}
                         contentContainerStyle={styles.scrollContent}
                         showsVerticalScrollIndicator={false}
@@ -103,6 +112,14 @@ export default function ArenaHome() {
                 </Animated.View>
             </SafeAreaView>
         </View>
+    );
+}
+
+export default function ArenaHome() {
+    return (
+        <TourProvider>
+            <ArenaContent />
+        </TourProvider>
     );
 }
 

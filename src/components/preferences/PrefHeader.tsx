@@ -5,7 +5,7 @@ import Animated, {
     useAnimatedStyle,
     withSpring,
     withSequence,
-    withTiming
+    withTiming,
 } from 'react-native-reanimated';
 import Colors from '@/constants/colors';
 
@@ -20,7 +20,6 @@ interface PrefHeaderProps {
 export const PrefHeader: React.FC<PrefHeaderProps> = ({ question, step, totalSteps }) => {
     const bubbleScale = useSharedValue(0.7);
     const foxHeadPos = useSharedValue(0);
-    const borderOpacity = useSharedValue(0.6);
 
     useEffect(() => {
         // Pop animation for bubble
@@ -42,11 +41,7 @@ export const PrefHeader: React.FC<PrefHeaderProps> = ({ question, step, totalSte
 
     const foxStyle = useAnimatedStyle(() => ({
         transform: [{ translateY: foxHeadPos.value }],
-        borderColor: interpolateColor(borderOpacity.value, [0.6, 1], ['rgba(0, 214, 143, 0.6)', '#00D68F']),
     }));
-
-    // Helper for color interpolation in reanimated is tricky with rgba strings sometimes, 
-    // but the prompt specified a quick brightening of the border.
 
     return (
         <View style={styles.container}>
@@ -133,5 +128,3 @@ const styles = StyleSheet.create({
         fontWeight: '700',
     },
 });
-
-import { interpolateColor } from 'react-native-reanimated';

@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useGame } from '@/context/GameContext';
 import { TYPOGRAPHY } from '@/constants/typography';
 import { DIVISIONS } from '@/constants/divisions';
+import { TourAnchor } from '@/src/components/fin/TourAnchor';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -31,7 +32,9 @@ export default function RatingHeroCard() {
                 <View style={styles.topSection}>
                     {/* Left Column (60% width) */}
                     <View style={styles.leftCol}>
-                        <Text style={styles.ratingNumber}>{profile.rating}</Text>
+                        <TourAnchor id="rating_hero_number">
+                            <Text style={styles.ratingNumber}>{profile.rating}</Text>
+                        </TourAnchor>
                         <View style={styles.deltaContainer}>
                             <Ionicons name="caret-up" size={12} color="#00D68F" />
                             <Text style={styles.deltaText}>+10 today</Text>
@@ -64,10 +67,12 @@ export default function RatingHeroCard() {
 
                 {/* Stats Row */}
                 <View style={styles.statsRow}>
-                    <View style={styles.statCol}>
-                        <Text style={[styles.statValue, { color: '#F5A623' }]}>{profile.streak}</Text>
-                        <Text style={styles.statLabel}>Day Streak 🔥</Text>
-                    </View>
+                    <TourAnchor id="stats_panel_streak">
+                        <View style={styles.statCol}>
+                            <Text style={[styles.statValue, { color: '#F5A623' }]}>{profile.streak}</Text>
+                            <Text style={styles.statLabel}>Day Streak 🔥</Text>
+                        </View>
+                    </TourAnchor>
                     <View style={styles.labelDivider} />
                     <View style={styles.statCol}>
                         <Text style={[styles.statValue, { color: '#FFFFFF' }]}>{profile.duelsPlayedToday}</Text>
@@ -79,7 +84,7 @@ export default function RatingHeroCard() {
                         <Text style={styles.statLabel}>Online Now</Text>
                     </View>
                 </View>
-            </LinearGradient>
+                泛            </LinearGradient>
 
             {/* Banner CTA */}
             <View style={styles.ctaBanner}>

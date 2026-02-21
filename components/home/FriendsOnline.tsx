@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import UserAvatar from '@/src/components/UserAvatar';
-import { MOCK_FRIENDS } from '@/mocks/data';
 import { TYPOGRAPHY } from '@/constants/typography';
 import SectionHeader from './SectionHeader';
+import { supabase } from '@/src/services/supabase';
+import { LeaderboardEntry } from '@/src/services/leaderboardService';
 
 const AVATAR_COLORS = ['#1A1A2E', '#1A2E1A', '#2E1A1A', '#1A2A2E', '#2E2A1A'];
 
@@ -39,7 +40,44 @@ const OnlineDot = () => {
 };
 
 export default function FriendsOnline() {
-    const data = [...MOCK_FRIENDS, { id: 'invite-placeholder', isInvite: true }];
+    const [onlineUsers, setOnlineUsers] = useState<LeaderboardEntry[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchOnlineUsers = async () => {
+        try {
+            const { data, error } = await supabase
+                .from('profiles')
+                .select('id, username, avatar, rating, is_online')
+                .eq('is_online', true)
+                .limit(10);
+
+            if (error) throw error;
+            setOnlineUsers(data as any || []);
+        } catch (err) {
+            console.error('Error fetching online users:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchOnlineUsers();
+
+        const channel = supabase
+            .channel('online-friends-sync')
+            .on(
+                'postgres_changes',
+                { event: '*', schema: 'public', table: 'profiles' },
+                () => fetchOnlineUsers()
+            )
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
+    }, []);
+
+    const data = [...onlineUsers, { id: 'invite-placeholder', isInvite: true }];
 
     const renderItem = ({ item, index }: any) => {
         if (item.isInvite) {
@@ -78,7 +116,7 @@ export default function FriendsOnline() {
         <View style={styles.container}>
             <SectionHeader
                 title="Friends online"
-                count={MOCK_FRIENDS.length}
+                count={onlineUsers.length}
                 actionLabel="Invite"
             />
 

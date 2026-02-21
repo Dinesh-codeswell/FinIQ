@@ -29,12 +29,10 @@ function CommitmentCard({
     isSelected: boolean;
     onSelect: (minutes: number) => void;
 }) {
-    const scale = useSharedValue(1);
     const borderOpacity = useSharedValue(0);
     const bgOpacity = useSharedValue(0);
 
     useEffect(() => {
-        scale.value = withSpring(isSelected ? 1.05 : 1, { damping: 14, stiffness: 300 });
         borderOpacity.value = withTiming(isSelected ? 1 : 0, { duration: 200 });
         bgOpacity.value = withTiming(isSelected ? 1 : 0, { duration: 200 });
     }, [isSelected]);
@@ -45,7 +43,6 @@ function CommitmentCard({
         const backgroundColor =
             bgOpacity.value > 0.5 ? `${opt.accent}20` : 'rgba(255,255,255,0.04)';
         return {
-            transform: [{ scale: scale.value }],
             borderColor,
             backgroundColor,
         };
@@ -54,7 +51,7 @@ function CommitmentCard({
     return (
         <Animated.View
             entering={FadeInUp.delay(350 + index * 100).springify()}
-            style={styles.flex1}
+            style={[styles.flex1, isSelected && { zIndex: 10 }]}
         >
             <TouchableOpacity
                 activeOpacity={0.9}
@@ -126,36 +123,38 @@ const styles = StyleSheet.create({
     },
     grid: {
         flexDirection: 'row',
-        gap: 10,
+        gap: 14,
     },
     flex1: {
         flex: 1,
     },
     tile: {
-        minHeight: 120,
-        borderRadius: 20,
+        minHeight: 140,
+        borderRadius: 24,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 2,
-        paddingVertical: 12,
+        paddingVertical: 16,
         paddingHorizontal: 8,
     },
     tileIcon: {
-        fontSize: 24,
-        marginBottom: 6,
-        opacity: 0.8,
+        fontSize: 28,
+        marginBottom: 8,
+        opacity: 0.9,
     },
     tileLabel: {
-        fontSize: 13,
+        fontSize: 14,
         fontWeight: '900',
         textAlign: 'center',
     },
     tileMode: {
         fontSize: 10,
-        color: 'rgba(255, 255, 255, 0.5)',
+        color: 'rgba(255, 255, 255, 0.4)',
         marginTop: 4,
         textAlign: 'center',
         paddingHorizontal: 4,
+        fontWeight: 'bold',
+        letterSpacing: 0.2,
     },
     details: {
         marginTop: 32,

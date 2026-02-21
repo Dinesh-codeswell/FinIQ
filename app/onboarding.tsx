@@ -16,7 +16,8 @@ import Animated, {
     interpolateColor,
     interpolate,
     withTiming,
-    runOnJS
+    runOnJS,
+    useAnimatedScrollHandler
 } from 'react-native-reanimated';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -36,6 +37,7 @@ import { ONBOARDING_CONFIG } from '@/src/constants/onboardingConfig';
 import { Accelerometer } from 'expo-sensors';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const CTA_HEIGHT = 180;
 
 type Step = 'carousel' | 'username' | 'preferences';
 
@@ -99,14 +101,19 @@ export default function OnboardingScreen() {
         }
     };
 
-    const handleScroll = (event: any) => {
-        const offsetX = event.nativeEvent.contentOffset.x;
-        scrollX.value = offsetX;
-        const index = Math.round(offsetX / SCREEN_WIDTH);
+    const updateCarouselIndex = (index: number) => {
         if (index !== carouselIndex) {
             setCarouselIndex(index);
         }
     };
+
+    const scrollHandler = useAnimatedScrollHandler({
+        onScroll: (event) => {
+            scrollX.value = event.contentOffset.x;
+            const index = Math.round(event.contentOffset.x / SCREEN_WIDTH);
+            runOnJS(updateCarouselIndex)(index);
+        },
+    });
 
     const nextQuiz = () => {
         if (Platform.OS !== 'web') Haptics.selectionAsync();
@@ -160,8 +167,8 @@ export default function OnboardingScreen() {
                                     horizontal
                                     pagingEnabled
                                     showsHorizontalScrollIndicator={false}
-                                    onScroll={handleScroll}
-                                    scrollEventThrottle={16}
+                                    onScroll={scrollHandler}
+                                    scrollEventThrottle={1}
                                     style={styles.pager}
                                 >
                                     <Slide1Arena

@@ -9,23 +9,35 @@ const mapToSnakeCase = (profile: Partial<UserProfile>) => {
         longestStreak: 'longest_streak',
         onboardingCompleted: 'onboarding_completed',
         sessionLength: 'session_length',
-        selectedFrame: 'selected_frame',
+        selectedAvatarFrame: 'selected_frame',
         isPro: 'is_pro',
-        previousRating: 'previous_rating',
-        totalXp: 'total_xp',
-        tournamentXp: 'tournament_xp',
-        globalRank: 'global_rank',
-        rankChange: 'rank_change',
-        winCount: 'win_count',
-        lossCount: 'loss_count',
-        currentStreak: 'current_streak',
-        isOnline: 'is_online',
-        lastActiveAt: 'last_active_at'
+        previous_rating: 'previous_rating',
+        total_xp: 'total_xp',
+        tournament_xp: 'tournament_xp',
+        global_rank: 'global_rank',
+        rank_change: 'rank_change',
+        win_count: 'win_count',
+        loss_count: 'loss_count',
+        current_streak: 'current_streak',
+        is_online: 'is_online',
+        last_active_at: 'last_active_at'
     };
+
+    // ONLY map keys that exist in the profiles table
+    const validDbKeys = [
+        'id', 'username', 'avatar', 'rating', 'xp', 'coins', 'streak',
+        'last_play_date', 'total_duels', 'wins', 'longest_streak',
+        'badges', 'interests', 'difficulty', 'is_pro', 'selected_frame',
+        'onboarding_completed', 'session_length', 'tournament_xp', 'total_xp',
+        'weekly_rank', 'global_rank', 'rank_change', 'previous_rating',
+        'win_count', 'loss_count', 'current_streak', 'is_online', 'last_active_at'
+    ];
 
     Object.keys(profile).forEach(key => {
         const snakeKey = keyMap[key] || key.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
-        mapped[snakeKey] = (profile as any)[key];
+        if (validDbKeys.includes(snakeKey)) {
+            mapped[snakeKey] = (profile as any)[key];
+        }
     });
 
     return mapped;
@@ -35,23 +47,33 @@ const mapToCamelCase = (data: any): UserProfile | null => {
     if (!data) return null;
     return {
         ...data,
+        id: data.id,
+        username: data.username ?? '',
+        avatar: data.avatar ?? 'fox',
+        rating: data.rating ?? 1000,
+        xp: data.xp ?? 0,
+        coins: data.coins ?? 0,
+        streak: data.streak ?? 0,
         lastPlayDate: data.last_play_date,
-        totalDuels: data.total_duels,
-        longestStreak: data.longest_streak,
-        onboardingCompleted: data.onboarding_completed,
-        sessionLength: data.session_length,
-        selectedFrame: data.selected_frame,
-        isPro: data.is_pro,
-        previousRating: data.previous_rating,
-        totalXp: data.total_xp,
-        tournamentXp: data.tournament_xp,
-        globalRank: data.global_rank,
-        rankChange: data.rank_change,
-        winCount: data.win_count,
-        lossCount: data.loss_count,
-        currentStreak: data.current_streak,
-        isOnline: data.is_online,
-        lastActiveAt: data.last_active_at
+        totalDuels: data.total_duels ?? 0,
+        longestStreak: data.longest_streak ?? 0,
+        onboardingCompleted: data.onboarding_completed ?? false,
+        sessionLength: data.session_length ?? 5,
+        selectedAvatarFrame: data.selected_frame ?? 'none',
+        isPro: data.is_pro ?? false,
+        previous_rating: data.previous_rating,
+        total_xp: data.total_xp,
+        tournament_xp: data.tournament_xp,
+        global_rank: data.global_rank,
+        rank_change: data.rank_change,
+        win_count: data.win_count ?? 0,
+        loss_count: data.loss_count ?? 0,
+        current_streak: data.current_streak ?? 0,
+        is_online: data.is_online ?? false,
+        last_active_at: data.last_active_at,
+        badges: data.badges ?? [],
+        interests: data.interests ?? [],
+        difficulty: data.difficulty ?? 1,
     } as UserProfile;
 };
 

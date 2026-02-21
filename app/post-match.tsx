@@ -151,12 +151,25 @@ export default function PostMatchScreen() {
                         >
                             <Text style={styles.playAgainText}>PLAY AGAIN</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.continueBtn}
-                            onPress={() => router.replace('/')}
-                        >
-                            <Text style={styles.continueBtnText}>CONTINUE</Text>
-                        </TouchableOpacity>
+
+                        <View style={styles.secondaryActions}>
+                            <TouchableOpacity
+                                style={styles.reviewBtn}
+                                onPress={() => router.replace({
+                                    pathname: '/duel-explanation',
+                                    params: { result: JSON.stringify(result) }
+                                } as any)}
+                            >
+                                <Text style={styles.reviewBtnText}>REVIEW</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={styles.continueBtn}
+                                onPress={() => router.replace('/')}
+                            >
+                                <Text style={styles.continueBtnText}>DONE</Text>
+                            </TouchableOpacity>
+                        </View>
                     </Animated.View>
                 </View>
             </SafeAreaView>
@@ -306,11 +319,10 @@ const styles = StyleSheet.create({
         fontWeight: '600' as const,
     },
     actions: {
-        flexDirection: 'row',
+        width: '100%',
         gap: 12,
     },
     playAgainBtn: {
-        flex: 1,
         backgroundColor: Colors.accent,
         borderRadius: 12,
         paddingVertical: 16,
@@ -322,6 +334,10 @@ const styles = StyleSheet.create({
         fontWeight: '800' as const,
         letterSpacing: 1,
     },
+    secondaryActions: {
+        flexDirection: 'row',
+        gap: 12,
+    },
     continueBtn: {
         flex: 1,
         backgroundColor: Colors.cardBackground,
@@ -330,6 +346,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 1,
         borderColor: Colors.border,
+    },
+    reviewBtn: {
+        flex: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+        borderRadius: 12,
+        paddingVertical: 16,
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: Colors.border,
+    },
+    reviewBtnText: {
+        color: Colors.textSecondary,
+        fontSize: 14,
+        fontWeight: '700' as const,
+        letterSpacing: 1,
     },
     continueBtnText: {
         color: Colors.textPrimary,

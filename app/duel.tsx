@@ -40,6 +40,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 export default function DuelScreen() {
     const router = useRouter();
     const params = useLocalSearchParams<{
+        opponentId?: string;
         opponentName?: string;
         opponentAvatar?: string;
         opponentRating?: string;
@@ -49,15 +50,18 @@ export default function DuelScreen() {
     const { profile, recordDuelResult, setLastDuelResult } = useGame();
     const { recordDuelResult: recordFinResult } = useFinStore();
 
+    const opponentId = params.opponentId || 'bot_fallback';
     const opponentName = params.opponentName || 'Bot';
     const opponentAvatar = params.opponentAvatar || 'wolf';
-    const opponentRating = parseInt(params.opponentRating || '1000', 10);
-    const topic = params.topic || 'investing';
-    const mode = params.mode || 'classical';
+    const opponentRatingNum = parseInt(params.opponentRating || '1000', 10);
+    const topicStr = params.topic || 'investing';
+    const modeStr = params.mode || 'classical';
 
-    const mmMode = topic === 'mental_math' ? MENTAL_MATH_MODES.find(m => m.id === mode) : null;
+    const mmMode = topicStr === 'mental_math' ? MENTAL_MATH_MODES.find(m => m.id === modeStr) : null;
     const duelDuration = mmMode ? mmMode.duration : 60;
     const questionCount = mmMode ? mmMode.questionCount : 20;
+    // ... (omitting unchanged lines for brevity in reasoning, but must provide full block in tool)
+
 
     const [questions, setQuestions] = useState<Question[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -69,7 +73,10 @@ export default function DuelScreen() {
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [gameOver, setGameOver] = useState<boolean>(false);
     const [isBotThinking, setIsBotThinking] = useState<boolean>(true);
-    const [resultsHistory, setResultsHistory] = useState<(boolean | null)[]>(new Array(20).fill(null));
+    const [resultsHistory, setResultsHistory] = useState<(boolean | null)[]>([]);
+
+    const playerScoreRef = useRef(0);
+    const botScoreRef = useRef(0);
 
     useEffect(() => {
         const loadQuestions = async () => {
@@ -77,10 +84,11 @@ export default function DuelScreen() {
                 const qs = await getQuestionsForDuel({
                     difficulty: profile.difficulty || 1,
                     count: questionCount,
-                    mode: mode as any,
-                    topic: topic
+                    mode: modeStr as any,
+                    topic: topicStr
                 });
                 setQuestions(qs);
+                setResultsHistory(new Array(qs.length).fill(null));
             } catch (error) {
                 console.error('Failed to load questions:', error);
             } finally {
@@ -142,17 +150,18 @@ export default function DuelScreen() {
         setIsBotThinking(true);
         if (botTimeoutRef.current) clearTimeout(botTimeoutRef.current);
         const delay = 3000 + Math.random() * 4000;
-        const correctChance = 0.55 + (opponentRating - 800) * 0.0003;
+        const correctChance = 0.55 + (opponentRatingNum - 800) * 0.0003;
 
         botTimeoutRef.current = setTimeout(() => {
             if (!gameOverRef.current) {
                 setIsBotThinking(false);
                 if (Math.random() < correctChance) {
                     setBotScore(prev => prev + 1);
+                    botScoreRef.current += 1;
                 }
             }
         }, delay);
-    }, [currentIndex, opponentRating]);
+    }, [currentIndex, opponentRatingNum]);
 
     const handleAnswer = useCallback((optionIndex: number) => {
         if (answered || gameOver) return;
@@ -165,6 +174,7 @@ export default function DuelScreen() {
 
         if (isCorrect) {
             setPlayerScore(prev => prev + 1);
+            playerScoreRef.current += 1;
             if (Platform.OS !== 'web') {
                 Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
             }
@@ -228,25 +238,27 @@ export default function DuelScreen() {
 
         const log = questionLog.current;
         const totalQuestions = log.length || 1;
-        const accuracy = Math.round((playerScore / totalQuestions) * 100);
+        const finalPlayerScore = playerScoreRef.current;
+        const finalBotScore = botScoreRef.current;
+        const accuracy = Math.round((finalPlayerScore / totalQuestions) * 100);
         const avgTimeTaken = Math.round(log.reduce((sum, q) => sum + q.timeTaken, 0) / totalQuestions);
 
-        const won = playerScore > botScore;
+        const won = finalPlayerScore > finalBotScore;
         const ratingChange = won ? 25 : -15;
         const xpMultiplier = mmMode ? mmMode.xpMultiplier : 1;
-        const xpEarned = Math.round(playerScore * 10 * xpMultiplier);
+        const xpEarned = Math.round(finalPlayerScore * 10 * xpMultiplier);
 
         const result: DuelResult = {
             duelId: Math.random().toString(36).substring(2, 11),
-            mode: mode,
+            mode: modeStr,
             won,
-            playerScore,
-            opponentScore: botScore,
+            playerScore: finalPlayerScore,
+            opponentScore: finalBotScore,
             ratingChange,
             xpEarned,
             opponentName,
             opponentAvatar,
-            opponentRating,
+            opponentRating: opponentRatingNum,
             timestamp: Date.now(),
             accuracy,
             avgTimeTaken,
@@ -254,8 +266,15 @@ export default function DuelScreen() {
         };
 
         setLastDuelResult(result);
-        recordDuelResult(result as any);
-        recordFinResult(won ? 'win' : 'loss', mode);
+        recordDuelResult(
+            opponentId,
+            finalPlayerScore,
+            finalBotScore,
+            modeStr,
+            totalQuestions,
+            Math.round((Date.now() - startTimeRef.current) / 1000)
+        );
+        recordFinResult(won ? 'win' : 'loss', modeStr);
 
         if (Platform.OS !== 'web') {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
@@ -264,7 +283,7 @@ export default function DuelScreen() {
         setTimeout(() => {
             router.replace({ pathname: '/duel-explanation' } as any);
         }, 300);
-    }, [playerScore, botScore, profile.rating, opponentRating, opponentName, opponentAvatar]);
+    }, [playerScore, botScore, profile.rating, opponentRatingNum, opponentName, opponentAvatar, opponentId, modeStr]);
 
     const mainZoneStyle = useAnimatedStyle(() => ({
         transform: [{ translateX: questionSlideX.value }],
@@ -337,7 +356,7 @@ export default function DuelScreen() {
                 </Animated.View>
 
                 <ProgressFooter
-                    total={20}
+                    total={questions.length}
                     current={currentIndex}
                     results={resultsHistory}
                 />

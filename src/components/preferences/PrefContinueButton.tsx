@@ -31,10 +31,11 @@ export const PrefContinueButton: React.FC<PrefContinueButtonProps> = ({
     const animatedStyle = useAnimatedStyle(() => {
         return {
             backgroundColor: withTiming(
-                enabled ? '#00D68F' : 'rgba(0, 214, 143, 0.3)',
+                enabled ? '#00D68F' : 'rgba(0, 214, 143, 0.2)',
                 { duration: 200 }
             ),
             shadowOpacity: withTiming(enabled ? 0.3 : 0, { duration: 200 }),
+            elevation: enabled ? 4 : 0,
             transform: [{ scale: withTiming(enabled ? 1 : 0.98, { duration: 200 }) }]
         };
     });

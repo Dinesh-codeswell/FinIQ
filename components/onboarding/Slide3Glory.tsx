@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, Dimensions } from 'react-native';
 import Animated, {
     useAnimatedStyle,
@@ -29,6 +29,11 @@ export const Slide3Glory = ({ isVisible, scrollX, index }: Props) => {
     const trophyScale = useSharedValue(1);
     const trophyGlowOpacity = useSharedValue(0.3);
 
+    const float1Opacity = useSharedValue(0);
+    const float1Y = useSharedValue(10);
+    const float2Opacity = useSharedValue(0);
+    const float2Y = useSharedValue(10);
+
     React.useEffect(() => {
         if (isVisible) {
             trophyY.value = withDelay(150, withSpring(0, { damping: 12, stiffness: 120 }));
@@ -38,6 +43,20 @@ export const Slide3Glory = ({ isVisible, scrollX, index }: Props) => {
                 withTiming(0.6, { duration: 400 }),
                 withTiming(0.3, { duration: 400 })
             ), -1, true));
+
+            // Floating elements stagger
+            float1Opacity.value = withDelay(500, withTiming(1, { duration: 400 }));
+            float1Y.value = withDelay(500, withSpring(0, { damping: 14, stiffness: 100 }));
+            float2Opacity.value = withDelay(700, withTiming(1, { duration: 400 }));
+            float2Y.value = withDelay(700, withSpring(0, { damping: 14, stiffness: 100 }));
+        } else {
+            // Reset for replay
+            trophyY.value = -100;
+            trophyGlowOpacity.value = 0.3;
+            float1Opacity.value = 0;
+            float1Y.value = 10;
+            float2Opacity.value = 0;
+            float2Y.value = 10;
         }
     }, [isVisible]);
 
@@ -50,7 +69,16 @@ export const Slide3Glory = ({ isVisible, scrollX, index }: Props) => {
 
     const glowStyle = useAnimatedStyle(() => ({
         opacity: trophyGlowOpacity.value,
-        transform: [{ scale: interpolate(trophyGlowOpacity.value, [0.3, 0.6], [1, 1.2]) }],
+        transform: [{ scale: interpolate(trophyGlowOpacity.value, [0.3, 0.6], [1, 1.1]) }],
+    }));
+
+    const float1Style = useAnimatedStyle(() => ({
+        opacity: float1Opacity.value,
+        transform: [{ translateY: float1Y.value }],
+    }));
+    const float2Style = useAnimatedStyle(() => ({
+        opacity: float2Opacity.value,
+        transform: [{ translateY: float2Y.value }],
     }));
 
     const parallaxStyle = useAnimatedStyle(() => {
@@ -91,13 +119,18 @@ export const Slide3Glory = ({ isVisible, scrollX, index }: Props) => {
 
                 <LeaderboardStack isVisible={isVisible} />
 
-                {/* Floating elements */}
-                <View style={[styles.floating, { top: 10, left: 20 }]}>
-                    <Text style={styles.floatingText}>🔥 47-Day Streak</Text>
-                </View>
-                <View style={[styles.floating, { top: 20, right: 20 }]}>
-                    <Text style={[styles.floatingText, { color: '#F5A623' }]}>+2.0× XP</Text>
-                </View>
+                {/* Floating elements — animated */}
+                <Animated.View style={[styles.floating, { top: 10, left: 24 }, float1Style]}>
+                    <View style={styles.streakBadge}>
+                        <Animated.Text style={styles.fireEmoji}>🔥</Animated.Text>
+                        <Text style={styles.streakText}>47-Day Streak</Text>
+                    </View>
+                </Animated.View>
+                <Animated.View style={[styles.floating, { top: 30, right: 24 }, float2Style]}>
+                    <View style={styles.xpBadge}>
+                        <Text style={styles.xpText}>+2.0× XP</Text>
+                    </View>
+                </Animated.View>
             </Animated.View>
 
             <View style={styles.textZone}>
@@ -113,11 +146,13 @@ const styles = StyleSheet.create({
     container: {
         width: SCREEN_WIDTH,
         flex: 1,
+        overflow: 'hidden',
     },
     illustration: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        overflow: 'hidden',
     },
     trophyContainer: {
         alignItems: 'center',
@@ -127,14 +162,14 @@ const styles = StyleSheet.create({
     },
     trophyGlow: {
         position: 'absolute',
-        width: 120,
-        height: 120,
-        borderRadius: 60,
+        width: 100,
+        height: 100,
+        borderRadius: 50,
         backgroundColor: 'rgba(245,166,35,0.3)',
     },
     textZone: {
         paddingHorizontal: 24,
-        paddingBottom: 200,
+        paddingBottom: 180,
     },
     title: {
         color: '#FFFFFF',
@@ -158,9 +193,38 @@ const styles = StyleSheet.create({
     floating: {
         position: 'absolute',
     },
-    floatingText: {
+    streakBadge: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'rgba(255, 69, 58, 0.15)',
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: 'rgba(255, 69, 58, 0.3)',
+        gap: 6,
+    },
+    xpBadge: {
+        backgroundColor: 'rgba(245, 166, 35, 0.15)',
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: 'rgba(245, 166, 35, 0.3)',
+    },
+    fireEmoji: {
+        fontSize: 18,
+    },
+    streakText: {
         color: '#FFFFFF',
-        fontSize: 11,
-        fontWeight: '700',
+        fontSize: 14,
+        fontWeight: '900',
+        fontFamily: 'BarlowCondensed_700Bold',
+    },
+    xpText: {
+        color: '#F5A623',
+        fontSize: 14,
+        fontWeight: '900',
+        fontFamily: 'BarlowCondensed_700Bold',
     },
 });

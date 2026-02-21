@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { TourAnchor } from '@/src/components/fin/TourAnchor';
 import SectionHeader from './SectionHeader';
 
 export default function DuelsSection() {
@@ -22,24 +23,26 @@ export default function DuelsSection() {
                 contentContainerStyle={styles.scrollContent}
             >
                 {/* Sprint Card (Active) */}
-                <TouchableOpacity
-                    style={[styles.card, styles.activeCard]}
-                    activeOpacity={0.8}
-                    onPress={() => router.push('/matchmaking')}
-                >
-                    <View style={styles.accentEdge} />
-                    <View style={styles.iconContainer}>
-                        <Ionicons name="flash" size={26} color="#00D68F" />
-                    </View>
-                    <View style={styles.modeContent}>
-                        <Text style={styles.modeName}>Sprint</Text>
-                        <Text style={styles.modeDesc}>Fast-paced duels with quick questions.</Text>
-                    </View>
-                    <View style={styles.cardFooter}>
-                        <Ionicons name="time-outline" size={14} color="#6B7280" />
-                        <Text style={styles.timeText}>~1 min</Text>
-                    </View>
-                </TouchableOpacity>
+                <TourAnchor id="sprint_duel_card">
+                    <TouchableOpacity
+                        style={[styles.card, styles.activeCard]}
+                        activeOpacity={0.8}
+                        onPress={() => router.push('/matchmaking')}
+                    >
+                        <View style={styles.accentEdge} />
+                        <View style={styles.iconContainer}>
+                            <Ionicons name="flash" size={26} color="#00D68F" />
+                        </View>
+                        <View style={styles.modeContent}>
+                            <Text style={styles.modeName}>Sprint</Text>
+                            <Text style={styles.modeDesc}>Fast-paced duels with quick questions.</Text>
+                        </View>
+                        <View style={styles.cardFooter}>
+                            <Ionicons name="time-outline" size={14} color="#6B7280" />
+                            <Text style={styles.timeText}>~1 min</Text>
+                        </View>
+                    </TouchableOpacity>
+                </TourAnchor>
 
                 <TouchableOpacity
                     style={[styles.card, { backgroundColor: '#13111A', borderColor: '#BB8FCE40' }]}

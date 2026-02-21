@@ -7,6 +7,7 @@ import Colors from '@/constants/colors';
 import { TYPOGRAPHY } from '@/constants/typography';
 
 const TAB_ORDER = ['(arena)', 'compete', 'duel-dummy', 'quests', 'profile'];
+import { TourAnchor } from '@/src/components/fin/TourAnchor';
 
 const CustomTabButton = ({ children, onPress, isActive, label, index }: any) => {
     const pathname = usePathname();
@@ -110,18 +111,20 @@ export default function TabLayout() {
                 options={{
                     title: 'Compete',
                     tabBarButton: (props) => (
-                        <CustomTabButton
-                            {...props}
-                            label="Compete"
-                            index={1}
-                            isActive={props.accessibilityState?.selected}
-                        >
-                            <Ionicons
-                                name={props.accessibilityState?.selected ? "trophy" : "trophy-outline"}
-                                size={22}
-                                color={props.accessibilityState?.selected ? '#FFFFFF' : '#6B7280'}
-                            />
-                        </CustomTabButton>
+                        <TourAnchor id="bottom_nav_compete">
+                            <CustomTabButton
+                                {...props}
+                                label="Compete"
+                                index={1}
+                                isActive={props.accessibilityState?.selected}
+                            >
+                                <Ionicons
+                                    name={props.accessibilityState?.selected ? "trophy" : "trophy-outline"}
+                                    size={22}
+                                    color={props.accessibilityState?.selected ? '#FFFFFF' : '#6B7280'}
+                                />
+                            </CustomTabButton>
+                        </TourAnchor>
                     ),
                 }}
             />
@@ -130,10 +133,12 @@ export default function TabLayout() {
                 options={{
                     title: 'Duel',
                     tabBarButton: (props: any) => (
-                        <DuelTabButton
-                            onPress={() => router.push('/matchmaking')}
-                            isActive={props.accessibilityState?.selected}
-                        />
+                        <TourAnchor id="center_duel_nav_button">
+                            <DuelTabButton
+                                onPress={() => router.push('/matchmaking')}
+                                isActive={props.accessibilityState?.selected}
+                            />
+                        </TourAnchor>
                     ),
                 }}
                 listeners={{
@@ -148,22 +153,24 @@ export default function TabLayout() {
                 options={{
                     title: 'Quests',
                     tabBarButton: (props) => (
-                        <CustomTabButton
-                            {...props}
-                            label="Quests"
-                            index={3}
-                            isActive={props.accessibilityState?.selected}
-                        >
-                            <View>
-                                <Ionicons
-                                    name={props.accessibilityState?.selected ? "ribbon" : "ribbon-outline"}
-                                    size={22}
-                                    color={props.accessibilityState?.selected ? '#FFFFFF' : '#6B7280'}
-                                />
-                                {/* Quest Badge Dot (Step 10) */}
-                                <View style={styles.questDot} />
-                            </View>
-                        </CustomTabButton>
+                        <TourAnchor id="bottom_nav_quests">
+                            <CustomTabButton
+                                {...props}
+                                label="Quests"
+                                index={3}
+                                isActive={props.accessibilityState?.selected}
+                            >
+                                <View>
+                                    <Ionicons
+                                        name={props.accessibilityState?.selected ? "ribbon" : "ribbon-outline"}
+                                        size={22}
+                                        color={props.accessibilityState?.selected ? '#FFFFFF' : '#6B7280'}
+                                    />
+                                    {/* Quest Badge Dot (Step 10) */}
+                                    <View style={styles.questDot} />
+                                </View>
+                            </CustomTabButton>
+                        </TourAnchor>
                     ),
                 }}
             />

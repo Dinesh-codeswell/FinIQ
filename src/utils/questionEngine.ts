@@ -141,6 +141,7 @@ export const getQuestionsForDuel = async (options: DuelOptions): Promise<Questio
     const interleaved = interleaveQuestions(starterQs, regularQs);
 
     return interleaved.map(q => {
+        // Ensure money_math / mental_math (numeric) always have 4 options
         if ((q.type === 'money_math' || (q.type as string) === 'mental_math') && typeof q.answer === 'number' && (!q.options || q.options.length === 0)) {
             return {
                 ...q,
@@ -151,13 +152,8 @@ export const getQuestionsForDuel = async (options: DuelOptions): Promise<Questio
 
         // Handle mental math string type answers (like letter patterns or words)
         if ((q.type as string) === 'mental_math' && typeof q.answer === 'string' && (!q.options || q.options.length === 0)) {
-            // For simple mental math, we might need a different generator for string distractors.
-            // For now, if no options are provide, we'll try to provide default ones or just let the UI handle it.
-            // Actually, my data has some letter/word answers. I'll add a simple generator for those.
             if (q.answer.length === 1 && /[A-Z]/.test(q.answer)) {
-                // Letter pattern
                 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                const idx = alphabet.indexOf(q.answer);
                 const distractors = new Set<string>();
                 distractors.add(q.answer);
                 while (distractors.size < 4) {
@@ -166,9 +162,39 @@ export const getQuestionsForDuel = async (options: DuelOptions): Promise<Questio
                 }
                 return { ...q, options: shuffle(Array.from(distractors)) };
             }
+            // Fallback for word answers
+            const fallbackOpts = [q.answer, 'Option A', 'Option B', 'Option C'];
+            return { ...q, options: shuffle(fallbackOpts) };
         }
+
+        // Ensure true_false questions always have ["TRUE", "FALSE"] options
+        if (q.type === 'true_false' && (!q.options || q.options.length === 0)) {
+            const answerStr = String(q.answer ?? '').trim().toUpperCase();
+            return {
+                ...q,
+                options: ['TRUE', 'FALSE'],
+                answer: answerStr === 'TRUE' ? 'TRUE' : 'FALSE',
+                correctAnswer: answerStr === 'TRUE' ? 0 : 1,
+            };
+        }
+
+        // Ensure scenario_mcq questions have options — if correctAnswer index exists, reconstruct
+        if (q.type === 'scenario_mcq' && (!q.options || q.options.length === 0)) {
+            console.warn(`[questionEngine] scenario_mcq ${q.id} has no options — skipping or using answer as single option`);
+            // If we have an answer string, create placeholder options with the answer included
+            if (q.answer && typeof q.answer === 'string') {
+                const opts = [q.answer.trim(), 'Not enough information', 'None of the above', 'All of the above'];
+                return { ...q, options: shuffle(opts), answer: q.answer.trim(), correctAnswer: undefined };
+            }
+        }
+
+        // Trim answer whitespace for all questions coming from DB
+        if (q.answer && typeof q.answer === 'string') {
+            return { ...q, answer: q.answer.trim() };
+        }
+
         return q;
-    }) as any as Question[];
+    }).filter(q => q.options && q.options.length >= 2) as any as Question[];
 };
 
 export const getDailyChallenge = async (): Promise<DailyChallenge | null> => {
@@ -182,8 +208,11 @@ export const getDailyChallenge = async (): Promise<DailyChallenge | null> => {
 };
 
 export const checkAnswer = (question: Question, selectedOption: string | number): boolean => {
+    const selected = selectedOption?.toString().trim();
+    const answer = question.answer?.toString().trim();
+    if (!selected || !answer) return false;
     if (question.type === 'money_math' || (question.type as string) === 'mental_math') {
-        return selectedOption.toString() === question.answer?.toString();
+        return selected === answer;
     }
-    return selectedOption === question.answer;
+    return selected === answer;
 };
