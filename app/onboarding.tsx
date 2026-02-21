@@ -14,7 +14,9 @@ import Animated, {
     useSharedValue,
     useAnimatedStyle,
     interpolateColor,
-    interpolate
+    interpolate,
+    withTiming,
+    runOnJS
 } from 'react-native-reanimated';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -29,12 +31,13 @@ import { OnboardingCTA } from '@/components/onboarding/OnboardingCTA';
 import { Slide1Arena } from '@/components/onboarding/Slide1Arena';
 import { Slide2Weapon } from '@/components/onboarding/Slide2Weapon';
 import { Slide3Glory } from '@/components/onboarding/Slide3Glory';
+import { PreferencesFlow } from '@/src/components/preferences/PreferencesFlow';
 import { ONBOARDING_CONFIG } from '@/src/constants/onboardingConfig';
 import { Accelerometer } from 'expo-sensors';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
-type Step = 'carousel' | 'quiz1' | 'quiz2' | 'quiz3' | 'username';
+type Step = 'carousel' | 'username' | 'preferences';
 
 const TOPICS = ['Investing', 'Personal Finance', 'Crypto', 'Banking', 'Economics'];
 
@@ -44,9 +47,6 @@ export default function OnboardingScreen() {
 
     const [step, setStep] = useState<Step>('carousel');
     const [carouselIndex, setCarouselIndex] = useState<number>(0);
-    const [difficulty, setDifficulty] = useState<number>(1);
-    const [interests, setInterests] = useState<string[]>([]);
-    const [sessionLength, setSessionLength] = useState<number>(5);
     const [username, setUsername] = useState<string>('');
     const [avatar, setAvatar] = useState<string>('fox');
 
@@ -56,22 +56,6 @@ export default function OnboardingScreen() {
     // Parallax logic
     const scrollX = useSharedValue(0);
     const scrollRef = useRef<ScrollView>(null);
-
-    const [tilt, setTilt] = useState({ x: 0, y: 0 });
-
-    useEffect(() => {
-        let subscription: any;
-        if (step === 'carousel') {
-            Accelerometer.setUpdateInterval(50);
-            subscription = Accelerometer.addListener(({ x, y }) => {
-                setTilt(prev => ({
-                    x: prev.x * 0.8 + x * 0.2,
-                    y: prev.y * 0.8 + y * 0.2,
-                }));
-            });
-        }
-        return () => subscription?.remove();
-    }, [step]);
 
     const containerStyle = useAnimatedStyle(() => {
         const backgroundColor = interpolateColor(
@@ -96,20 +80,22 @@ export default function OnboardingScreen() {
     }));
 
     const animateTransition = (callback: () => void) => {
-        fadeAnim.value = Animated.withTiming(0, { duration: 150 }, () => {
-            Animated.runOnJS(callback)();
+        fadeAnim.value = withTiming(0, { duration: 150 }, () => {
+            runOnJS(callback)();
             slideAnim.value = 30;
             fadeAnim.value = 0;
-            fadeAnim.value = Animated.withTiming(1, { duration: 250 });
-            slideAnim.value = Animated.withTiming(0, { duration: 250 });
+            fadeAnim.value = withTiming(1, { duration: 250 });
+            slideAnim.value = withTiming(0, { duration: 250 });
         });
     };
+
+    const suggestedHandle = `@${avatar === 'bull' ? 'Bull' : avatar === 'bear' ? 'Bear' : avatar === 'owl' ? 'Owl' : avatar === 'wolf' ? 'Wolf' : 'Fox'}Rider_${Math.floor(Math.random() * 99)}`;
 
     const nextCarousel = () => {
         if (carouselIndex < 2) {
             scrollRef.current?.scrollTo({ x: (carouselIndex + 1) * SCREEN_WIDTH, animated: true });
         } else {
-            animateTransition(() => setStep('quiz1'));
+            animateTransition(() => setStep('username'));
         }
     };
 
@@ -124,30 +110,35 @@ export default function OnboardingScreen() {
 
     const nextQuiz = () => {
         if (Platform.OS !== 'web') Haptics.selectionAsync();
-        if (step === 'quiz1') animateTransition(() => setStep('quiz2'));
-        else if (step === 'quiz2') animateTransition(() => setStep('quiz3'));
-        else if (step === 'quiz3') animateTransition(() => setStep('username'));
+        if (step === 'carousel') animateTransition(() => setStep('username'));
+        else if (step === 'username') {
+            if (!username.trim()) return;
+            animateTransition(() => setStep('preferences'));
+        }
     };
 
-    const toggleInterest = (topic: string) => {
-        if (Platform.OS !== 'web') Haptics.selectionAsync();
-        setInterests(prev =>
-            prev.includes(topic) ? prev.filter(t => t !== topic) : [...prev, topic]
-        );
-    };
-
-    const handleFinish = () => {
-        if (!username.trim()) return;
+    const handlePreferencesComplete = (data: any) => {
         if (Platform.OS !== 'web') Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-        completeOnboarding(username.trim(), avatar, difficulty, interests, sessionLength);
+
+        // Starting ELO based on knowledge
+        let elo = 1000;
+        if (data.knowledge === 'recruit') elo = 900;
+        else if (data.knowledge === 'strategist') elo = 1100;
+
+        completeOnboarding(
+            username.trim(),
+            avatar,
+            elo,
+            data.topics,
+            data.commitment
+        );
+
         router.replace('/(tabs)' as any);
     };
 
-    const suggestedHandle = `@${avatar === 'bull' ? 'Bull' : avatar === 'bear' ? 'Bear' : avatar === 'owl' ? 'Owl' : avatar === 'wolf' ? 'Wolf' : 'Fox'}Rider_${Math.floor(Math.random() * 99)}`;
-
     return (
         <Animated.View style={containerStyle}>
-            <SafeAreaView style={styles.safeArea}>
+            <SafeAreaView style={styles.safeArea} edges={step === 'preferences' ? [] : ['top', 'bottom']}>
                 <KeyboardAvoidingView
                     style={styles.flex}
                     behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -158,7 +149,7 @@ export default function OnboardingScreen() {
                                 <OnboardingProgress currentIndex={carouselIndex} />
 
                                 <TouchableOpacity
-                                    onPress={() => setStep('quiz1')}
+                                    onPress={() => setStep('username')}
                                     style={styles.skipBtn}
                                 >
                                     <Text style={styles.skipText}>Skip</Text>
@@ -198,92 +189,6 @@ export default function OnboardingScreen() {
                             </View>
                         )}
 
-                        {step === 'quiz1' && (
-                            <View style={styles.quizContainer}>
-                                <Text style={styles.quizStep}>1 OF 3</Text>
-                                <Text style={styles.quizTitle}>What's your current finance knowledge?</Text>
-                                {[
-                                    { label: 'Beginner', desc: 'Just starting out', value: 1 },
-                                    { label: 'Intermediate', desc: 'Know the basics well', value: 2 },
-                                    { label: 'Advanced', desc: 'Deep market knowledge', value: 3 },
-                                ].map(opt => (
-                                    <TouchableOpacity
-                                        key={opt.value}
-                                        style={[styles.quizOption, difficulty === opt.value && styles.quizOptionActive]}
-                                        onPress={() => { setDifficulty(opt.value); if (Platform.OS !== 'web') Haptics.selectionAsync(); }}
-                                    >
-                                        <View>
-                                            <Text style={[styles.quizOptionLabel, difficulty === opt.value && styles.quizOptionLabelActive]}>
-                                                {opt.label}
-                                            </Text>
-                                            <Text style={styles.quizOptionDesc}>{opt.desc}</Text>
-                                        </View>
-                                        {difficulty === opt.value && <View style={styles.checkDot} />}
-                                    </TouchableOpacity>
-                                ))}
-                                <TouchableOpacity style={[styles.primaryBtn, styles.quizBtn]} onPress={nextQuiz}>
-                                    <Text style={styles.primaryBtnText}>CONTINUE</Text>
-                                </TouchableOpacity>
-                            </View>
-                        )}
-
-                        {step === 'quiz2' && (
-                            <View style={styles.quizContainer}>
-                                <Text style={styles.quizStep}>2 OF 3</Text>
-                                <Text style={styles.quizTitle}>What topics interest you most?</Text>
-                                <Text style={styles.quizHint}>Select all that apply</Text>
-                                <View style={styles.topicsGrid}>
-                                    {TOPICS.map(topic => (
-                                        <TouchableOpacity
-                                            key={topic}
-                                            style={[styles.topicChip, interests.includes(topic) && styles.topicChipActive]}
-                                            onPress={() => toggleInterest(topic)}
-                                        >
-                                            <Text style={[styles.topicChipText, interests.includes(topic) && styles.topicChipTextActive]}>
-                                                {topic}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    ))}
-                                </View>
-                                <TouchableOpacity
-                                    style={[styles.primaryBtn, styles.quizBtn, interests.length === 0 && styles.btnDisabled]}
-                                    onPress={nextQuiz}
-                                    disabled={interests.length === 0}
-                                >
-                                    <Text style={styles.primaryBtnText}>CONTINUE</Text>
-                                </TouchableOpacity>
-                            </View>
-                        )}
-
-                        {step === 'quiz3' && (
-                            <View style={styles.quizContainer}>
-                                <Text style={styles.quizStep}>3 OF 3</Text>
-                                <Text style={styles.quizTitle}>How long do you want daily sessions?</Text>
-                                {[
-                                    { label: '5 min', desc: 'Quick daily sharpening', value: 5 },
-                                    { label: '10 min', desc: 'Balanced practice', value: 10 },
-                                    { label: '15 min', desc: 'Deep daily training', value: 15 },
-                                ].map(opt => (
-                                    <TouchableOpacity
-                                        key={opt.value}
-                                        style={[styles.quizOption, sessionLength === opt.value && styles.quizOptionActive]}
-                                        onPress={() => { setSessionLength(opt.value); if (Platform.OS !== 'web') Haptics.selectionAsync(); }}
-                                    >
-                                        <View>
-                                            <Text style={[styles.quizOptionLabel, sessionLength === opt.value && styles.quizOptionLabelActive]}>
-                                                {opt.label}
-                                            </Text>
-                                            <Text style={styles.quizOptionDesc}>{opt.desc}</Text>
-                                        </View>
-                                        {sessionLength === opt.value && <View style={styles.checkDot} />}
-                                    </TouchableOpacity>
-                                ))}
-                                <TouchableOpacity style={[styles.primaryBtn, styles.quizBtn]} onPress={nextQuiz}>
-                                    <Text style={styles.primaryBtnText}>CONTINUE</Text>
-                                </TouchableOpacity>
-                            </View>
-                        )}
-
                         {step === 'username' && (
                             <ScrollView style={styles.flex} contentContainerStyle={styles.usernameContainer} keyboardShouldPersistTaps="handled">
                                 <Text style={styles.quizTitle}>Create your handle</Text>
@@ -320,12 +225,20 @@ export default function OnboardingScreen() {
 
                                 <TouchableOpacity
                                     style={[styles.primaryBtn, styles.finishBtn, !username.trim() && styles.btnDisabled]}
-                                    onPress={handleFinish}
+                                    onPress={nextQuiz}
                                     disabled={!username.trim()}
                                 >
-                                    <Text style={styles.primaryBtnText}>ENTER THE ARENA</Text>
+                                    <Text style={styles.primaryBtnText}>CONTINUE</Text>
                                 </TouchableOpacity>
                             </ScrollView>
+                        )}
+
+                        {step === 'preferences' && (
+                            <PreferencesFlow
+                                username={username}
+                                avatar={avatar}
+                                onComplete={handlePreferencesComplete}
+                            />
                         )}
                     </Animated.View>
                 </KeyboardAvoidingView>

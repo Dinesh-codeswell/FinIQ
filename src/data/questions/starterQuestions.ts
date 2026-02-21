@@ -44,46 +44,46 @@ export const starterQuestions: Question[] = [
     { id: "ST_MM_040", type: "money_math", topic: "mental_math", difficulty: 0, isStarter: true, confidenceTag: "quick_win", minRating: 0, timeLimit: 10, question: "You spend ₹100/day on average. Monthly spend (30 days) = ?", answer: 3000, explanation: "₹100 × 30 = ₹3,000/month. Daily spending habits define your monthly financial picture." },
 
     // PART B: 40 STARTER TRUE/FALSE QUESTIONS (ST_TF_001 to ST_TF_040)
-    { id: "ST_TF_001", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Saving money every month helps you build financial security.", answer: "TRUE", explanation: "Consistent saving creates a buffer for emergencies and a foundation for future plans." },
-    { id: "ST_TF_002", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "You need a lot of money to start saving.", answer: "FALSE", explanation: "You can start saving with as little as ₹100/month. The habit matters far more than the amount." },
-    { id: "ST_TF_003", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "A bank account is safer than keeping large amounts of cash at home.", answer: "TRUE", explanation: "Bank deposits are protected. Large cash at home risks theft, fire, or loss." },
-    { id: "ST_TF_004", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Keeping cash under your mattress is a safe way to store money.", answer: "FALSE", explanation: "Cash at home has no protection and loses value over time as prices of things rise." },
-    { id: "ST_TF_005", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Spending less than you earn is the first rule of personal finance.", answer: "TRUE", explanation: "Living below your means is the foundation every financial expert agrees on." },
-    { id: "ST_TF_006", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "A credit card is the same as free money.", answer: "FALSE", explanation: "A credit card is a short-term loan. Unpaid balances attract high interest charges." },
-    { id: "ST_TF_007", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "If you borrow money, you usually have to pay back more than you borrowed.", answer: "TRUE", explanation: "The extra amount you pay back is called interest — the cost of borrowing money." },
-    { id: "ST_TF_008", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Rich people don't need to budget.", answer: "FALSE", explanation: "Many wealthy people budget carefully. Budgeting is how you stay wealthy, not just how you get there." },
-    { id: "ST_TF_009", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "A credit card lets you buy now and pay later.", answer: "TRUE", explanation: "Credit cards provide short-term loans. Pay in full by due date to avoid extra charges." },
-    { id: "ST_TF_010", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "If a product is expensive, it's always better quality.", answer: "FALSE", explanation: "Price doesn't always equal quality. Comparing reviews is smarter than assuming price = quality." },
-    { id: "ST_TF_011", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Prices of most things tend to rise over time.", answer: "TRUE", explanation: "This is called inflation. ₹100 today buys less than ₹100 did 10 years ago." },
-    { id: "ST_TF_012", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Taking a loan is always a bad financial decision.", answer: "FALSE", explanation: "Loans for productive things like education or property can be smart when managed well." },
-    { id: "ST_TF_013", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Investing money can help it grow faster than keeping it idle.", answer: "TRUE", explanation: "Idle money loses value. Investments in FDs or funds can grow faster than inflation." },
-    { id: "ST_TF_014", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "You only need to think about retirement when you're 50.", answer: "FALSE", explanation: "Starting retirement savings at 25 vs 50 can mean much more money saved due to time." },
-    { id: "ST_TF_015", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "You should read what you're signing before taking a loan.", answer: "TRUE", explanation: "Loan agreements contain terms about interest and repayment — always read them." },
-    { id: "ST_TF_016", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "All investments are equally risky.", answer: "FALSE", explanation: "FDS carry very low risk. Stocks carry high risk. Risk varies greatly." },
-    { id: "ST_TF_017", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Having an emergency fund helps you avoid taking loans during a crisis.", answer: "TRUE", explanation: "Experts recommend 3-6 months of expenses saved as an emergency fund." },
-    { id: "ST_TF_018", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Banks give you free money when you open an account.", answer: "FALSE", explanation: "Banks pay interest on deposits, but only on the amount saved and only while it's with them." },
-    { id: "ST_TF_019", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Starting to save at a young age gives your money more time to grow.", answer: "TRUE", explanation: "The earlier you start, the longer your money has to grow. Time is a powerful tool." },
-    { id: "ST_TF_020", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Winning a lot of money means you'll never have financial problems.", answer: "FALSE", explanation: "Many lottery winners go broke. Managing money is a skill, not just about the amount." },
-    { id: "ST_TF_021", type: "true_false", topic: "insurance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Insurance helps you cover large unexpected expenses.", answer: "TRUE", explanation: "Health or life insurance protects you from major events for a small regular cost." },
-    { id: "ST_TF_022", type: "true_false", topic: "insurance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Insurance is a waste of money if you don't make a claim.", answer: "FALSE", explanation: "Insurance is buying peace of mind. Not claiming means you were lucky, not that you wasted money." },
-    { id: "ST_TF_023", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Your income minus your expenses equals your savings.", answer: "TRUE", explanation: "Savings = Income − Expenses. This is the starting point of financial planning." },
-    { id: "ST_TF_024", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "The stock market always goes up in the short term.", answer: "FALSE", explanation: "Stocks can fall significantly in the short term. Long-term trends are usually upward." },
-    { id: "ST_TF_025", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "A shop selling something for 50% off means you pay half the price.", answer: "TRUE", explanation: "50% off = half price. A ₹1,000 item at 50% off costs ₹500." },
-    { id: "ST_TF_026", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "You should always withdraw all your money if the stock market falls.", answer: "FALSE", explanation: "Selling during a fall locks in your losses. Markets historically recover over time." },
-    { id: "ST_TF_027", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Paying your bills on time helps maintain a good credit history.", answer: "TRUE", explanation: "Timely payments are the biggest factor in building a strong credit reputation." },
-    { id: "ST_TF_028", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Splitting a restaurant bill equally is the only fair way.", answer: "FALSE", explanation: "Fairness depends on what each person ordered. Equal splitting is just one option." },
-    { id: "ST_TF_029", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Comparing prices before buying can save you money.", answer: "TRUE", explanation: "Price comparison is one of the easiest ways to spend less for the same thing." },
-    { id: "ST_TF_030", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "A zero bank balance is fine as long as you have a credit card.", answer: "FALSE", explanation: "Over-relying on credit leads to debt. A savings buffer is always safer." },
-    { id: "ST_TF_031", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Compound interest means you earn interest on your interest.", answer: "TRUE", explanation: "Your interest gets added to your total, and next time you earn interest on the larger amount." },
-    { id: "ST_TF_032", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "If something is on monthly payments (EMI), it's affordable for you.", answer: "FALSE", explanation: "Payments can stretch beyond your means. Always check if total payments fit your budget." },
-    { id: "ST_TF_033", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Spending money on things that lose value (like electronics) is higher risk than on things that grow (like property).", answer: "TRUE", explanation: "Electronics lose value quickly. Borrowing to buy them means you owe money on something worth less each day." },
-    { id: "ST_TF_034", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Bigger loans always have smaller interest rates.", answer: "FALSE", explanation: "Interest rates depend on the type of loan and your credit score, not necessarily the loan size." },
-    { id: "ST_TF_035", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Diversifying means not putting all your money in one place.", answer: "TRUE", explanation: "Spreading money across different assets reduces the risk of losing everything if one fails." },
-    { id: "ST_TF_036", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "You can trust any investment that promises guaranteed high returns.", answer: "FALSE", explanation: "Guaranteed high returns are a major warning sign. High returns always come with higher risk." },
-    { id: "ST_TF_037", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "A higher salary doesn't automatically mean more savings.", answer: "TRUE", explanation: "Expenses often rise with income. Savings depend on your habits, not just your income size." },
-    { id: "ST_TF_038", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Your salary is the only measure of your financial health.", answer: "FALSE", explanation: "Net worth, savings rate, and debt level matter more than salary for true financial health." },
-    { id: "ST_TF_039", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Tracking your spending helps you understand where your money goes.", answer: "TRUE", explanation: "Most people underestimate certain costs until they write them down. Awareness is the first step." },
-    { id: "ST_TF_040", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "It's impossible to save money when your salary is low.", answer: "FALSE", explanation: "Saving even a small part of any income builds the habit. The amount grows as your income does." },
+    { id: "ST_TF_001", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Saving money every month helps you build financial security.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Consistent saving creates a buffer for emergencies and a foundation for future plans." },
+    { id: "ST_TF_002", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "You need a lot of money to start saving.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "You can start saving with as little as ₹100/month. The habit matters far more than the amount." },
+    { id: "ST_TF_003", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "A bank account is safer than keeping large amounts of cash at home.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Bank deposits are protected. Large cash at home risks theft, fire, or loss." },
+    { id: "ST_TF_004", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Keeping cash under your mattress is a safe way to store money.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Cash at home has no protection and loses value over time as prices of things rise." },
+    { id: "ST_TF_005", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Spending less than you earn is the first rule of personal finance.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Living below your means is the foundation every financial expert agrees on." },
+    { id: "ST_TF_006", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "A credit card is the same as free money.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "A credit card is a short-term loan. Unpaid balances attract high interest charges." },
+    { id: "ST_TF_007", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "If you borrow money, you usually have to pay back more than you borrowed.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "The extra amount you pay back is called interest — the cost of borrowing money." },
+    { id: "ST_TF_008", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Rich people don't need to budget.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Many wealthy people budget carefully. Budgeting is how you stay wealthy, not just how you get there." },
+    { id: "ST_TF_009", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "A credit card lets you buy now and pay later.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Credit cards provide short-term loans. Pay in full by due date to avoid extra charges." },
+    { id: "ST_TF_010", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "If a product is expensive, it's always better quality.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Price doesn't always equal quality. Comparing reviews is smarter than assuming price = quality." },
+    { id: "ST_TF_011", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Prices of most things tend to rise over time.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "This is called inflation. ₹100 today buys less than ₹100 did 10 years ago." },
+    { id: "ST_TF_012", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Taking a loan is always a bad financial decision.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Loans for productive things like education or property can be smart when managed well." },
+    { id: "ST_TF_013", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Investing money can help it grow faster than keeping it idle.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Idle money loses value. Investments in FDs or funds can grow faster than inflation." },
+    { id: "ST_TF_014", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "You only need to think about retirement when you're 50.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Starting retirement savings at 25 vs 50 can mean much more money saved due to time." },
+    { id: "ST_TF_015", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "You should read what you're signing before taking a loan.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Loan agreements contain terms about interest and repayment — always read them." },
+    { id: "ST_TF_016", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "All investments are equally risky.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "FDS carry very low risk. Stocks carry high risk. Risk varies greatly." },
+    { id: "ST_TF_017", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Having an emergency fund helps you avoid taking loans during a crisis.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Experts recommend 3-6 months of expenses saved as an emergency fund." },
+    { id: "ST_TF_018", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Banks give you free money when you open an account.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Banks pay interest on deposits, but only on the amount saved and only while it's with them." },
+    { id: "ST_TF_019", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Starting to save at a young age gives your money more time to grow.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "The earlier you start, the longer your money has to grow. Time is a powerful tool." },
+    { id: "ST_TF_020", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Winning a lot of money means you'll never have financial problems.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Many lottery winners go broke. Managing money is a skill, not just about the amount." },
+    { id: "ST_TF_021", type: "true_false", topic: "insurance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Insurance helps you cover large unexpected expenses.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Health or life insurance protects you from major events for a small regular cost." },
+    { id: "ST_TF_022", type: "true_false", topic: "insurance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Insurance is a waste of money if you don't make a claim.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Insurance is buying peace of mind. Not claiming means you were lucky, not that you wasted money." },
+    { id: "ST_TF_023", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Your income minus your expenses equals your savings.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Savings = Income − Expenses. This is the starting point of financial planning." },
+    { id: "ST_TF_024", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "The stock market always goes up in the short term.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Stocks can fall significantly in the short term. Long-term trends are usually upward." },
+    { id: "ST_TF_025", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "A shop selling something for 50% off means you pay half the price.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "50% off = half price. A ₹1,000 item at 50% off costs ₹500." },
+    { id: "ST_TF_026", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "You should always withdraw all your money if the stock market falls.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Selling during a fall locks in your losses. Markets historically recover over time." },
+    { id: "ST_TF_027", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Paying your bills on time helps maintain a good credit history.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Timely payments are the biggest factor in building a strong credit reputation." },
+    { id: "ST_TF_028", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Splitting a restaurant bill equally is the only fair way.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Fairness depends on what each person ordered. Equal splitting is just one option." },
+    { id: "ST_TF_029", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Comparing prices before buying can save you money.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Price comparison is one of the easiest ways to spend less for the same thing." },
+    { id: "ST_TF_030", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "A zero bank balance is fine as long as you have a credit card.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Over-relying on credit leads to debt. A savings buffer is always safer." },
+    { id: "ST_TF_031", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Compound interest means you earn interest on your interest.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Your interest gets added to your total, and next time you earn interest on the larger amount." },
+    { id: "ST_TF_032", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "If something is on monthly payments (EMI), it's affordable for you.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Payments can stretch beyond your means. Always check if total payments fit your budget." },
+    { id: "ST_TF_033", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Spending money on things that lose value (like electronics) is higher risk than on things that grow (like property).", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Electronics lose value quickly. Borrowing to buy them means you owe money on something worth less each day." },
+    { id: "ST_TF_034", type: "true_false", topic: "banking", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Bigger loans always have smaller interest rates.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Interest rates depend on the type of loan and your credit score, not necessarily the loan size." },
+    { id: "ST_TF_035", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Diversifying means not putting all your money in one place.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Spreading money across different assets reduces the risk of losing everything if one fails." },
+    { id: "ST_TF_036", type: "true_false", topic: "investing", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "You can trust any investment that promises guaranteed high returns.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Guaranteed high returns are a major warning sign. High returns always come with higher risk." },
+    { id: "ST_TF_037", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "A higher salary doesn't automatically mean more savings.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Expenses often rise with income. Savings depend on your habits, not just your income size." },
+    { id: "ST_TF_038", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Your salary is the only measure of your financial health.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Net worth, savings rate, and debt level matter more than salary for true financial health." },
+    { id: "ST_TF_039", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "Tracking your spending helps you understand where your money goes.", options: ["TRUE", "FALSE"], answer: "TRUE", correctAnswer: 0, explanation: "Most people underestimate certain costs until they write them down. Awareness is the first step." },
+    { id: "ST_TF_040", type: "true_false", topic: "personal_finance", difficulty: 0, isStarter: true, confidenceTag: "common_sense", minRating: 0, timeLimit: 7, question: "It's impossible to save money when your salary is low.", options: ["TRUE", "FALSE"], answer: "FALSE", correctAnswer: 1, explanation: "Saving even a small part of any income builds the habit. The amount grows as your income does." },
 
     // PART C: 40 STARTER SCENARIO MCQ QUESTIONS (ST_MCQ_001 to ST_MCQ_040)
     {
@@ -91,6 +91,7 @@ export const starterQuestions: Question[] = [
         question: "You want to buy a phone worth ₹30,000 but only have ₹15,000. What's the smartest first step?",
         options: ["Save more money until you can afford it", "Immediately take a credit card loan", "Buy it anyway and worry later", "Ask your boss for a ₹30,000 advance"],
         answer: "Save more money until you can afford it",
+        correctAnswer: 0,
         explanation: "Saving up avoids debt and interest costs. Patience is a financial superpower."
     },
     {
@@ -98,6 +99,7 @@ export const starterQuestions: Question[] = [
         question: "You get ₹10,000 as a Diwali bonus. What should you do FIRST?",
         options: ["Spend it all on shopping — it's a bonus!", "Set aside some for savings or an emergency fund first", "Lend it to a friend", "Convert it all to cash and keep at home"],
         answer: "Set aside some for savings or an emergency fund first",
+        correctAnswer: 1,
         explanation: "Unexpected income is a great opportunity to build savings. Spend what's left, not the other way round."
     },
     {
@@ -105,6 +107,7 @@ export const starterQuestions: Question[] = [
         question: "Two shops sell the same bag — Shop A for ₹800, Shop B for ₹650. What's the smart choice?",
         options: ["Buy from Shop A — it must be better quality", "Buy from Shop B — same product, lower price", "Don't buy at all", "Flip a coin"],
         answer: "Buy from Shop B — same product, lower price",
+        correctAnswer: 1,
         explanation: "If the product is identical, always pay less. Comparing prices is basic smart spending."
     },
     {
@@ -112,6 +115,7 @@ export const starterQuestions: Question[] = [
         question: "Your monthly expenses are ₹15,000 but your salary is ₹12,000. What's the problem?",
         options: ["Your salary is too high", "You are spending more than you earn — this creates debt", "Your expenses are perfectly fine", "You need to work fewer hours"],
         answer: "You are spending more than you earn — this creates debt",
+        correctAnswer: 1,
         explanation: "Spending more than you earn means borrowing or using up savings — unsustainable over time."
     },
     {
@@ -119,6 +123,7 @@ export const starterQuestions: Question[] = [
         question: "A friend offers you high returns guaranteed in just 1 month. You should:",
         options: ["Invest everything immediately — this is a great deal", "Be very suspicious — guaranteed high returns are a major warning sign", "Tell all your family to invest too", "Ask for even higher returns"],
         answer: "Be very suspicious — guaranteed high returns are a major warning sign",
+        correctAnswer: 1,
         explanation: "Guaranteed high returns in a short time are almost always scams. If it sounds too good to be true, it is."
     },
     {
@@ -126,6 +131,7 @@ export const starterQuestions: Question[] = [
         question: "You have ₹50,000 saved. An essential repair costs ₹20,000. You should:",
         options: ["Take a personal loan immediately", "Use your savings — this is what an emergency fund is for", "Ignore the repair", "Ask your employer for a salary advance"],
         answer: "Use your savings — this is what an emergency fund is for",
+        correctAnswer: 1,
         explanation: "Emergency funds exist for exactly this — unexpected essential costs. Using savings beats paying loan interest."
     },
     {
@@ -133,6 +139,7 @@ export const starterQuestions: Question[] = [
         question: "Which is the best way to avoid forgetting to pay your credit card bill?",
         options: ["Hope you remember each month", "Set up an automatic payment or calendar reminder", "Stop using the credit card entirely", "Pay only when the bank calls you"],
         answer: "Set up an automatic payment or calendar reminder",
+        correctAnswer: 1,
         explanation: "Automation removes the chance of human error. One missed payment can hurt your credit reputation."
     },
     {
@@ -140,6 +147,7 @@ export const starterQuestions: Question[] = [
         question: "Your monthly income is ₹20,000. How much should you ideally save at minimum?",
         options: ["₹0 — spend everything", "At least ₹2,000 (10%) — start small and build the habit", "₹19,000 — save almost everything", "Whatever is left after fun spending"],
         answer: "At least ₹2,000 (10%) — start small and build the habit",
+        correctAnswer: 1,
         explanation: "10% is a classic starting savings rule. The habit matters more than the amount at this stage."
     },
     {
@@ -147,6 +155,7 @@ export const starterQuestions: Question[] = [
         question: "You want to buy something costing ₹5,000 but have only ₹3,000. Which option costs the least total?",
         options: ["Buy on credit card with high interest", "Take a personal loan", "Save the remaining ₹2,000 over 2 months and pay cash", "Ask for a discount"],
         answer: "Save the remaining ₹2,000 over 2 months and pay cash",
+        correctAnswer: 2,
         explanation: "Paying cash after saving means zero interest. Every loan option costs more than the original price."
     },
     {
@@ -154,6 +163,7 @@ export const starterQuestions: Question[] = [
         question: "Which habit best helps you know if you're overspending?",
         options: ["Checking your bank balance once a year", "Tracking your spending every week", "Spending until your account is empty", "Asking a friend to guess"],
         answer: "Tracking your spending every week",
+        correctAnswer: 1,
         explanation: "Weekly tracking gives you real-time awareness and allows small corrections before problems grow large."
     },
     {
@@ -161,6 +171,7 @@ export const starterQuestions: Question[] = [
         question: "Choosing between keeping large cash at home or putting it in a bank Fixed Deposit (FD):",
         options: ["Cash at home is better — you can see it", "Bank FD is better — it's safer and earns interest", "Both are exactly the same", "Keep half in cash and hide the other half"],
         answer: "Bank FD is better — it's safer and earns interest",
+        correctAnswer: 1,
         explanation: "Bank deposits are protected and help your money grow. Cash at home risks loss and earns nothing."
     },
     {
@@ -168,6 +179,7 @@ export const starterQuestions: Question[] = [
         question: "When deciding whether to buy a house or rent one, what's a key factor?",
         options: ["Buying is always better for everyone", "Renting is always a waste of money", "Compare your monthly budget and how long you plan to stay", "Ask your neighbor what they did"],
         answer: "Compare your monthly budget and how long you plan to stay",
+        correctAnswer: 2,
         explanation: "The right choice depends on your specific financial situation and future plans, not a single rule."
     },
     {
@@ -175,6 +187,7 @@ export const starterQuestions: Question[] = [
         question: "A friend is pressuring you to join a 'wealth club' that requires ₹5,000 and recruiting others. You should:",
         options: ["Join immediately — friends know best", "Be careful — this sounds like a pyramid scheme which is risky and often illegal", "Invest ₹10,000 instead", "Wait until next week"],
         answer: "Be careful — this sounds like a pyramid scheme which is risky and often illegal",
+        correctAnswer: 1,
         explanation: "If an 'investment' relies on recruiting people rather than selling a product, it's a major warning sign."
     },
     {
@@ -182,6 +195,7 @@ export const starterQuestions: Question[] = [
         question: "On a salary slip, what is the difference between 'Gross Pay' and 'Net Pay'?",
         options: ["Gross is what you take home, Net is total before taxes", "Net is what you take home, Gross is total before taxes", "They are exactly the same", "Gross is for managers, Net is for others"],
         answer: "Net is what you take home, Gross is total before taxes",
+        correctAnswer: 1,
         explanation: "Net pay (take-home) is Gross pay minus deductions like taxes or insurance."
     },
     {
@@ -189,6 +203,7 @@ export const starterQuestions: Question[] = [
         question: "When comparing two loans, which one is generally better for you?",
         options: ["The one with the higher interest rate", "The one with the lower total cost of repayment", "The one from a bigger bank", "The one with the longest name"],
         answer: "The one with the lower total cost of repayment",
+        correctAnswer: 1,
         explanation: "Always look at the total amount you'll pay back, including all interest and fees."
     },
     {
@@ -196,6 +211,7 @@ export const starterQuestions: Question[] = [
         question: "What does it mean when a bank says your FD will earn 6% per year?",
         options: ["You get 6 rupees back total", "You earn 6 extra rupees for every ₹100 you deposit, every year", "You must pay the bank ₹6 every year", "You can only withdraw 6% of your money"],
         answer: "You earn 6 extra rupees for every ₹100 you deposit, every year",
+        correctAnswer: 1,
         explanation: "6% per year means ₹6 earned per ₹100 deposited annually. On ₹10,000, that's ₹600 extra."
     },
     {
@@ -203,6 +219,7 @@ export const starterQuestions: Question[] = [
         question: "What is a 'loan'?",
         options: ["Free money given by the government", "Money you borrow and must repay with extra charges", "A type of investment that grows", "Money your employer gives as a gift"],
         answer: "Money you borrow and must repay with extra charges",
+        correctAnswer: 1,
         explanation: "A loan is borrowed money. You repay the original amount plus interest (the borrowing cost)."
     },
     {
@@ -210,6 +227,7 @@ export const starterQuestions: Question[] = [
         question: "Why do banks pay you interest on savings?",
         options: ["Because they feel generous", "Because they use your money to give loans to others and share some profit with you", "It's a government rule for customers only", "Banks don't actually pay interest"],
         answer: "Because they use your money to give loans to others and share some profit with you",
+        correctAnswer: 1,
         explanation: "Banks take deposits, lend at higher rates, and share some of that as interest to you."
     },
     {
@@ -217,6 +235,7 @@ export const starterQuestions: Question[] = [
         question: "What does 'spending within your means' mean?",
         options: ["Only buying expensive things", "Spending only what you can afford without going into debt", "Always buying the cheapest option", "Never spending money on fun"],
         answer: "Spending only what you can afford without going into debt",
+        correctAnswer: 1,
         explanation: "Living within your means = not spending more than you earn. It's a fundamental principle."
     },
     {
@@ -224,6 +243,7 @@ export const starterQuestions: Question[] = [
         question: "What is the main purpose of health insurance?",
         options: ["To save money on groceries", "To cover large medical costs so they don't hurt your finances", "To make you healthier", "To avoid going to doctors"],
         answer: "To cover large medical costs so they don't hurt your finances",
+        correctAnswer: 1,
         explanation: "Health insurance protects you from paying massive hospital bills out of pocket in an emergency."
     },
     {
@@ -231,6 +251,7 @@ export const starterQuestions: Question[] = [
         question: "If you invest ₹1,000 and earn 10% in a year, how much total do you have?",
         options: ["₹10,000", "₹1,100", "₹1,010", "₹900"],
         answer: "₹1,100",
+        correctAnswer: 1,
         explanation: "10% of ₹1,000 = ₹100. Total = ₹1,000 + ₹100 = ₹1,100. Your money grew while you waited."
     },
     {
@@ -238,6 +259,7 @@ export const starterQuestions: Question[] = [
         question: "What happens to your money's value when prices of things rise (inflation)?",
         options: ["You can buy more with the same money", "You can buy less with the same money", "Nothing changes", "Your salary automatically increases"],
         answer: "You can buy less with the same money",
+        correctAnswer: 1,
         explanation: "Inflation means ₹100 buys fewer things over time. This is why investing is important."
     },
     {
@@ -245,6 +267,7 @@ export const starterQuestions: Question[] = [
         question: "What is a 'budget'?",
         options: ["A list of everything you own", "A plan for how much you will earn and spend", "A type of bank account", "A loan for starting a business"],
         answer: "A plan for how much you will earn and spend",
+        correctAnswer: 1,
         explanation: "A budget helps you track where your money goes and ensures you save for your future."
     },
     {
@@ -252,6 +275,7 @@ export const starterQuestions: Question[] = [
         question: "What is 'Net Worth'?",
         options: ["Total amount you earn in a year", "Everything you own minus everything you owe", "The balance in your main bank account", "The cost of your most expensive possession"],
         answer: "Everything you own minus everything you owe",
+        correctAnswer: 1,
         explanation: "Net worth is the true measure of your wealth. It's assets minus liabilities."
     },
     {
@@ -259,6 +283,7 @@ export const starterQuestions: Question[] = [
         question: "What is a 'credit score'?",
         options: ["Points you get for shopping", "A number that shows how reliable you are at paying back loans", "The amount of money you have in the bank", "Your ranking compared to other customers"],
         answer: "A number that shows how reliable you are at paying back loans",
+        correctAnswer: 1,
         explanation: "A good credit score helps you get loans easier and at better interest rates."
     },
     {
@@ -266,6 +291,7 @@ export const starterQuestions: Question[] = [
         question: "Why should you diversify your investments?",
         options: ["To make things more complicated", "To reduce the risk of losing all your money if one thing fails", "To pay more fees to the bank", "Because the government requires it"],
         answer: "To reduce the risk of losing all your money if one thing fails",
+        correctAnswer: 1,
         explanation: "Diversifying — or spreading your money — protects you from losing everything in a single crash."
     },
     {
@@ -273,6 +299,7 @@ export const starterQuestions: Question[] = [
         question: "In simple terms, what is a 'Mutual Fund'?",
         options: ["A loan you give to a friend", "A pool of money from many people used to buy many different investments together", "A private bank account", "A type of credit card"],
         answer: "A pool of money from many people used to buy many different investments together",
+        correctAnswer: 1,
         explanation: "Mutual funds allow you to own a slice of many investments even with a small amount of money."
     },
     {
@@ -280,6 +307,7 @@ export const starterQuestions: Question[] = [
         question: "Why is it better to start investing when you're young?",
         options: ["Because young people have more luck", "Because your money has a lot more time to grow through compounding", "Because banks only like young customers", "It's not actually better"],
         answer: "Because your money has a lot more time to grow through compounding",
+        correctAnswer: 1,
         explanation: "Starting early is the biggest advantage you can have. Even small amounts grow large over decades."
     },
     {
@@ -287,6 +315,7 @@ export const starterQuestions: Question[] = [
         question: "In simple terms, what is 'income tax'?",
         options: ["A fee you pay to use a bank", "A part of your earnings that goes to the government to pay for public services", "A bonus your boss gives you", "The cost of opening a business"],
         answer: "A part of your earnings that goes to the government to pay for public services",
+        correctAnswer: 1,
         explanation: "The government uses tax money for things like roads, schools, and hospitals."
     },
     {
@@ -294,6 +323,7 @@ export const starterQuestions: Question[] = [
         question: "What is an 'EMI'?",
         options: ["A type of fast payment", "A fixed amount you pay every month to repay a loan", "An email notification from your bank", "A special savings account"],
         answer: "A fixed amount you pay every month to repay a loan",
+        correctAnswer: 1,
         explanation: "EMI stands for Equated Monthly Installment. It helps you pay back a large loan in small, equal parts."
     },
     {
@@ -301,6 +331,7 @@ export const starterQuestions: Question[] = [
         question: "Your first salary just arrived. Friends want you to celebrate with an expensive dinner. You should:",
         options: ["Spend a huge amount — you earned it!", "Celebrate reasonably within a budget, then save the rest", "Not celebrate at all", "Pay for everyone using a credit card loan"],
         answer: "Celebrate reasonably within a budget, then save the rest",
+        correctAnswer: 1,
         explanation: "Celebrating is fine! The key is deciding a budget before you spend, not after."
     },
     {
@@ -308,6 +339,7 @@ export const starterQuestions: Question[] = [
         question: "You just got your first credit card. What is the safest habit?",
         options: ["Max out the limit immediately", "Use it for planned things and pay the full bill before the due date", "Never use it at all", "Pay only the minimum amount due each month"],
         answer: "Use it for planned things and pay the full bill before the due date",
+        correctAnswer: 1,
         explanation: "Full payment means no extra interest and a strong credit reputation."
     },
     {
@@ -315,6 +347,7 @@ export const starterQuestions: Question[] = [
         question: "Your essential costs take ₹18,000 of your ₹22,000 salary. What should you do?",
         options: ["Ignore it — ₹18,000 is small", "Look for ways to spend less or earn more — ₹4,000 extra is very tight", "Take a loan to feel more comfortable", "Immediately quit your job"],
         answer: "Look for ways to spend less or earn more — ₹4,000 extra is very tight",
+        correctAnswer: 1,
         explanation: "Only ₹4,000 left after essentials leaves almost no room for savings or emergencies."
     },
     {
@@ -322,6 +355,7 @@ export const starterQuestions: Question[] = [
         question: "You get a small raise at work. The smartest move is:",
         options: ["Immediately move to a more expensive house", "Keep your expenses the same and save the extra amount", "Spend it all on a luxury watch", "Quit and travel until the money is gone"],
         answer: "Keep your expenses the same and save the extra amount",
+        correctAnswer: 1,
         explanation: "Saving your salary increases is the fastest way to build real wealth."
     },
     {
@@ -329,6 +363,7 @@ export const starterQuestions: Question[] = [
         question: "Which of these is a 'Good Debt'?",
         options: ["Credit card loan for a vacation", "Education loan to improve your career", "Payday loan for a new phone", "None — all debt is bad"],
         answer: "Education loan to improve your career",
+        correctAnswer: 1,
         explanation: "Good debt is used for things that grow in value or increase your earning power."
     },
     {
@@ -336,6 +371,7 @@ export const starterQuestions: Question[] = [
         question: "What is an 'Asset'?",
         options: ["Something you own that has value or earns you money", "Something you owe to others", "A monthly expense like rent", "The total tax you pay"],
         answer: "Something you own that has value or earns you money",
+        correctAnswer: 0,
         explanation: "Assets include savings, property, and investments. They help build your wealth."
     },
     {
@@ -343,6 +379,7 @@ export const starterQuestions: Question[] = [
         question: "What is a 'Liability'?",
         options: ["Something you own that is valuable", "A debt or obligation you owe to others", "Your total income for a year", "A type of insurance"],
         answer: "A debt or obligation you owe to others",
+        correctAnswer: 1,
         explanation: "Liabilities include loans and credit card balances. They reduce your total wealth."
     },
     {
@@ -350,6 +387,7 @@ export const starterQuestions: Question[] = [
         question: "Which habit helps you prepare for the unexpected?",
         options: ["Spending everything as soon as you get it", "Building an emergency fund of 3-6 months' expenses", "Hope for the best and don't worry", "Lending all your extra money to friends"],
         answer: "Building an emergency fund of 3-6 months' expenses",
+        correctAnswer: 1,
         explanation: "An emergency fund is your financial safety net for things like medical bills or job loss."
     },
     {
@@ -357,6 +395,7 @@ export const starterQuestions: Question[] = [
         question: "Why should you track your spending?",
         options: ["To see where your money is going and find ways to save", "Because it's a fun hobby", "Because the bank charges you if you don't", "To show off to your friends"],
         answer: "To see where your money is going and find ways to save",
+        correctAnswer: 0,
         explanation: "Tracking is the only way to know if your spending matches your goals."
     },
     {
@@ -364,6 +403,7 @@ export const starterQuestions: Question[] = [
         question: "What is the simplest way to explain 'Risk' in investing?",
         options: ["The chance that you might lose some or all of your money", "The total profit you earn", "The cost of opening a demat account", "The time it takes to get your money back"],
         answer: "The chance that you might lose some or all of your money",
+        correctAnswer: 0,
         explanation: "Higher risk usually means higher potential returns, but also more chance of losing money."
     }
 ];

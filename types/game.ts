@@ -83,15 +83,24 @@ export interface Question {
 }
 
 export interface UserProfile {
+    id: string; // Added id for comparisons
     username: string;
     avatar: string;
     rating: number;
+    previous_rating?: number;
     xp: number;
+    total_xp?: number;
+    tournament_xp?: number;
+    global_rank?: number;
+    rank_change?: number;
     coins: number;
     streak: number;
+    current_streak?: number;
     lastPlayDate: string | null;
     totalDuels: number;
     wins: number;
+    win_count?: number;
+    loss_count?: number;
     longestStreak: number;
     badges: string[];
     interests: string[];
@@ -104,6 +113,8 @@ export interface UserProfile {
     duelsPlayedToday: number;
     duelsWonToday: number;
     duelsDateTracker: string | null;
+    is_online?: boolean;
+    last_active_at?: string;
     // Feature 3: Pro & Frames
     isPro: boolean;
     proExpiresAt: number | null;

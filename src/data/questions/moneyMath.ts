@@ -1,4 +1,4 @@
-import { Question } from '../../../types/game';
+import { Question } from './schema';
 
 /**
  * Money Math Question Bank (Target: 250 questions)

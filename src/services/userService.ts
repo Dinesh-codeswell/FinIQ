@@ -10,11 +10,21 @@ const mapToSnakeCase = (profile: Partial<UserProfile>) => {
         onboardingCompleted: 'onboarding_completed',
         sessionLength: 'session_length',
         selectedFrame: 'selected_frame',
-        isPro: 'is_pro'
+        isPro: 'is_pro',
+        previousRating: 'previous_rating',
+        totalXp: 'total_xp',
+        tournamentXp: 'tournament_xp',
+        globalRank: 'global_rank',
+        rankChange: 'rank_change',
+        winCount: 'win_count',
+        lossCount: 'loss_count',
+        currentStreak: 'current_streak',
+        isOnline: 'is_online',
+        lastActiveAt: 'last_active_at'
     };
 
     Object.keys(profile).forEach(key => {
-        const snakeKey = keyMap[key] || key;
+        const snakeKey = keyMap[key] || key.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
         mapped[snakeKey] = (profile as any)[key];
     });
 
@@ -31,7 +41,17 @@ const mapToCamelCase = (data: any): UserProfile | null => {
         onboardingCompleted: data.onboarding_completed,
         sessionLength: data.session_length,
         selectedFrame: data.selected_frame,
-        isPro: data.is_pro
+        isPro: data.is_pro,
+        previousRating: data.previous_rating,
+        totalXp: data.total_xp,
+        tournamentXp: data.tournament_xp,
+        globalRank: data.global_rank,
+        rankChange: data.rank_change,
+        winCount: data.win_count,
+        lossCount: data.loss_count,
+        currentStreak: data.current_streak,
+        isOnline: data.is_online,
+        lastActiveAt: data.last_active_at
     } as UserProfile;
 };
 

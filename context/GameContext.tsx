@@ -11,6 +11,7 @@ import { duelService } from '@/src/services/duelService';
 const STORAGE_KEY = 'finiq_profile';
 
 const defaultProfile: UserProfile = {
+    id: '',
     username: '',
     avatar: 'fox',
     rating: 1000,
@@ -45,7 +46,7 @@ function getTodayString(): string {
 
 export const [GameProvider, useGame] = createContextHook(() => {
     const [profile, setProfile] = useState<UserProfile>(defaultProfile);
-    const [lastDuelResult, setLastDuelResult] = useState<DuelResult | null>(null);
+    const [lastDuelResult, setLastDuelResult] = useState<any>(null);
     const [isReady, setIsReady] = useState<boolean>(false);
     const queryClient = useQueryClient();
 
@@ -56,7 +57,7 @@ export const [GameProvider, useGame] = createContextHook(() => {
 
             if (session?.user) {
                 const { data, error } = await userService.getProfile(session.user.id);
-                if (data) return { ...defaultProfile, ...data };
+                if (data) return { ...defaultProfile, ...data, id: session.user.id };
             }
 
             const stored = await AsyncStorage.getItem(STORAGE_KEY);
@@ -90,6 +91,45 @@ export const [GameProvider, useGame] = createContextHook(() => {
             setIsReady(true);
         }
     }, [profileQuery.data]);
+
+    // REAL-TIME PROFILE SUBSCRIPTION
+    useEffect(() => {
+        if (!profile.id) return;
+
+        const channel = supabase
+            .channel(`user-profile-${profile.id}`)
+            .on(
+                'postgres_changes',
+                {
+                    event: 'UPDATE',
+                    schema: 'public',
+                    table: 'profiles',
+                    filter: `id=eq.${profile.id}`,
+                },
+                (payload) => {
+                    const updated = payload.new as any;
+                    // Sync backend fields to CamelCase if needed or just spread
+                    setProfile(prev => ({
+                        ...prev,
+                        rating: updated.rating,
+                        previous_rating: updated.previous_rating,
+                        xp: updated.total_xp ?? prev.xp,
+                        total_xp: updated.total_xp,
+                        tournament_xp: updated.tournament_xp,
+                        win_count: updated.win_count,
+                        loss_count: updated.loss_count,
+                        current_streak: updated.current_streak,
+                        global_rank: updated.global_rank,
+                        rank_change: updated.rank_change,
+                    }));
+                }
+            )
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
+    }, [profile.id]);
 
     const updateProfile = useCallback((updates: Partial<UserProfile>) => {
         setProfile(prev => {
@@ -156,64 +196,85 @@ export const [GameProvider, useGame] = createContextHook(() => {
         });
     }, [saveMutation]);
 
-    const recordDuelResult = useCallback((result: DuelResult) => {
-        setLastDuelResult(result);
-        const today = getTodayString();
+    // UPDATED: SECURE SERVER-SIDE DUEL RECORDING
+    const recordDuelResult = useCallback(async (
+        opponentId: string,
+        playerScore: number,
+        opponentScore: number,
+        duelMode: string,
+        totalQuestions: number,
+        durationSeconds: number,
+    ) => {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session?.user) return null;
 
-        setProfile(prev => {
-            const newRating = Math.max(0, prev.rating + result.ratingChange);
-            const newXp = prev.xp + result.xpEarned;
-            const newWins = result.won ? prev.wins + 1 : prev.wins;
-            const newDuelsToday = (prev.duelsDateTracker === today ? prev.duelsPlayedToday : 0) + 1;
-            const newWinsToday = (prev.duelsDateTracker === today ? prev.duelsWonToday : 0) + (result.won ? 1 : 0);
+        try {
+            // 1. Insert pending duel record
+            const { data: duelRecord, error: insertError } = await supabase
+                .from('duel_results')
+                .insert({
+                    player1_id: session.user.id,
+                    player2_id: opponentId,
+                    player1_score: playerScore,
+                    player2_score: opponentScore,
+                    player1_rating_before: profile.rating,
+                    player2_rating_before: 1000, // Ideally fetch opponent rating
+                    player1_rating_after: 0,
+                    player2_rating_after: 0,
+                    duel_mode: duelMode,
+                    total_questions: totalQuestions,
+                    duration_seconds: durationSeconds,
+                    verified: false,
+                })
+                .select()
+                .single();
 
-            const newBadges = [...prev.badges];
-            if (result.won && !newBadges.includes('first_blood') && newWins === 1) {
-                newBadges.push('first_blood');
-            }
-            if (result.playerScore >= 10 && !newBadges.includes('speed_demon')) {
-                newBadges.push('speed_demon');
-            }
-            if (newWins >= 50 && !newBadges.includes('compound_king')) {
-                newBadges.push('compound_king');
-            }
-            if (newRating >= 1200 && !newBadges.includes('wall_street_wolf')) {
-                newBadges.push('wall_street_wolf');
-            }
-            if (prev.totalDuels + 1 >= 100 && !newBadges.includes('centurion')) {
-                newBadges.push('centurion');
-            }
+            if (insertError || !duelRecord) throw new Error('Failed to record duel result');
 
-            const newStreak = prev.lastPlayDate === today ? prev.streak : (prev.streak + 1);
-
-            const updated: UserProfile = {
-                ...prev,
-                rating: newRating,
-                xp: newXp,
-                wins: newWins,
-                totalDuels: prev.totalDuels + 1,
-                badges: newBadges,
-                lastPlayDate: today,
-                streak: newStreak,
-                longestStreak: Math.max(prev.longestStreak, newStreak),
-                duelsPlayedToday: newDuelsToday,
-                duelsWonToday: newWinsToday,
-                duelsDateTracker: today,
-            };
-
-            // SYNC TO SUPABASE
-            supabase.auth.getSession().then(({ data: { session } }) => {
-                if (session?.user) {
-                    duelService.recordDuel(session.user.id, result, result.ratingChange, result.xpEarned);
-                    userService.updateProfile(session.user.id, updated);
-                } else {
-                    saveMutation.mutate(updated);
+            // 2. Call Edge Function
+            const response = await fetch(
+                `${process.env.EXPO_PUBLIC_SUPABASE_URL}/functions/v1/record-duel-result`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${session.access_token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        duel_result_id: duelRecord.id,
+                        player1_id: session.user.id,
+                        player2_id: opponentId,
+                        player1_score: playerScore,
+                        player2_score: opponentScore,
+                        duel_mode: duelMode,
+                        total_questions: totalQuestions,
+                        duration_seconds: durationSeconds,
+                    }),
                 }
+            );
+
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error);
+
+            // 3. Update local state optimistically or wait for real-time
+            // The result structure follows Part 4: { success, player1: { newRating, delta, xpEarned }, ... }
+            setLastDuelResult({
+                won: playerScore > opponentScore,
+                playerScore,
+                opponentScore,
+                ratingChange: result.player1.delta,
+                xpEarned: result.player1.xpEarned
             });
 
-            return updated;
-        });
-    }, [saveMutation]);
+            // Invalidate queries to refresh leaderboard
+            queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
+
+            return result;
+        } catch (err) {
+            console.error('Error recording duel:', err);
+            return null;
+        }
+    }, [profile, queryClient]);
 
     const completeDailyChallenge = useCallback((correct: boolean) => {
         const today = getTodayString();

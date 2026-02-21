@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import { Question, DuelResult } from '@/types/game';
+import { Question } from '@/types/game';
 
 export const duelService = {
     async getQuestions(options: {
@@ -32,42 +32,4 @@ export const duelService = {
 
         return { data: shuffled as any as Question[], error: null };
     },
-
-    async recordDuel(player_id: string, result: DuelResult, ratingChange: number, xpEarned: number) {
-        const { data: duelData, error: duelError } = await supabase
-            .from('duels')
-            .insert({
-                player_id,
-                opponent_id: result.opponentName,
-                mode: result.mode || 'classical',
-                won: result.won,
-                player_score: result.playerScore,
-                opponent_score: result.opponentScore,
-                rating_change: ratingChange,
-                xp_earned: xpEarned,
-            })
-            .select()
-            .single();
-
-        if (duelError) return { error: duelError };
-
-        // Record individual question performance if available
-        if (result.questionLog && result.questionLog.length > 0) {
-            const logEntries = result.questionLog.map(q => ({
-                duel_id: duelData.id,
-                question_id: q.id,
-                is_correct: q.isCorrect,
-                time_taken: q.timeTaken,
-                user_answer: q.userAnswer?.toString(),
-            }));
-
-            const { error: logError } = await supabase
-                .from('duel_questions')
-                .insert(logEntries);
-
-            if (logError) console.error('Error logging duel questions:', logError);
-        }
-
-        return { data: duelData, error: null };
-    }
 };

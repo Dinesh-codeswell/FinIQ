@@ -28,6 +28,7 @@ export interface Question {
     minRating: number;             // Minimum player rating to see this question (0/1000/1300)
     question: string;              // The question text shown to player
     answer: string | number;       // Correct answer
+    correctAnswer?: number;         // Index of correct option (for MCQs)
     options?: string[];            // MCQ only: exactly 4 options, answer must be one of them
     explanation: string;           // Brief explanation shown post-answer (1-2 sentences)
     feedbackCorrect?: string;      // Motivational text for correct answer
