@@ -143,45 +143,56 @@ export const [GameProvider, useGame] = createContextHook(() => {
     const updateProfile = useCallback((updates: Partial<UserProfile>) => {
         setProfile(prev => {
             const updated = { ...prev, ...updates };
-            saveMutation.mutate(updated);
+            // Side effect moved outside of updater via useEffect or manual call
             return updated;
         });
-    }, [saveMutation]);
+        // Mutate outside of the profile updater to avoid React anti-pattern
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session?.user) {
+                const updated = { ...profile, ...updates };
+                saveMutation.mutate(updated);
+            }
+        });
+    }, [saveMutation, profile]);
 
     const addXP = useCallback((amount: number) => {
         setProfile(prev => {
             const updated = { ...prev, xp: prev.xp + amount };
-            saveMutation.mutate(updated);
             return updated;
         });
-    }, [saveMutation]);
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session?.user) {
+                const updated = { ...profile, xp: profile.xp + amount };
+                saveMutation.mutate(updated);
+            }
+        });
+    }, [saveMutation, profile]);
 
     const completeOnboarding = useCallback((
         username: string,
         avatar: string,
-        difficulty: number,
+        rating: number, // Correctly named as rating
         interests: string[],
         sessionLength: number,
     ) => {
         const today = getTodayString();
-        setProfile(prev => {
-            const updated: UserProfile = {
-                ...prev,
-                username,
-                avatar,
-                difficulty,
-                interests,
-                sessionLength,
-                onboardingCompleted: true,
-                lastPlayDate: today,
-                streak: 1,
-                duelsDateTracker: today,
-                questsDate: today,
-            };
-            saveMutation.mutate(updated);
-            return updated;
-        });
-    }, [saveMutation]);
+        const updated: UserProfile = {
+            ...profile,
+            username,
+            avatar,
+            rating,
+            interests,
+            sessionLength,
+            onboardingCompleted: true,
+            lastPlayDate: today,
+            streak: 1,
+            duelsDateTracker: today,
+            questsDate: today,
+        };
+
+        setProfile(updated);
+        saveMutation.mutate(updated);
+    }, [saveMutation, profile]);
 
     const checkAndUpdateStreak = useCallback(() => {
         const today = getTodayString();

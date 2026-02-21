@@ -132,15 +132,20 @@ export default function OnboardingScreen() {
         if (data.knowledge === 'recruit') elo = 900;
         else if (data.knowledge === 'strategist') elo = 1100;
 
+        // FIXED: Using the corrected completeOnboarding (rating instead of difficulty)
+        // Order: username, avatar, rating, interests, sessionLength
         completeOnboarding(
             username.trim(),
             avatar,
             elo,
-            data.topics,
-            data.commitment
+            data.topics || [],
+            data.commitment || 10
         );
 
-        router.replace('/(tabs)' as any);
+        // Added slight delay to ensure state update and bridge calm down before transition
+        setTimeout(() => {
+            router.replace('/(tabs)' as any);
+        }, 100);
     };
 
     return (
