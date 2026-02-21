@@ -14,6 +14,7 @@ import Animated, {
     withSpring,
     Easing,
 } from 'react-native-reanimated';
+import type { SharedValue } from 'react-native-reanimated';
 import { Check, Shield, Zap, TrendingUp, Globe, Target } from 'lucide-react-native';
 import Svg, { Path, Circle, Line, G, Defs, LinearGradient as SvgGradient, Stop } from 'react-native-svg';
 
@@ -34,6 +35,25 @@ const LOADING_STEPS = [
     "Setting up your first arena...",
     "Ready for the fight."
 ];
+
+const AnimatedDot = ({ point, index }: { point: SharedValue<number>, index: number }) => {
+    const dotProps = useAnimatedProps(() => {
+        const angle = (index * 60 * Math.PI) / 180;
+        const r = point.value * 100;
+        return {
+            cx: 120 + r * Math.cos(angle),
+            cy: 120 + r * Math.sin(angle)
+        };
+    });
+
+    return (
+        <AnimatedCircle
+            r="3"
+            fill="#00D68F"
+            animatedProps={dotProps}
+        />
+    );
+};
 
 export const PrefLoadingTransition: React.FC<PrefLoadingTransitionProps> = ({ onComplete, topics }) => {
     const [stepIndex, setStepIndex] = useState(0);
@@ -214,24 +234,9 @@ export const PrefLoadingTransition: React.FC<PrefLoadingTransitionProps> = ({ on
                             />
 
                             {/* Data Point Blobs */}
-                            {dataPoints.map((p, i) => {
-                                const dotProps = useAnimatedProps(() => {
-                                    const angle = (i * 60 * Math.PI) / 180;
-                                    const r = p.value * 100;
-                                    return {
-                                        cx: 120 + r * Math.cos(angle),
-                                        cy: 120 + r * Math.sin(angle)
-                                    };
-                                });
-                                return (
-                                    <AnimatedCircle
-                                        key={i}
-                                        r="3"
-                                        fill="#00D68F"
-                                        animatedProps={dotProps}
-                                    />
-                                );
-                            })}
+                            {dataPoints.map((p, i) => (
+                                <AnimatedDot key={i} point={p} index={i} />
+                            ))}
                         </Svg>
 
                         {/* Outer rotating markers */}
@@ -253,7 +258,7 @@ export const PrefLoadingTransition: React.FC<PrefLoadingTransitionProps> = ({ on
                         <PulseRing delay={0} size={140} />
                         <PulseRing delay={800} size={140} />
 
-                        {stepIndex === LOADING_STEPS.length - 1 && (
+                        {stepIndex === (LOADING_STEPS?.length || 5) - 1 && (
                             <Animated.View style={[styles.checkContainer, checkContainerStyle]}>
                                 <Check size={40} color="#00D68F" />
                             </Animated.View>
@@ -264,12 +269,12 @@ export const PrefLoadingTransition: React.FC<PrefLoadingTransitionProps> = ({ on
                 {/* Status UI */}
                 <View style={styles.statusBox}>
                     <View style={styles.glitchContainer}>
-                        <Text style={styles.loadingText}>{LOADING_STEPS[stepIndex]}</Text>
+                        <Text style={styles.loadingText}>{(LOADING_STEPS || [])[stepIndex] || "LOADING..."}</Text>
                         <View style={styles.progressBar}>
                             <Animated.View
                                 style={[
                                     styles.progressFill,
-                                    { width: `${((stepIndex + 1) / LOADING_STEPS.length) * 100}%` }
+                                    { width: `${((stepIndex + 1) / (LOADING_STEPS?.length || 1)) * 100}%` }
                                 ]}
                             />
                         </View>

@@ -119,14 +119,14 @@ export const Slide3Glory = ({ isVisible, scrollX, index }: Props) => {
 
                 <LeaderboardStack isVisible={isVisible} />
 
-                {/* Floating elements — animated */}
-                <Animated.View style={[styles.floating, { top: 10, left: 24 }, float1Style]}>
+                {/* Integrated Floating Elements — flanking the stack */}
+                <Animated.View style={[styles.floating, { bottom: 200, left: 32 }, float1Style]}>
                     <View style={styles.streakBadge}>
                         <Animated.Text style={styles.fireEmoji}>🔥</Animated.Text>
                         <Text style={styles.streakText}>47-Day Streak</Text>
                     </View>
                 </Animated.View>
-                <Animated.View style={[styles.floating, { top: 30, right: 24 }, float2Style]}>
+                <Animated.View style={[styles.floating, { bottom: 180, right: 32 }, float2Style]}>
                     <View style={styles.xpBadge}>
                         <Text style={styles.xpText}>+2.0× XP</Text>
                     </View>

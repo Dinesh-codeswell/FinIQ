@@ -47,9 +47,16 @@ export const authService = {
 
             const { GoogleSignin } = require('@react-native-google-signin/google-signin');
 
+            const webClientId = process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID;
+            if (!webClientId) {
+                console.error('Missing EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID');
+                return { data: null, error: new Error('Google Sign-In configuration is missing. Please contact support.') };
+            }
+
             // Configure Google Sign-In — MANDATORY for Android
             GoogleSignin.configure({
-                webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+                webClientId: webClientId,
+                iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
                 offlineAccess: true,
                 forceCodeForRefreshToken: true,
             });

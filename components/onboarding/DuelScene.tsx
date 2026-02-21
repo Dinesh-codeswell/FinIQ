@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
 import Svg, { Circle, Rect, Line, Defs, RadialGradient, Stop } from 'react-native-svg';
 import Animated, {
     useAnimatedStyle,
@@ -85,7 +85,9 @@ export const DuelScene = ({ isVisible }: Props) => {
 
     return (
         <View style={styles.container}>
-            {/* Left Player (You) */}
+            {/* 
+                Original VS and Player animations - Commented out for future use
+                
             <Animated.View style={[styles.playerContainer, leftScaleStyle]}>
                 <Animated.View style={[styles.aura, styles.auraLeft, auraLeftStyle]} />
                 <View style={[styles.card, styles.cardLeft]}>
@@ -94,12 +96,10 @@ export const DuelScene = ({ isVisible }: Props) => {
                 <Text style={styles.playerLabel}>You</Text>
             </Animated.View>
 
-            {/* VS Element */}
             <Animated.View style={[styles.vsContainer, vsScaleStyle]}>
                 <Text style={styles.vsText}>VS</Text>
             </Animated.View>
 
-            {/* Right Player (Opponent) */}
             <Animated.View style={[styles.playerContainer, rightScaleStyle]}>
                 <Animated.View style={[styles.aura, styles.auraRight, auraRightStyle]} />
                 <View style={[styles.card, styles.cardRight]}>
@@ -107,17 +107,28 @@ export const DuelScene = ({ isVisible }: Props) => {
                 </View>
                 <Text style={styles.playerLabel}>?</Text>
             </Animated.View>
+            */}
+
+            {/* New VS Image Asset */}
+            <Animated.Image
+                source={require('../../assets/images/VS.png')}
+                style={[styles.vsImage, vsScaleStyle]}
+                resizeMode="contain"
+            />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        height: 200,
-        gap: 30,
+        height: 240,
+        width: '100%',
+    },
+    vsImage: {
+        width: '100%',
+        height: '100%',
     },
     playerContainer: {
         alignItems: 'center',

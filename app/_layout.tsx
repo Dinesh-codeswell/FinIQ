@@ -20,6 +20,7 @@ import Constants, { ExecutionEnvironment } from "expo-constants";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { GameProvider } from "@/context/GameContext";
 import Colors from "@/constants/colors";
+import { TourProvider } from "@/context/TourContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -94,12 +95,14 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <GestureHandlerRootView style={{ flex: 1, backgroundColor: Colors.background }}>
-        <GameProvider>
-          <StatusBar style="light" />
-          <RootLayoutNav />
-        </GameProvider>
-      </GestureHandlerRootView>
+      <TourProvider>
+        <GestureHandlerRootView style={{ flex: 1, backgroundColor: Colors.background }}>
+          <GameProvider>
+            <StatusBar style="light" />
+            <RootLayoutNav />
+          </GameProvider>
+        </GestureHandlerRootView>
+      </TourProvider>
     </QueryClientProvider>
   );
 }
