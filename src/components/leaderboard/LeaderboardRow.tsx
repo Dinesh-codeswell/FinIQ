@@ -44,8 +44,8 @@ export const LeaderboardRow = ({ item, index, isUser, onPress }: Props) => {
 
     return (
         <Animated.View
-            entering={FadeInRight.delay(index * 50).duration(400)}
-            layout={Layout.springify()}
+            entering={FadeInRight.delay(Math.min(index * 40, 200)).duration(350).springify().damping(14)}
+            layout={Layout.springify().damping(14)}
         >
             <TouchableOpacity
                 style={[

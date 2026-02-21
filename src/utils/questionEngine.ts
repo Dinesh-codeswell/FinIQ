@@ -81,7 +81,30 @@ export const getQuestionsForDuel = async (options: DuelOptions): Promise<Questio
 
         // Shuffle and take count
         const shuffled = filtered.sort(() => Math.random() - 0.5).slice(0, count);
-        return shuffled as any as Question[];
+        // Ensure every question has options so the duel UI can render answer choices
+        return shuffled.map((q: any) => {
+            if (q.options && q.options.length >= 2) return q as Question;
+            const answerStr = String(q.answer ?? '');
+            const num = parseInt(answerStr, 10);
+            if (!Number.isNaN(num)) {
+                return {
+                    ...q,
+                    options: generateMathOptions(num),
+                    answer: num.toLocaleString('en-IN'),
+                } as Question;
+            }
+            if (answerStr.length === 1 && /[A-Za-z]/.test(answerStr)) {
+                const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const distractors = new Set<string>([answerStr.toUpperCase()]);
+                while (distractors.size < 4) {
+                    distractors.add(alphabet[Math.floor(Math.random() * 26)]);
+                }
+                return { ...q, options: shuffle(Array.from(distractors)) } as Question;
+            }
+            // Fallback: ensure 4 distinct options so UI always has choices
+            const fallbackOpts = [answerStr, 'A', 'B', 'C'].slice(0, 4);
+            return { ...q, options: shuffle(fallbackOpts) } as Question;
+        }) as Question[];
     }
 
     let validTypes: QuestionType[] = [];

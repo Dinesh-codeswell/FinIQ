@@ -95,7 +95,7 @@ export default function PostMatchScreen() {
 
                     <Animated.View style={[styles.scoreBoard, { transform: [{ translateY: scoreSlide }], opacity: detailsFade }]}>
                         <View style={styles.scorePlayer}>
-                            <UserAvatar size={56} animalEmoji={profile.avatar} frameId={profile.selectedAvatarFrame as any} isPro={profile.isPro} />
+                            <UserAvatar size={56} animalEmoji={profile?.avatar ?? 'fox'} frameId={(profile?.selectedAvatarFrame as any) ?? 'none'} isPro={profile?.isPro ?? false} />
                             <Text style={styles.scoreName}>YOU</Text>
                             <Text style={[styles.scoreNum, { color: won ? Colors.accent : Colors.textPrimary }]}>
                                 {result.playerScore}
@@ -108,7 +108,7 @@ export default function PostMatchScreen() {
 
                         <View style={styles.scorePlayer}>
                             <UserAvatar size={56} animalEmoji={result.opponentAvatar} frameId="none" isPro={false} />
-                            <Text style={styles.scoreName}>{result.opponentName.split('_')[0]}</Text>
+                            <Text style={styles.scoreName}>{(result.opponentName || 'Opponent').split('_')[0]}</Text>
                             <Text style={[styles.scoreNum, { color: !won ? Colors.accent : Colors.textPrimary }]}>
                                 {result.opponentScore}
                             </Text>
@@ -129,8 +129,10 @@ export default function PostMatchScreen() {
                         </View>
                         <View style={styles.statDivider} />
                         <View style={styles.statItem}>
-                            <Text style={styles.statValue}>{profile.rating}</Text>
-                            <Text style={[styles.statLabel, { color: division.color }]}>{division.title.split(' ')[0].toUpperCase()}</Text>
+                            <Text style={styles.statValue}>{profile?.rating ?? 0}</Text>
+                            <Text style={[styles.statLabel, division?.color && { color: division.color }]}>
+                                {division?.title ? division.title.split(' ')[0].toUpperCase() : '—'}
+                            </Text>
                         </View>
                     </Animated.View>
 

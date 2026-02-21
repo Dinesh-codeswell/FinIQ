@@ -44,22 +44,22 @@ export default function CompeteScreen() {
 
     const listRef = useRef<FlatList>(null);
 
-    // Division Change Detection
+    // Division Change Detection (only show celebration for valid division keys)
+    const validDivisions = useMemo(() => ['bronze', 'silver', 'gold', 'platinum', 'diamond', 'elite'], []);
     useEffect(() => {
         const checkDivisionChange = async () => {
             const currentDiv = getDivision(profile.rating);
             const lastDiv = await AsyncStorage.getItem(LAST_DIVISION_KEY);
 
-            if (lastDiv && lastDiv !== currentDiv) {
-                // Determine if it's a promotion or demotion (optional logic here)
+            if (lastDiv && lastDiv !== currentDiv && validDivisions.includes(lastDiv) && validDivisions.includes(currentDiv)) {
                 setCelebration({ old: lastDiv, new: currentDiv });
             }
 
             await AsyncStorage.setItem(LAST_DIVISION_KEY, currentDiv);
         };
 
-        if (profile.rating) checkDivisionChange();
-    }, [profile.rating]);
+        if (profile?.rating != null) checkDivisionChange();
+    }, [profile?.rating, validDivisions]);
 
     // Fetch Initial Leaderboard
     useEffect(() => {
@@ -202,7 +202,7 @@ export default function CompeteScreen() {
                 )}
 
                 {/* Sticky User Position Footer */}
-                {players.findIndex(p => p.id === profile.id) >= 3 || userRank === null ? (
+                {profile && (players.findIndex(p => p.id === profile.id) >= 3 || userRank === null) ? (
                     <Animated.View
                         entering={SlideInDown.duration(500)}
                         style={styles.stickyFooter}
@@ -210,19 +210,19 @@ export default function CompeteScreen() {
                         <LeaderboardRow
                             item={players.find(p => p.id === profile.id) || {
                                 id: profile.id,
-                                username: profile.username,
-                                avatar: profile.avatar,
-                                rating: profile.rating,
-                                previous_rating: profile.previous_rating || profile.rating,
+                                username: profile.username ?? '',
+                                avatar: profile.avatar ?? 'fox',
+                                rating: profile.rating ?? 1000,
+                                previous_rating: profile.previous_rating ?? profile.rating ?? 1000,
                                 rank_change: 0,
-                                total_xp: profile.xp,
-                                tournament_xp: profile.tournament_xp || 0,
-                                global_rank: userRank || 0,
-                                win_count: profile.wins,
-                                loss_count: profile.loss_count || 0,
-                                current_streak: profile.streak,
+                                total_xp: profile.xp ?? 0,
+                                tournament_xp: profile.tournament_xp ?? 0,
+                                global_rank: userRank ?? 0,
+                                win_count: profile.wins ?? 0,
+                                loss_count: profile.loss_count ?? 0,
+                                current_streak: profile.streak ?? 0,
                                 is_online: true,
-                                division: profile.rating >= 2100 ? 'elite' : profile.rating >= 1800 ? 'diamond' : 'silver', // simplified
+                                division: getDivision(profile.rating ?? 1000),
                                 last_active_at: new Date().toISOString()
                             } as any}
                             index={userRank ? userRank - 1 : 99}
@@ -232,13 +232,13 @@ export default function CompeteScreen() {
                 ) : null}
             </SafeAreaView>
 
-            {celebration && (
-                <RankCelebration
-                    oldDivision={celebration.old}
-                    newDivision={celebration.new}
-                    onClose={() => setCelebration(null)}
-                />
-            )}
+                {celebration && validDivisions.includes(celebration.old) && validDivisions.includes(celebration.new) && (
+                    <RankCelebration
+                        oldDivision={celebration.old}
+                        newDivision={celebration.new}
+                        onClose={() => setCelebration(null)}
+                    />
+                )}
         </View>
     );
 }

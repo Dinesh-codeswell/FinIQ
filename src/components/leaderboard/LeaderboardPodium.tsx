@@ -27,12 +27,12 @@ export const LeaderboardPodium = ({ topPlayers, type }: Props) => {
 
         return (
             <Animated.View
-                entering={FadeInDown.delay(position * 100).springify()}
+                entering={FadeInDown.delay(position * 80).duration(400).springify().damping(14)}
                 style={[styles.spotContainer, styles[`spot${position}`]]}
             >
                 <View style={styles.avatarContainer}>
                     {isFirst && (
-                        <Animated.View entering={ZoomIn.delay(600)} style={styles.crownWrapper}>
+                        <Animated.View entering={ZoomIn.delay(400).springify().damping(12)} style={styles.crownWrapper}>
                             <Crown size={24} color="#FFD700" fill="#FFD700" />
                         </Animated.View>
                     )}

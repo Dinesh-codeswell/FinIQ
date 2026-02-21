@@ -13,6 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChevronLeft, Check, X, Lightbulb, Clock, ChevronRight } from 'lucide-react-native';
 import Colors from '@/constants/colors';
 import { DuelResult, QuestionResult } from '@/types/game';
+import { useGame } from '@/context/GameContext';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -30,9 +31,19 @@ const TOPIC_COLORS: Record<string, { bg: string; text: string }> = {
 
 export default function DuelExplanationScreen() {
     const router = useRouter();
-    const params = useLocalSearchParams<{ result: string }>();
+    const params = useLocalSearchParams<{ result?: string }>();
+    const { lastDuelResult: contextResult } = useGame();
 
-    const result: DuelResult = params.result ? JSON.parse(params.result) : null;
+    let result: DuelResult | null = null;
+    if (params.result) {
+        try {
+            result = JSON.parse(params.result) as DuelResult;
+        } catch (_) {
+            result = contextResult;
+        }
+    } else {
+        result = contextResult;
+    }
     const scrollViewRef = useRef<ScrollView>(null);
     const fadeAnims = useRef<Animated.Value[]>([]).current;
 
@@ -50,7 +61,20 @@ export default function DuelExplanationScreen() {
         }
     }, [result]);
 
-    if (!result) return null;
+    if (!result || !result.questionLog || !Array.isArray(result.questionLog)) {
+        return (
+            <View style={styles.container}>
+                <SafeAreaView style={styles.safeArea}>
+                    <View style={[styles.header, { justifyContent: 'center', flex: 1 }]}>
+                        <Text style={styles.errorText}>No review data available</Text>
+                        <TouchableOpacity style={styles.resultsBtn} onPress={() => router.replace('/')}>
+                            <Text style={styles.resultsBtnText}>GO HOME</Text>
+                        </TouchableOpacity>
+                    </View>
+                </SafeAreaView>
+            </View>
+        );
+    }
 
     const scrollToQuestion = (index: number) => {
         // Rough estimate for scroll position
@@ -67,7 +91,7 @@ export default function DuelExplanationScreen() {
                         <Text style={styles.headerTitle}>{result.playerScore}/{result.questionLog?.length} Correct</Text>
                     </View>
                     <View style={styles.accuracyPill}>
-                        <Text style={styles.accuracyText}>{result.accuracy}% accuracy</Text>
+                        <Text style={styles.accuracyText}>{result.accuracy ?? 0}% accuracy</Text>
                     </View>
                 </View>
 
@@ -415,5 +439,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '800',
         letterSpacing: 1,
+    },
+    errorText: {
+        color: Colors.textSecondary,
+        fontSize: 16,
+        marginBottom: 20,
+        textAlign: 'center',
     },
 });

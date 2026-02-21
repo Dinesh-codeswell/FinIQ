@@ -1,5 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Modal, TouchableOpacity, Dimensions } from 'react-native';
+import Animated, {
+    FadeIn,
+    FadeOut,
+    SlideInUp,
+    SlideInDown,
+    useSharedValue,
+    useAnimatedStyle,
+    withSpring,
+    withTiming,
+} from 'react-native-reanimated';
 import FinMascot from './FinMascot';
 import { FIN_TOUR_STEPS } from '@/src/data/fin/tour';
 import { useFinStore } from '@/src/store/finStore';
@@ -20,7 +30,7 @@ export default function FinTourOverlay() {
         if (isLast) {
             setTourCompleted(true);
         } else {
-            setCurrentStepIndex(currentStepIndex + 1);
+            setCurrentStepIndex((prev) => prev + 1);
         }
     };
 
@@ -28,9 +38,17 @@ export default function FinTourOverlay() {
         setTourCompleted(true);
     };
 
+    if (!step) return null;
+
+    const isTop = step.position === 'top';
+
     return (
         <Modal transparent animationType="fade" visible={!tourCompleted}>
-            <View style={styles.container}>
+            <Animated.View
+                entering={FadeIn.duration(250)}
+                exiting={FadeOut.duration(200)}
+                style={styles.container}
+            >
                 <View style={styles.backdrop} />
 
                 <View style={styles.content}>
@@ -38,10 +56,14 @@ export default function FinTourOverlay() {
                         <Text style={styles.skipText}>Skip tour</Text>
                     </TouchableOpacity>
 
-                    <View style={[
-                        styles.messageBox,
-                        step.position === 'top' ? styles.positionTop : styles.positionBottom
-                    ]}>
+                    <Animated.View
+                        key={currentStepIndex}
+                        entering={isTop ? SlideInDown.springify().damping(14) : SlideInUp.springify().damping(14)}
+                        style={[
+                            styles.messageBox,
+                            isTop ? styles.positionTop : styles.positionBottom,
+                        ]}
+                    >
                         <View style={styles.stepInfo}>
                             <FinMascot expression={step.expression} size="medium" />
                             <View style={styles.textContainer}>
@@ -50,22 +72,44 @@ export default function FinTourOverlay() {
                             </View>
                         </View>
 
-                        <TouchableOpacity style={styles.actionButton} onPress={handleNext}>
+                        <TouchableOpacity style={styles.actionButton} onPress={handleNext} activeOpacity={0.85}>
                             <Text style={styles.actionLabel}>{step.action_label}</Text>
                         </TouchableOpacity>
 
                         <View style={styles.progressRow}>
                             {FIN_TOUR_STEPS.map((_, i) => (
-                                <View
-                                    key={i}
-                                    style={[styles.dot, i === currentStepIndex && styles.activeDot]}
-                                />
+                                <TourDot key={i} active={i === currentStepIndex} index={i} />
                             ))}
                         </View>
-                    </View>
+                    </Animated.View>
                 </View>
-            </View>
+            </Animated.View>
         </Modal>
+    );
+}
+
+function TourDot({ active, index }: { active: boolean; index: number }) {
+    const scale = useSharedValue(active ? 1.3 : 1);
+    const width = useSharedValue(active ? 12 : 6);
+
+    useEffect(() => {
+        scale.value = withSpring(active ? 1.3 : 1, { damping: 14 });
+        width.value = withTiming(active ? 12 : 6, { duration: 200 });
+    }, [active]);
+
+    const animatedStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: scale.value }],
+        width: width.value,
+    }));
+
+    return (
+        <Animated.View
+            style={[
+                styles.dot,
+                active && styles.activeDot,
+                animatedStyle,
+            ]}
+        />
     );
 }
 
@@ -86,6 +130,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 60,
         right: 24,
+        zIndex: 10,
     },
     skipText: {
         color: '#AAAAAA',
@@ -140,15 +185,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         gap: 8,
+        alignItems: 'center',
     },
     dot: {
-        width: 6,
         height: 6,
         borderRadius: 3,
         backgroundColor: '#444',
     },
     activeDot: {
         backgroundColor: Colors.accent,
-        width: 12,
     },
 });

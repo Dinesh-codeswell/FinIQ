@@ -1,6 +1,18 @@
-import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withSpring,
+    withSequence,
+    withTiming,
+    withDelay,
+    withRepeat,
+    Easing,
+} from 'react-native-reanimated';
 import { AVATAR_EMOJIS } from '@/constants/divisions';
+
+const AnimatedText = Animated.createAnimatedComponent(Text);
 
 interface BattleHeaderProps {
     playerScore: number;
@@ -25,47 +37,68 @@ export default function BattleHeader({
     playerAvatar,
     botAvatar,
     botName,
-    isThinking
+    isThinking,
 }: BattleHeaderProps) {
-    const scoreScale = useRef(new Animated.Value(1)).current;
-    const botScoreScale = useRef(new Animated.Value(1)).current;
-    const prevScore = useRef(playerScore);
-    const prevBotScore = useRef(botScore);
+    const playerScale = useSharedValue(1);
+    const botScale = useSharedValue(1);
+    const timerWidth = useSharedValue(1);
 
     useEffect(() => {
+        timerWidth.value = withTiming(Math.max(0, timeLeft / totalDuration), {
+            duration: 400,
+            easing: Easing.out(Easing.cubic),
+        });
+    }, [timeLeft, totalDuration]);
+
+    const prevScore = React.useRef(playerScore);
+    const prevBotScore = React.useRef(botScore);
+    useEffect(() => {
         if (playerScore > prevScore.current) {
-            Animated.sequence([
-                Animated.timing(scoreScale, { toValue: 1.4, duration: 150, useNativeDriver: true }),
-                Animated.timing(scoreScale, { toValue: 1, duration: 150, useNativeDriver: true }),
-            ]).start();
+            playerScale.value = withSequence(
+                withSpring(1.35, { damping: 10, stiffness: 400 }),
+                withSpring(1)
+            );
         }
         prevScore.current = playerScore;
     }, [playerScore]);
 
     useEffect(() => {
         if (botScore > prevBotScore.current) {
-            Animated.sequence([
-                Animated.timing(botScoreScale, { toValue: 1.4, duration: 150, useNativeDriver: true }),
-                Animated.timing(botScoreScale, { toValue: 1, duration: 150, useNativeDriver: true }),
-            ]).start();
+            botScale.value = withSequence(
+                withSpring(1.35, { damping: 10, stiffness: 400 }),
+                withSpring(1)
+            );
         }
         prevBotScore.current = botScore;
     }, [botScore]);
 
-    const timerPercent = timeLeft / totalDuration;
+    const timerPercent = Math.max(0, timeLeft / totalDuration);
     const timerColor = timeLeft <= 10 ? '#FF4757' : timeLeft <= 30 ? '#F5A623' : '#00D68F';
 
+    const playerScoreStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: playerScale.value }],
+    }));
+    const botScoreStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: botScale.value }],
+    }));
+    const timerBarStyle = useAnimatedStyle(() => ({
+        width: `${timerWidth.value * 100}%`,
+    }));
     return (
         <View style={styles.container}>
-            {/* TIMER BAR */}
             <View style={styles.timerBarTrack}>
-                <View style={[styles.timerBarFill, { width: `${timerPercent * 100}%`, backgroundColor: timerColor }]} />
+                <Animated.View
+                    style={[
+                        styles.timerBarFill,
+                        { backgroundColor: timerColor },
+                        timerBarStyle,
+                    ]}
+                />
             </View>
 
             <View style={styles.headerContent}>
-                {/* YOUR SIDE */}
                 <View style={styles.playerSide}>
-                    <Animated.Text style={[styles.scoreText, { transform: [{ scale: scoreScale }] }]}>
+                    <Animated.Text style={[styles.scoreText, playerScoreStyle]}>
                         {playerScore}
                     </Animated.Text>
                     <View style={[styles.avatarRing, { borderColor: '#00D68F' }]}>
@@ -74,15 +107,13 @@ export default function BattleHeader({
                     <Text style={styles.username} numberOfLines={1}>YOU</Text>
                 </View>
 
-                {/* CENTER STATUS */}
                 <View style={styles.centerStatus}>
                     <Text style={[styles.timerNumber, timeLeft <= 10 && styles.timerCritical]}>{timeLeft}s</Text>
                     <Text style={styles.qCounter}>Q{currentIndex + 1} of {totalQuestions}</Text>
                 </View>
 
-                {/* OPPONENT SIDE */}
                 <View style={styles.playerSide}>
-                    <Animated.Text style={[styles.scoreText, { transform: [{ scale: botScoreScale }] }]}>
+                    <Animated.Text style={[styles.scoreText, botScoreStyle]}>
                         {botScore}
                     </Animated.Text>
                     <View style={[styles.avatarRing, { borderColor: '#FF4757' }]}>
@@ -100,35 +131,33 @@ export default function BattleHeader({
     );
 }
 
-const ThinkingDots = () => {
-    const dot1 = useRef(new Animated.Value(0.3)).current;
-    const dot2 = useRef(new Animated.Value(0.3)).current;
-    const dot3 = useRef(new Animated.Value(0.3)).current;
+function ThinkingDots() {
+    const d1 = useSharedValue(0.3);
+    const d2 = useSharedValue(0.3);
+    const d3 = useSharedValue(0.3);
 
     useEffect(() => {
-        const animate = (anim: Animated.Value, delay: number) => {
-            Animated.loop(
-                Animated.sequence([
-                    Animated.delay(delay),
-                    Animated.timing(anim, { toValue: 1, duration: 400, useNativeDriver: true }),
-                    Animated.timing(anim, { toValue: 0.3, duration: 400, useNativeDriver: true }),
-                    Animated.delay(800 - delay),
-                ])
-            ).start();
-        };
-        animate(dot1, 0);
-        animate(dot2, 200);
-        animate(dot3, 400);
+        const pulse = withSequence(
+            withTiming(1, { duration: 350 }),
+            withTiming(0.3, { duration: 350 })
+        );
+        d1.value = withRepeat(pulse, -1);
+        d2.value = withDelay(120, withRepeat(pulse, -1));
+        d3.value = withDelay(240, withRepeat(pulse, -1));
     }, []);
+
+    const s1 = useAnimatedStyle(() => ({ opacity: d1.value }));
+    const s2 = useAnimatedStyle(() => ({ opacity: d2.value }));
+    const s3 = useAnimatedStyle(() => ({ opacity: d3.value }));
 
     return (
         <View style={styles.dotsRow}>
-            <Animated.View style={[styles.dot, { opacity: dot1 }]} />
-            <Animated.View style={[styles.dot, { opacity: dot2 }]} />
-            <Animated.View style={[styles.dot, { opacity: dot3 }]} />
+            <Animated.View style={[styles.dot, s1]} />
+            <Animated.View style={[styles.dot, s2]} />
+            <Animated.View style={[styles.dot, s3]} />
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -142,9 +171,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#1E1E1E',
         position: 'absolute',
         top: 0,
+        overflow: 'hidden',
+        borderRadius: 3,
     },
     timerBarFill: {
-        height: '100%',
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        bottom: 0,
+        borderRadius: 3,
     },
     headerContent: {
         flex: 1,

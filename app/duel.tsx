@@ -2,11 +2,19 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
     View,
     StyleSheet,
-    Animated,
     Dimensions,
     Platform,
     ActivityIndicator,
 } from 'react-native';
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withSpring,
+    withTiming,
+    withRepeat,
+    withSequence,
+    runOnJS,
+} from 'react-native-reanimated';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
@@ -38,7 +46,7 @@ export default function DuelScreen() {
         topic?: string;
         mode?: string;
     }>();
-    const { profile, recordDuelResult } = useGame();
+    const { profile, recordDuelResult, setLastDuelResult } = useGame();
     const { recordDuelResult: recordFinResult } = useFinStore();
 
     const opponentName = params.opponentName || 'Bot';
@@ -82,9 +90,9 @@ export default function DuelScreen() {
         loadQuestions();
     }, []);
 
-    // Animations
-    const questionSlide = useRef(new Animated.Value(0)).current;
-    const bgGlow = useRef(new Animated.Value(0)).current;
+    // Animations (Reanimated — UI thread)
+    const questionSlideX = useSharedValue(0);
+    const bgGlowOpacity = useSharedValue(0.02);
 
     const botTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -103,13 +111,14 @@ export default function DuelScreen() {
             });
         }, 1000);
 
-        // Background atmosphere pulse
-        Animated.loop(
-            Animated.sequence([
-                Animated.timing(bgGlow, { toValue: 1, duration: 3000, useNativeDriver: true }),
-                Animated.timing(bgGlow, { toValue: 0, duration: 3000, useNativeDriver: true }),
-            ])
-        ).start();
+        bgGlowOpacity.value = withRepeat(
+            withSequence(
+                withTiming(0.05, { duration: 3000 }),
+                withTiming(0.02, { duration: 3000 })
+            ),
+            -1,
+            true
+        );
 
         return () => {
             if (timerRef.current) clearInterval(timerRef.current);
@@ -124,15 +133,8 @@ export default function DuelScreen() {
     }, [timeLeft]);
 
     useEffect(() => {
-        // Slide in new question
-        questionSlide.setValue(SCREEN_WIDTH);
-        Animated.spring(questionSlide, {
-            toValue: 0,
-            tension: 50,
-            friction: 10,
-            useNativeDriver: true,
-        }).start();
-
+        questionSlideX.value = SCREEN_WIDTH;
+        questionSlideX.value = withSpring(0, { damping: 18, stiffness: 120 });
         scheduleBotAnswer();
     }, [currentIndex]);
 
@@ -198,26 +200,24 @@ export default function DuelScreen() {
         // Update topic accuracy
         updateTopicAccuracy(currentQ.topic as any, isCorrect).catch(console.error);
 
-        // Auto-advance
+        const advance = () => {
+            setCurrentIndex(prev => prev + 1);
+            setAnswered(false);
+            setSelectedOption(null);
+            startTimeRef.current = Date.now();
+        };
+
         const delay = isCorrect ? 1800 : 2200;
         setTimeout(() => {
             if (currentIndex < questions.length - 1 && !gameOverRef.current) {
-                // Slide out
-                Animated.timing(questionSlide, {
-                    toValue: -SCREEN_WIDTH,
-                    duration: 200,
-                    useNativeDriver: true,
-                }).start(() => {
-                    setCurrentIndex(prev => prev + 1);
-                    setAnswered(false);
-                    setSelectedOption(null);
-                    startTimeRef.current = Date.now();
+                questionSlideX.value = withTiming(-SCREEN_WIDTH, { duration: 220 }, (finished) => {
+                    if (finished) runOnJS(advance)();
                 });
             } else if (!gameOverRef.current) {
                 endGame();
             }
         }, delay);
-    }, [answered, gameOver, currentIndex, questions, questionSlide]);
+    }, [answered, gameOver, currentIndex, questions]);
 
     const endGame = useCallback(() => {
         if (gameOverRef.current) return;
@@ -253,7 +253,8 @@ export default function DuelScreen() {
             questionLog: log,
         };
 
-        recordDuelResult(result);
+        setLastDuelResult(result);
+        recordDuelResult(result as any);
         recordFinResult(won ? 'win' : 'loss', mode);
 
         if (Platform.OS !== 'web') {
@@ -261,12 +262,16 @@ export default function DuelScreen() {
         }
 
         setTimeout(() => {
-            router.replace({
-                pathname: '/duel-explanation',
-                params: { result: JSON.stringify(result) }
-            } as any);
+            router.replace({ pathname: '/duel-explanation' } as any);
         }, 300);
     }, [playerScore, botScore, profile.rating, opponentRating, opponentName, opponentAvatar]);
+
+    const mainZoneStyle = useAnimatedStyle(() => ({
+        transform: [{ translateX: questionSlideX.value }],
+    }));
+    const bgSpotlightStyle = useAnimatedStyle(() => ({
+        opacity: bgGlowOpacity.value,
+    }));
 
     if (isLoading) {
         return (
@@ -281,15 +286,8 @@ export default function DuelScreen() {
 
     return (
         <View style={styles.container}>
-            {/* Background Atmosphere */}
             <View style={styles.bgGrid} pointerEvents="none" />
-            <Animated.View
-                style={[
-                    styles.bgSpotlight,
-                    { opacity: bgGlow.interpolate({ inputRange: [0, 1], outputRange: [0.02, 0.05] }) }
-                ]}
-                pointerEvents="none"
-            />
+            <Animated.View style={[styles.bgSpotlight, bgSpotlightStyle]} pointerEvents="none" />
             {timeLeft <= 10 && (
                 <View style={styles.criticalVignette} pointerEvents="none" />
             )}
@@ -308,7 +306,7 @@ export default function DuelScreen() {
                     isThinking={isBotThinking}
                 />
 
-                <Animated.View style={[styles.mainBattleZone, { transform: [{ translateX: questionSlide }] }]}>
+                <Animated.View style={[styles.mainBattleZone, mainZoneStyle]}>
                     <QuestionCard
                         question={currentQ.question}
                         topic={currentQ.topic}

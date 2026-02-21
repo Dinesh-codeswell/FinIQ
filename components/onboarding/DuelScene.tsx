@@ -55,6 +55,16 @@ export const DuelScene = ({ isVisible }: Props) => {
         }
     }, [isVisible]);
 
+    const leftScaleStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: leftScale.value }],
+    }));
+    const rightScaleStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: rightScale.value }],
+    }));
+    const vsScaleStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: vsScale.value }],
+    }));
+
     const auraLeftStyle = useAnimatedStyle(() => ({
         opacity: auraLeftOpacity.value,
         transform: [{ scale: auraLeftScale.value }],
@@ -68,7 +78,7 @@ export const DuelScene = ({ isVisible }: Props) => {
     return (
         <View style={styles.container}>
             {/* Left Player (You) */}
-            <AnimatedView style={[styles.playerContainer, { transform: [{ scale: leftScale }] }]}>
+            <AnimatedView style={[styles.playerContainer, leftScaleStyle]}>
                 <AnimatedView style={[styles.aura, styles.auraLeft, auraLeftStyle]} />
                 <View style={[styles.card, styles.cardLeft]}>
                     <Text style={styles.monogram}>FQ</Text>
@@ -77,12 +87,12 @@ export const DuelScene = ({ isVisible }: Props) => {
             </AnimatedView>
 
             {/* VS Element */}
-            <AnimatedView style={[styles.vsContainer, { transform: [{ scale: vsScale }] }]}>
+            <AnimatedView style={[styles.vsContainer, vsScaleStyle]}>
                 <Text style={styles.vsText}>VS</Text>
             </AnimatedView>
 
             {/* Right Player (Opponent) */}
-            <AnimatedView style={[styles.playerContainer, { transform: [{ scale: rightScale }] }]}>
+            <AnimatedView style={[styles.playerContainer, rightScaleStyle]}>
                 <AnimatedView style={[styles.aura, styles.auraRight, auraRightStyle]} />
                 <View style={[styles.card, styles.cardRight]}>
                     <View style={styles.silhouette} />

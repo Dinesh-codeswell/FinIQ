@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import { getTopicConfig } from '@/constants/topicColors';
 
 interface QuestionCardProps {
@@ -11,7 +12,10 @@ export default function QuestionCard({ question, topic }: QuestionCardProps) {
     const topicConfig = getTopicConfig(topic);
 
     return (
-        <View style={styles.container}>
+        <Animated.View
+            entering={FadeInDown.duration(320).springify().damping(14)}
+            style={styles.container}
+        >
             <View style={[styles.topicBadge, { backgroundColor: `${topicConfig.color}26` }]}>
                 <View style={[styles.topicAccent, { backgroundColor: topicConfig.color }]} />
                 <Text style={[styles.topicText, { color: topicConfig.color }]}>
@@ -19,7 +23,7 @@ export default function QuestionCard({ question, topic }: QuestionCardProps) {
                 </Text>
             </View>
             <Text style={styles.questionText}>{question}</Text>
-        </View>
+        </Animated.View>
     );
 }
 

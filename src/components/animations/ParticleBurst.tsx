@@ -15,7 +15,7 @@ interface ParticleProps {
 }
 
 const Particle = ({ index, color }: ParticleProps) => {
-    const angle = (index * 15) * (Math.PI / 180);
+    const angle = (index * Math.PI) / 180;
     const distance = useSharedValue(0);
     const opacity = useSharedValue(1);
     const scale = useSharedValue(1);
@@ -45,11 +45,13 @@ const Particle = ({ index, color }: ParticleProps) => {
     return <Animated.View style={[styles.particle, animatedStyle]} />;
 };
 
+const PARTICLE_COUNT = 12;
+
 export const ParticleBurst = ({ color = '#FFD700' }) => {
     return (
-        <View style={styles.container}>
-            {Array.from({ length: 24 }).map((_, i) => (
-                <Particle key={i} index={i} color={color} />
+        <View style={styles.container} pointerEvents="none">
+            {Array.from({ length: PARTICLE_COUNT }).map((_, i) => (
+                <Particle key={i} index={i * (360 / PARTICLE_COUNT)} color={color} />
             ))}
         </View>
     );

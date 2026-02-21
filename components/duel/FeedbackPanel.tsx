@@ -1,5 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withSpring,
+    FadeInDown,
+} from 'react-native-reanimated';
 
 interface FeedbackPanelProps {
     isVisible: boolean;
@@ -14,41 +20,61 @@ export default function FeedbackPanel({
     isCorrect,
     correctOptionText,
     explanation,
-    points
+    points,
 }: FeedbackPanelProps) {
-    const slideAnim = useRef(new Animated.Value(160)).current;
+    const translateY = useSharedValue(200);
+    const iconScale = useSharedValue(0);
 
     useEffect(() => {
-        Animated.spring(slideAnim, {
-            toValue: isVisible ? 0 : 160,
-            friction: 8,
-            tension: 40,
-            useNativeDriver: true,
-        }).start();
+        translateY.value = withSpring(isVisible ? 0 : 200, {
+            damping: 18,
+            stiffness: 120,
+        });
+        if (isVisible) {
+            iconScale.value = withSpring(1, { damping: 10, stiffness: 200 });
+        } else {
+            iconScale.value = 0;
+        }
     }, [isVisible]);
+
+    const containerStyle = useAnimatedStyle(() => ({
+        transform: [{ translateY: translateY.value }],
+    }));
+
+    const iconStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: iconScale.value }],
+    }));
 
     const accentColor = isCorrect ? '#00D68F' : '#FF4757';
 
     return (
-        <Animated.View style={[styles.container, { transform: [{ translateY: slideAnim }] }]}>
+        <Animated.View style={[styles.container, containerStyle]}>
             <View style={[styles.accentStripe, { backgroundColor: accentColor }]} />
 
             <View style={styles.content}>
                 <View style={styles.topRow}>
                     <View style={styles.leftSection}>
-                        <View style={[styles.iconCircle, { backgroundColor: accentColor }]}>
+                        <Animated.View
+                            style={[
+                                styles.iconCircle,
+                                { backgroundColor: accentColor },
+                                iconStyle,
+                            ]}
+                        >
                             <Text style={styles.iconText}>{isCorrect ? '✓' : '✗'}</Text>
-                        </View>
+                        </Animated.View>
                         <Text style={[styles.statusText, { color: accentColor }]}>
                             {isCorrect ? 'CORRECT!' : 'NOT QUITE'}
                         </Text>
                     </View>
 
                     <View style={styles.rightSection}>
-                        {!isCorrect && (
+                        {!isCorrect && correctOptionText != null && (
                             <View style={styles.correctReveal}>
                                 <Text style={styles.smallLabel}>Correct answer:</Text>
-                                <Text style={styles.correctValue} numberOfLines={1}>{correctOptionText}</Text>
+                                <Text style={styles.correctValue} numberOfLines={1}>
+                                    {correctOptionText}
+                                </Text>
                             </View>
                         )}
                         <View style={styles.explanationBox}>
@@ -61,7 +87,9 @@ export default function FeedbackPanel({
 
                 <View style={styles.bottomRow}>
                     <Text style={styles.pointsText}>
-                        {isCorrect ? `+${points} POINT${points > 1 ? 'S' : ''}` : '0 POINTS'}
+                        {isCorrect
+                            ? `+${points} POINT${points !== 1 ? 'S' : ''}`
+                            : '0 POINTS'}
                     </Text>
                     <Text style={[styles.nextText, { color: accentColor }]}>NEXT →</Text>
                 </View>

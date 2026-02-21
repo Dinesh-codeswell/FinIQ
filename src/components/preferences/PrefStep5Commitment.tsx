@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import Animated, {
     FadeInUp,
     useAnimatedStyle,
+    useSharedValue,
     withSpring,
-    withTiming
+    withTiming,
 } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 import { COMMITMENT_OPTIONS } from '@/src/constants/preferenceOptions';
@@ -14,57 +15,104 @@ interface PrefStep5CommitmentProps {
     onSelect: (minutes: number) => void;
 }
 
-export const PrefStep5Commitment: React.FC<PrefStep5CommitmentProps> = ({ selected, onSelect }) => {
-    const selectedObj = COMMITMENT_OPTIONS.find(o => o.minutes === selected) || COMMITMENT_OPTIONS[1];
+type CommitmentOpt = (typeof COMMITMENT_OPTIONS)[number];
+
+// Single card component so hooks are called at top level (no hooks inside .map)
+function CommitmentCard({
+    opt,
+    index,
+    isSelected,
+    onSelect,
+}: {
+    opt: CommitmentOpt;
+    index: number;
+    isSelected: boolean;
+    onSelect: (minutes: number) => void;
+}) {
+    const scale = useSharedValue(1);
+    const borderOpacity = useSharedValue(0);
+    const bgOpacity = useSharedValue(0);
+
+    useEffect(() => {
+        scale.value = withSpring(isSelected ? 1.05 : 1, { damping: 14, stiffness: 300 });
+        borderOpacity.value = withTiming(isSelected ? 1 : 0, { duration: 200 });
+        bgOpacity.value = withTiming(isSelected ? 1 : 0, { duration: 200 });
+    }, [isSelected]);
+
+    const animatedStyle = useAnimatedStyle(() => {
+        const borderColor =
+            borderOpacity.value > 0.5 ? opt.accent : 'rgba(255,255,255,0.1)';
+        const backgroundColor =
+            bgOpacity.value > 0.5 ? `${opt.accent}20` : 'rgba(255,255,255,0.04)';
+        return {
+            transform: [{ scale: scale.value }],
+            borderColor,
+            backgroundColor,
+        };
+    });
+
+    return (
+        <Animated.View
+            entering={FadeInUp.delay(350 + index * 100).springify()}
+            style={styles.flex1}
+        >
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => {
+                    onSelect(opt.minutes);
+                    if (Platform.OS !== 'web') {
+                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    }
+                }}
+                style={styles.flex1}
+            >
+                <Animated.View style={[styles.tile, animatedStyle]}>
+                    <Text style={[styles.tileIcon, isSelected && { color: opt.accent }]}>
+                        {opt.id === 'flash' ? '⚡' : opt.id === 'blitz' ? '🔥' : '🧠'}
+                    </Text>
+                    <Text
+                        style={[styles.tileLabel, { color: isSelected ? opt.accent : '#FFFFFF' }]}
+                        numberOfLines={1}
+                    >
+                        {opt.minutes} MIN
+                    </Text>
+                    <Text style={styles.tileMode} numberOfLines={2}>
+                        {opt.mode}
+                    </Text>
+                </Animated.View>
+            </TouchableOpacity>
+        </Animated.View>
+    );
+}
+
+export const PrefStep5Commitment: React.FC<PrefStep5CommitmentProps> = ({
+    selected,
+    onSelect,
+}) => {
+    const selectedObj =
+        COMMITMENT_OPTIONS.find((o) => o.minutes === selected) || COMMITMENT_OPTIONS[1];
 
     return (
         <View style={styles.container}>
             <View style={styles.grid}>
-                {COMMITMENT_OPTIONS.map((opt, index) => {
-                    const isSelected = selected === opt.minutes;
-
-                    const animatedStyle = useAnimatedStyle(() => ({
-                        transform: [{ scale: withSpring(isSelected ? 1.05 : 1, { damping: 12 }) }],
-                        borderColor: withTiming(isSelected ? opt.accent : 'rgba(255,255,255,0.1)', { duration: 200 }),
-                        backgroundColor: withTiming(isSelected ? `${opt.accent}20` : 'rgba(255,255,255,0.04)', { duration: 200 }),
-                    }));
-
-                    return (
-                        <Animated.View
-                            key={opt.id}
-                            entering={FadeInUp.delay(350 + index * 100).springify()}
-                            style={styles.flex1}
-                        >
-                            <TouchableOpacity
-                                activeOpacity={0.9}
-                                onPress={() => {
-                                    onSelect(opt.minutes);
-                                    if (Platform.OS !== 'web') {
-                                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                    }
-                                }}
-                                style={styles.flex1}
-                            >
-                                <Animated.View style={[styles.tile, animatedStyle]}>
-                                    <Text style={[styles.tileIcon, isSelected && { color: opt.accent }]}>
-                                        {opt.id === 'flash' ? '⚡' : opt.id === 'blitz' ? '🔥' : '🧠'}
-                                    </Text>
-                                    <Text style={[styles.tileLabel, { color: isSelected ? opt.accent : '#FFFFFF' }]}>
-                                        {opt.minutes} MIN
-                                    </Text>
-                                    <Text style={styles.tileMode}>{opt.mode}</Text>
-                                </Animated.View>
-                            </TouchableOpacity>
-                        </Animated.View>
-                    );
-                })}
+                {COMMITMENT_OPTIONS.map((opt, index) => (
+                    <CommitmentCard
+                        key={opt.id}
+                        opt={opt}
+                        index={index}
+                        isSelected={selected === opt.minutes}
+                        onSelect={onSelect}
+                    />
+                ))}
             </View>
 
             <Animated.View
                 entering={FadeInUp.delay(700).springify()}
                 style={styles.details}
             >
-                <Text style={[styles.detailsMode, { color: selectedObj.accent }]}>{selectedObj.label} MODE</Text>
+                <Text style={[styles.detailsMode, { color: selectedObj.accent }]}>
+                    {selectedObj.label} MODE
+                </Text>
                 <Text style={styles.detailsDesc}>{selectedObj.desc}</Text>
             </Animated.View>
         </View>
@@ -84,27 +132,30 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     tile: {
-        height: 120,
+        minHeight: 120,
         borderRadius: 20,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 2,
-        padding: 8,
+        paddingVertical: 12,
+        paddingHorizontal: 8,
     },
     tileIcon: {
         fontSize: 24,
-        marginBottom: 8,
+        marginBottom: 6,
         opacity: 0.8,
     },
     tileLabel: {
-        fontSize: 16,
+        fontSize: 13,
         fontWeight: '900',
+        textAlign: 'center',
     },
     tileMode: {
         fontSize: 10,
-        color: 'rgba(255, 255, 255, 0.4)',
+        color: 'rgba(255, 255, 255, 0.5)',
         marginTop: 4,
         textAlign: 'center',
+        paddingHorizontal: 4,
     },
     details: {
         marginTop: 32,
