@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Svg, { Polygon, Line, Circle, Text as SvgText } from 'react-native-svg';
 import Animated, {
@@ -23,8 +23,22 @@ const VALUES = [0.75, 0.60, 0.45, 0.80, 0.50, 0.90];
 const RADIUS = 110;
 const CENTER = 125;
 
+// Must be a worklet so it can run inside useAnimatedProps on the UI thread
+function getPoint(radius: number, angle: number) {
+    'worklet';
+    const x = CENTER + radius * Math.cos(angle - Math.PI / 2);
+    const y = CENTER + radius * Math.sin(angle - Math.PI / 2);
+    return { x, y };
+}
+
 export const RadarChart = ({ isVisible }: Props) => {
-    const animationValues = useRef(DOMAINS.map(() => useSharedValue(0))).current;
+    const v0 = useSharedValue(0);
+    const v1 = useSharedValue(0);
+    const v2 = useSharedValue(0);
+    const v3 = useSharedValue(0);
+    const v4 = useSharedValue(0);
+    const v5 = useSharedValue(0);
+    const animationValues = useRef([v0, v1, v2, v3, v4, v5]).current;
 
     useEffect(() => {
         if (isVisible) {
@@ -34,15 +48,11 @@ export const RadarChart = ({ isVisible }: Props) => {
         }
     }, [isVisible]);
 
-    const getPoint = (radius: number, angle: number) => {
-        const x = CENTER + radius * Math.cos(angle - Math.PI / 2);
-        const y = CENTER + radius * Math.sin(angle - Math.PI / 2);
-        return { x, y };
-    };
-
     const radarPoints = useAnimatedProps(() => {
         const points = DOMAINS.map((_, i) => {
-            const { x, y } = getPoint(animationValues[i].value * RADIUS, (i * 2 * Math.PI) / 6);
+            const r = animationValues[i].value * RADIUS;
+            const angle = (i * 2 * Math.PI) / 6;
+            const { x, y } = getPoint(r, angle);
             return `${x},${y}`;
         }).join(' ');
         return { points };
@@ -92,8 +102,6 @@ export const RadarChart = ({ isVisible }: Props) => {
         </View>
     );
 };
-
-import { useRef } from 'react';
 
 const styles = StyleSheet.create({
     container: {
