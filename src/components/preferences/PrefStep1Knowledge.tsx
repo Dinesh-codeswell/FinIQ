@@ -78,8 +78,8 @@ const KnowledgeCard = ({ level, index, selected, onSelect }: {
 
 export const PrefStep1Knowledge: React.FC<PrefStep1KnowledgeProps> = ({ selected, onSelect }) => {
     return (
-        {
-            KNOWLEDGE_LEVELS.map((level, index) => (
+        <View style={styles.container}>
+            {KNOWLEDGE_LEVELS.map((level, index) => (
                 <KnowledgeCard
                     key={level.id}
                     level={level}
@@ -87,9 +87,8 @@ export const PrefStep1Knowledge: React.FC<PrefStep1KnowledgeProps> = ({ selected
                     selected={selected}
                     onSelect={onSelect}
                 />
-            ))
-        }
-        </View >
+            ))}
+        </View>
     );
 };
 

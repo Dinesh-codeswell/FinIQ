@@ -76,11 +76,19 @@ export default function RootLayout() {
     if (!isExpoGo) {
       try {
         const { GoogleSignin } = require("@react-native-google-signin/google-signin");
-        GoogleSignin.configure({
-          webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
-          iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
-          offlineAccess: true,
-        });
+
+        const webClientId = process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID;
+        const iosClientId = process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID;
+
+        if (webClientId || iosClientId) {
+          GoogleSignin.configure({
+            webClientId,
+            iosClientId,
+            offlineAccess: true,
+          });
+        } else {
+          console.warn("Google Sign-In: No Client IDs provided in environment variables.");
+        }
       } catch (e) {
         console.warn("Google Sign-In native module failed to load:", e);
       }
